@@ -41,7 +41,6 @@ OfficialLineup.belongsToMany(MonthlyPlayer, {
     foreignKey: "official_lineup_id",
     otherKey: "monthly_player_id",
 });
-
 MonthlyPlayer.belongsToMany(OfficialLineup, {
     through: OfficialLineupPlayer,
     foreignKey: "monthly_player_id",
@@ -55,7 +54,6 @@ Lineup.belongsToMany(MonthlyPlayer, {
     foreignKey: "lineup_id",
     otherKey: "monthly_player_id",
 });
-
 MonthlyPlayer.belongsToMany(Lineup, {
     through: LineupPlayer,
     foreignKey: "monthly_player_id",

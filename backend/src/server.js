@@ -1,6 +1,7 @@
 const express = require('express');
 require ('dotenv').config();
 const sequelize = require("./config/database");
+const routes = require('./routers/index')
 
 const app = express();
 
@@ -8,7 +9,6 @@ const PORT = process.env.SERVER_PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded ({extended : true}));
-
 
 
 // Test connexion BDD
@@ -24,9 +24,17 @@ async function start() {
 
 start();
 
+//Synchronisation des modèles avec la BDD
+sequelize.sync({ alter:true})
+  .then(()=> {
+    console.log("Model synchronisé avec la base de données")
+  })
+  .catch(()=>{
+    console.log("Erreur de synchronisation du modèle avec la base de données")
+  });
 
 
-//Afficher les erreurs présente 
+//Gestion erreurs
 app.use((err, req, res, next)=>{
     console.error('Erreur:' , err)
     res.status(500).json({
@@ -36,6 +44,8 @@ app.use((err, req, res, next)=>{
 });
 
 
+//Importation des routes
+app.use("/api", routes);
 
   module.exports = {app, PORT};
  
