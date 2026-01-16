@@ -1,5 +1,6 @@
 const express = require('express');
 const { Sequelize } = require('sequelize');
+require ('dotenv').config();
 
 const app = express();
 
@@ -12,7 +13,7 @@ app.use(express.urlencoded ({extended : true}));
 // Connexion Base de donnée
 const sequelize = new Sequelize(
     'Top5League', 
-    process.env.DB_USER || 'username',
+    process.env.DB_USER || 'root',
     process.env.DB_PASSWORD || '', {
         host: process.env.DB_HOST,
         dialect: 'mysql',       
@@ -21,22 +22,17 @@ const sequelize = new Sequelize(
 
 
 // Test connexion BDD
-try {
-  await sequelize.authenticate();
-  console.log('Connection has been established successfully.');
-} catch (error) {
-  console.error('Unable to connect to the database:', error);
+async function start() {
+  try {
+    await sequelize.authenticate();
+    console.log("Connexion à la base de donnée réalisé avec succès.");
+
+  } catch (error) {
+    console.error("Impossible de se connecter à la DB :", error);
+  }
 }
 
-
-//Synchronisation BDD et serveur
-sequelize.sync({ alter:true})
-  .then(()=> {
-    console.log("modele synchronisé avec la base de donnée")
-  })
-  .catch(()=>{
-    console.log("Erreur de synchronisation du modèle avec la base de donnée")
-  });
+start();
 
 
 
@@ -51,4 +47,5 @@ app.use((err, req, res, next)=>{
 
 
 
-  module.exports = app;
+  module.exports = {app, PORT};
+ 
