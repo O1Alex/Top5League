@@ -1,6 +1,13 @@
 const express = require("express");
 const monthRouter = express.Router();
 
+const   {
+            createMonth,
+            getAllMonths,
+            getMonthById,
+            updateMonthById,
+            deleteMonthById
+        } = require("../controllers/monthController");
 
 
 // CRUD Ajouter middleware authentification Admin
@@ -10,12 +17,6 @@ monthRouter.get("/:id", getMonthById);
 monthRouter.put("/:id", updateMonthById);
 monthRouter.delete("/:id", deleteMonthById);
 
-
-
-// Routes "metier"
-monthRouter.get("/current", getCurrentMonth); // GET /months/current
-monthRouter.post("/generate", requireAuth, requireAdmin, generateMonth); // POST /months/generate
-monthRouter.put("/:id/status", requireAuth, requireAdmin, changeMonthStatus); // PUT /months/:id/status
 
 
 module.exports = monthRouter;

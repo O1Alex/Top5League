@@ -1,6 +1,14 @@
 const express = require("express");
 const userRouter = express.Router();
 
+const   {
+            createUser,
+            getAllUsers,
+            getUserById,
+            updateUserById,
+            deleteUserById
+        } = require("../controllers/userController")
+
 
 userRouter.post("/", createUser); 
 userRouter.get("/", getAllUsers); // Ajouter middleware authentification Admin
