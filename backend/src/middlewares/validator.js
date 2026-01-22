@@ -37,9 +37,8 @@ const authValidationRule = {
 const monthValidationRule = {
     create: [
         body("label")
-        .notEmpty()
+            .notEmpty()
             .withMessage("Le label est obligatoire")
-            .bail()
             .isString()
             .trim()
             .isLength({ min: 3 })
@@ -48,21 +47,18 @@ const monthValidationRule = {
         body("start_date")
             .notEmpty()
             .withMessage("La date de début est requise")
-            .bail()
             .isISO8601()
             .withMessage("La date de début doit être une date valide (YYYY-MM-DD)"),
 
         body("end_date")
             .notEmpty()
             .withMessage("La date de fin est requise")
-            .bail()
             .isISO8601()
             .withMessage("La date de fin doit être une date valide (YYYY-MM-DD)"),
 
         body("publish_date")
             .notEmpty()
             .withMessage("La date de publication est requise")
-            .bail()
             .isISO8601()
             .withMessage("La date de publication doit être une date valide (YYYY-MM-DD)"),
 

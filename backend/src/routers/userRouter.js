@@ -1,18 +1,16 @@
 const express = require("express");
 const userRouter = express.Router();
+const { authenticate, requireAdmin } = require("../middlewares/authMiddleware");
 
 const   {
-            createUser,
             getAllUsers,
             getUserById,
-            updateUserById,
             deleteUserById
         } = require("../controllers/userController")
 
 
-userRouter.get("/", getAllUsers); // Ajouter middleware authentification Admin
-userRouter.get("/:id", getUserById); // Ajouter middleware authentification Admin
-userRouter.put("/:id", updateUserById); // Pas sur que dans ce projet pas prévus de mpouvoir modifier les infos perso
-userRouter.delete("/:id", deleteUserById); // Ajouter middleware authentification Admin
+userRouter.get("/", authenticate, requireAdmin, getAllUsers);
+userRouter.get("/:id", authenticate, requireAdmin, getUserById);
+userRouter.delete("/:id", authenticate, requireAdmin,  deleteUserById);
 
 module.exports = userRouter;

@@ -13,8 +13,8 @@ const   {
 
 // CRUD Ajouter middleware authentification Admin
 monthRouter.post("/", authenticate, requireAdmin, createMonth); 
-monthRouter.get("/", getAllMonths);
-monthRouter.get("/:id", getMonthById);
+monthRouter.get("/", authenticate, requireAdmin, getAllMonths);
+monthRouter.get("/:id", authenticate, requireAdmin, getMonthById);
 monthRouter.put("/:id", authenticate, requireAdmin, updateMonthById);
 monthRouter.delete("/:id", authenticate, requireAdmin, deleteMonthById);
 

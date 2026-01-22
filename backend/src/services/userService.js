@@ -36,29 +36,29 @@ class userService {
     }
 
     // Modifier un utilisateur en se servant de son ID
-    static async updateUserById(id, userData){
-        try {
-            const user = await User.findByPk(id);
-            if(!user){
-                throw new Error (`User ${id} non trouvé`);
-            }
-            await user.update(userData);
-            return {user, ...userData};
+    // static async updateUserById(id, userData){
+    //     try {
+    //         const user = await User.findByPk(id);
+    //         if(!user){
+    //             throw new Error (`User ${id} non trouvé`);
+    //         }
+    //         await user.update(userData);
+    //         return user;
 
-        } catch (err) {
-            throw new Error (`Erreur lors de la modification de l'utilisateur ${err.message}`);
-        }
-    }
+    //     } catch (err) {
+    //         throw new Error (`Erreur lors de la modification de l'utilisateur ${err.message}`);
+    //     }
+    // }
 
     // Supprimer un utilisateur en se servant de son ID
     static async deleteUserById(id) {
         try {
             const user = await User.findByPk(id)
-        if (!user) {
-                throw new Error(`User ${id} non trouvé`);
-            }
-        await User.destroy();
-        return user;
+            if (!user) {
+                    throw new Error(`User ${id} non trouvé`);
+                }
+            await User.destroy();
+            return user;
 
         }catch (err) {
             throw new Error(`Erreur lors de la suppression de l'utilisateur ${err.message}`);

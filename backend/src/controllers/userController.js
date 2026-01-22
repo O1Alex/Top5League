@@ -40,26 +40,26 @@ const getUserById = async(req , res)=> {
 };
 
 // Modifier un utilisateur par son ID
-const updateUserById = async (req, res)=> {
-    try {
-        const { id } = req.params;
-        const userData = req.body;
+// const updateUserById = async (req, res)=> {
+//     try {
+//         const { id } = req.params;
+//         const userData = req.body;
 
-        const updatedUser = await userService.updateUserById(id, userData)
+//         const updatedUser = await userService.updateUserById(id, userData)
 
-        res.json({
-            success: true,
-            data: updatedUser,
-        });
+//         res.json({
+//             success: true,
+//             data: updatedUser,
+//         });
 
-    } catch (error) {
-        console.error("Erreur lors de la modification de l'utilisateur", error);
-        res.status(500).json({
-            success: false,
-             message: `Erreur serveur ${error.messsage}`,
-        }); 
-    }
-};
+//     } catch (error) {
+//         console.error("Erreur lors de la modification de l'utilisateur", error);
+//         res.status(500).json({
+//             success: false,
+//              message: `Erreur serveur ${error.messsage}`,
+//         }); 
+//     }
+// };
 
 // Supprimer un utilisateur par son ID
 const deleteUserById = async(req, res)=> {
@@ -85,6 +85,6 @@ const deleteUserById = async(req, res)=> {
 module.exports = {
     getAllUsers,
     getUserById,
-    updateUserById,
+    // updateUserById,
     deleteUserById
 };
