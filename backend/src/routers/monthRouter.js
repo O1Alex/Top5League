@@ -1,5 +1,6 @@
 const express = require("express");
 const monthRouter = express.Router();
+const { authenticate, requireAdmin } = require('../middlewares/authMiddleware');
 
 const   {
             createMonth,
@@ -11,11 +12,11 @@ const   {
 
 
 // CRUD Ajouter middleware authentification Admin
-monthRouter.post("/", createMonth); 
+monthRouter.post("/", authenticate, requireAdmin, createMonth); 
 monthRouter.get("/", getAllMonths);
 monthRouter.get("/:id", getMonthById);
-monthRouter.put("/:id", updateMonthById);
-monthRouter.delete("/:id", deleteMonthById);
+monthRouter.put("/:id", authenticate, requireAdmin, updateMonthById);
+monthRouter.delete("/:id", authenticate, requireAdmin, deleteMonthById);
 
 
 

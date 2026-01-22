@@ -10,7 +10,6 @@ const   {
         } = require("../controllers/userController")
 
 
-userRouter.post("/", createUser); 
 userRouter.get("/", getAllUsers); // Ajouter middleware authentification Admin
 userRouter.get("/:id", getUserById); // Ajouter middleware authentification Admin
 userRouter.put("/:id", updateUserById); // Pas sur que dans ce projet pas prévus de mpouvoir modifier les infos perso

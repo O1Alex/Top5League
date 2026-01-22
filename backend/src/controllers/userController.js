@@ -1,24 +1,5 @@
 const userService = require("../services/userService");
 
-// Créer un utilisateur
-const createUser = async(req , res)=> {
-    try {
-        const userData = req.body;
-        
-        const newUser = await userService.createUser(userData);
-        res.json({
-            success: true,
-            data: newUser,
-        });
-
-    } catch (error) {
-        console.error("Erreur lors de la création de l'utilisateur", error);
-        res.status(500).json({
-            success: false,
-             message: `Erreur serveur ${error.messsage}`,
-        });  
-    }
-};
 
 // Récupérer tous les utilisateurs
 const getAllUsers = async(req , res)=> {
@@ -102,7 +83,6 @@ const deleteUserById = async(req, res)=> {
 
 
 module.exports = {
-    createUser,
     getAllUsers,
     getUserById,
     updateUserById,

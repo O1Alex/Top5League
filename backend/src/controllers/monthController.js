@@ -6,7 +6,7 @@ const createMonth = async(req , res)=> {
         const monthData = req.body;
         
         const newMonth = await monthService.createMonth(monthData);
-        res.json({
+        res.status(201).json({
             success: true,
             data: newMonth,
         });
@@ -25,7 +25,7 @@ const getAllMonths = async(req , res)=> {
      try {
         const months = await monthService.getAllMonths();
 
-        res.json({
+        res.status(201).json({
             success: true,
             data: months,
     });
@@ -45,7 +45,7 @@ const getMonthById = async(req , res)=> {
 
         const month = await monthService.getMonthById(id);
 
-        res.json({
+        res.status(201).json({
             success: true,
             data: month,
     });
@@ -66,7 +66,7 @@ const updateMonthById = async (req, res)=> {
 
         const updatedMonth = await monthService.updateMonthById(id, monthData)
 
-        res.json({
+        res.status(201).json({
             success: true,
             data: updatedMonth,
         });
@@ -87,7 +87,7 @@ const deleteMonthById = async(req, res)=> {
 
         const month = await monthService.deleteMonthById(id);
 
-        res.json({
+        res.status(201).json({
             success: true,
             data: month,
     });

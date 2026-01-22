@@ -43,7 +43,7 @@ class monthService {
                 throw new Error (`month ${id} non trouvé`);
             }
             await month.update(monthData);
-            return {month, ...monthData};
+            return month;
 
         } catch (err) {
             throw new Error (`Erreur lors de la modification du mois ${err.message}`);

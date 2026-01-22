@@ -2,6 +2,7 @@ const express = require('express');
 require ('dotenv').config();
 const sequelize = require("./config/database");
 const routes = require('./routers/index')
+const cors = require('cors')
 
 const app = express();
 
@@ -49,3 +50,11 @@ app.use("/api", routes);
 
   module.exports = {app, PORT};
  
+
+// Middleware
+// cors:
+var corsOptions = {
+  origin: 'http://localhost:8000',
+  optionsSuccessStatus: 200
+}
+app.use(cors(corsOptions));
