@@ -4,7 +4,7 @@ const { authenticate, requireAdmin } = require('../middlewares/authMiddleware');
 
 const   {
             createMonthlyPlayerByMonthId,
-            getMonthlyPlayerByMonthId,
+            getMonthlyPlayersByMonthId,
             updateMonthlyPlayerById,
             deleteMonthlyPlayerById
         } = require("../controllers/monthlyPlayerController");

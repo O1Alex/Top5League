@@ -39,7 +39,11 @@ class monthlyPlayerService {
                 throw new Error (`Mois ${monthId} non trouvé`);   
             }      
             
-            const monthlyPlayer = MonthlyPlayer.findAll({ month_id: monthId })
+            const monthlyPlayer = MonthlyPlayer.findAll({ 
+                where:{month_id: monthId}, 
+                order:[["position", "ASC"]],
+            });
+
             return monthlyPlayer;
 
         } catch (err) {

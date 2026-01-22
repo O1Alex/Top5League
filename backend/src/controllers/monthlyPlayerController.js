@@ -1,4 +1,4 @@
-const { monthlyPlayerService } = require('../services/MonthlyPlayerService');
+const monthlyPlayerService = require('../services/MonthlyPlayerService');
 
 
 // Créer un nouveau joueur du mois dans un mois précis (par l'ID du mois)
@@ -29,11 +29,11 @@ const getMonthlyPlayersByMonthId = async(req , res)=> {
     try {
         const { monthId } = req.params;
 
-        const MonthlyPlayers = await monthlyPlayerService.getMonthlyPlayersByMonthId(monthId);
+        const monthlyPlayers = await monthlyPlayerService.getMonthlyPlayersByMonthId(monthId);
         
         res.status(200).json({
             success: true,
-            data: MonthlyPlayers,
+            data: monthlyPlayers,
         });
 
     } catch (error) {
