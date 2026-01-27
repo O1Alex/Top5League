@@ -45,6 +45,28 @@ const getMonthlyPlayersByMonthId = async(req , res)=> {
     }
 };
 
+// Récupérer tous les joueurs du mois en cours
+const getCurrentMonthlyPlayers= async(req, res)=>{
+
+    // Middleware
+    const monthId = req.currentMonth.id;
+
+    try{
+        const monthlyPlayers = await monthlyPlayerService.getMonthlyPlayersByMonthId(monthId);
+
+        res.status(200).json({
+            success: true,
+            data: monthlyPlayers,
+        });
+    } catch (error) {
+        console.error("Erreur lors de la récupération des joueurs du mois en cours", error);
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+}
+
 
 // Modifier un joueur du mois par son ID
 const updateMonthlyPlayerById = async (req, res)=> {
@@ -74,7 +96,7 @@ const deleteMonthlyPlayerById = async(req, res)=> {
     try {
         const { id } = req.params;
 
-        const monthlyPlayer = await userService.deleteMonthlyPlayerById(id);
+        const monthlyPlayer = await monthlyPlayerService.deleteMonthlyPlayerById(id);
 
         res.status(200).json({
             success: true,
@@ -97,6 +119,7 @@ const deleteMonthlyPlayerById = async(req, res)=> {
 module.exports= {
     createMonthlyPlayerByMonthId,
     getMonthlyPlayersByMonthId,
+    getCurrentMonthlyPlayers,
     deleteMonthlyPlayerById,
     updateMonthlyPlayerById
 }

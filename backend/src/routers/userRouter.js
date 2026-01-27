@@ -9,6 +9,7 @@ const   {
         } = require("../controllers/userController")
 
 
+// Routes ADMIN
 userRouter.get("/", authenticate, requireAdmin, getAllUsers);
 userRouter.get("/:id", authenticate, requireAdmin, getUserById);
 userRouter.delete("/:id", authenticate, requireAdmin,  deleteUserById);

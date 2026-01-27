@@ -6,7 +6,7 @@ const getAllUsers = async(req , res)=> {
      try {
         const users = await userService.getAllUsers();
 
-        res.json({
+        res.status(200).json({
             success: true,
             data: users,
     });
@@ -19,6 +19,7 @@ const getAllUsers = async(req , res)=> {
     }
 };
 
+
 // Récupérer un utilisateur par son ID
 const getUserById = async(req , res)=> {
      try {
@@ -26,7 +27,7 @@ const getUserById = async(req , res)=> {
 
         const user = await userService.getUserById(id);
 
-        res.json({
+        res.status(200).json({
             success: true,
             data: user,
     });
@@ -39,27 +40,6 @@ const getUserById = async(req , res)=> {
     }
 };
 
-// Modifier un utilisateur par son ID
-// const updateUserById = async (req, res)=> {
-//     try {
-//         const { id } = req.params;
-//         const userData = req.body;
-
-//         const updatedUser = await userService.updateUserById(id, userData)
-
-//         res.json({
-//             success: true,
-//             data: updatedUser,
-//         });
-
-//     } catch (error) {
-//         console.error("Erreur lors de la modification de l'utilisateur", error);
-//         res.status(500).json({
-//             success: false,
-//              message: `Erreur serveur ${error.messsage}`,
-//         }); 
-//     }
-// };
 
 // Supprimer un utilisateur par son ID
 const deleteUserById = async(req, res)=> {
@@ -68,15 +48,16 @@ const deleteUserById = async(req, res)=> {
 
         const user = await userService.deleteUserById(id);
 
-        res.json({
+        res.status(200).json({
             success: true,
             data: user,
+            message: "Utilisateur supprimé avec succès"
     });
     } catch (error) {
         console.error("Erreur lors de la suppression de l'utilisateur", error);
         res.status(500).json({
             success: false,
-             message: `Erreur serveur ${error.messsage}`,
+             message: `Erreur serveur ${error.message}`,
         });   
     }
 };
@@ -85,6 +66,5 @@ const deleteUserById = async(req, res)=> {
 module.exports = {
     getAllUsers,
     getUserById,
-    // updateUserById,
     deleteUserById
 };

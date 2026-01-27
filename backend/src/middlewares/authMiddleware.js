@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 
 function authenticate(req, res, next){
     const authHeader = req.headers.authorization;
-    if(!authHeader || !authHeader.startswith("Bearer")) {
+    if(!authHeader || !authHeader.startsWith("Bearer")) {
         return res.status(401).json({message: "Token manquant"});
     }
 
@@ -18,7 +18,7 @@ function authenticate(req, res, next){
 }
 
 function requireAdmin(req, res, next){
-    if (req.user.role !== admin) {
+    if (req.user.role !== "admin") {
         return res.status(403).json({message: "Accès refucé, administrateur uniquement"});
     }
     next();

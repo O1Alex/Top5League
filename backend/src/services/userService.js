@@ -2,17 +2,6 @@ const User = require("../models/User")
 
 class userService {
 
-    // Créer un utilisateur
-    static async createUser(userData){
-        try{
-            const newUser = User.create(userData);
-            return newUser;
-
-        } catch (err) {
-            throw new Error (`Erreur lors de la creation de l'utilisateur ${err.message}`);
-        }
-    }
-
     // Récupérer tous les utilisateurs
     static async getAllUsers(){
         try {
@@ -35,21 +24,6 @@ class userService {
         }
     }
 
-    // Modifier un utilisateur en se servant de son ID
-    // static async updateUserById(id, userData){
-    //     try {
-    //         const user = await User.findByPk(id);
-    //         if(!user){
-    //             throw new Error (`User ${id} non trouvé`);
-    //         }
-    //         await user.update(userData);
-    //         return user;
-
-    //     } catch (err) {
-    //         throw new Error (`Erreur lors de la modification de l'utilisateur ${err.message}`);
-    //     }
-    // }
-
     // Supprimer un utilisateur en se servant de son ID
     static async deleteUserById(id) {
         try {
@@ -57,8 +31,9 @@ class userService {
             if (!user) {
                     throw new Error(`User ${id} non trouvé`);
                 }
-            await User.destroy();
-            return user;
+            await user.destroy();
+            
+            return;
 
         }catch (err) {
             throw new Error(`Erreur lors de la suppression de l'utilisateur ${err.message}`);

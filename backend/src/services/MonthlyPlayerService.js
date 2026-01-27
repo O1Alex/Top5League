@@ -15,7 +15,9 @@ class monthlyPlayerService {
                 throw new Error (`Impossible de créer un joueur lorsque le mois n'est pas ouvert`);
             }
 
-            const count = await MonthlyPlayer.count({where: {month_id: monthId}})
+            const count = await MonthlyPlayer.count({where: 
+                {month_id: monthId}
+            });
                 if (count >= 20) {
                     throw new Error(
                         `Le nombre maximum de joueur du mois (20) a été atteint pour le mois ${monthId}`
@@ -51,6 +53,20 @@ class monthlyPlayerService {
         }
     }  
 
+    //Récupérer les joueurs du mois en cours
+    static async getCurrentMonthlyPlayers() {
+        try{          
+            const monthlyPlayer = await MonthlyPlayer.findAll({ 
+                where:{month_id: monthId}, 
+                order:[["position", "ASC"]],
+            });
+
+            return monthlyPlayer;
+
+        } catch (err) {
+            throw new Error (`Erreur lors de la récupération des joueurs ${err.message}`);
+        }
+    }  
 
     // Modifier un des joueurs du mois (par son ID)
     static async updateMonthlyPlayerById(id, monthlyPlayerData){
@@ -78,8 +94,8 @@ class monthlyPlayerService {
                     throw new Error (`Joueur ${id} non trouvé`);
                 }
 
-                await MonthlyPlayer.destroy();
-                return monthlyPlayer;
+                await monthlyPlayer.destroy();
+                return;
 
             } catch (err) {
                 throw new Error (`Erreur lors de la suppression du joueur ${err.message}`);

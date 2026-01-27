@@ -114,9 +114,9 @@ const getMe = async (req, res) => {
 };
 
 function sanitizerUser(user) {
-const plainUser = user.get({ plain: true });
-delete plainUser.password;
-return plainUser;
+    const plainUser = user.get({ plain: true });
+    delete plainUser.password;
+    return plainUser;
 }
 
 module.exports = { register, login, getMe };

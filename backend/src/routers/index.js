@@ -4,14 +4,16 @@ const router = express.Router();
 const userRouter = require("./userRouter");
 const authRouter = require("./authRouter");
 const monthRouter = require("./monthRouter");
-const monthlyPlayerRouter = require ("./monthlyPlayerRouter")
+const monthlyPlayerRouter = require ("./monthlyPlayerRouter");
+const lineupRouter = require ("./lineupRouter");
 
 
 
 router.use("/auth", authRouter);
-router.use("/user", userRouter);
-router.use("/month", monthRouter);
-router.use("/monthlyPlayer", monthlyPlayerRouter);
+router.use("/users", userRouter);
+router.use("/months", monthRouter);
+router.use("/monthlyPlayers", monthlyPlayerRouter);
+router.use("/lineups", lineupRouter);
 
 
 

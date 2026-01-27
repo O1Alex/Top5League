@@ -57,8 +57,8 @@ class lineupService {
                     throw new Error (`Top 5 ${id} non trouvé`);
                 }
 
-                await Lineup.destroy();
-                return lineup;
+                await lineup.destroy();
+                return;
 
             } catch (err) {
                 throw new Error (`Erreur lors de la suppression du Top 5 ${err.message}`);

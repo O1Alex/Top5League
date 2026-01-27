@@ -14,7 +14,7 @@ class monthService {
     }
 
     // Récupérer tous les mois
-    static async getAllmonths(){
+    static async getAllMonths(){
         try {
             const months = Month.findAll();
             return months;
@@ -25,7 +25,7 @@ class monthService {
     }
 
     // Récupérer un mois par son ID
-    static async getmonthById(id){
+    static async getMonthById(id){
         try {
             const month = Month.findByPk(id);
             return month;
@@ -35,8 +35,30 @@ class monthService {
         }
     }
 
+    // Récupérer le mois en cours
+    static async getCurrentMonth() {
+        let month = await Month.findOne({
+            where: { status: "open" },
+            order: [["start_date", "DESC"]],
+        });
+
+        // Si aucun mois ouvert
+        if (!month) {
+        month = await Month.findOne({
+            where: { status: "closed" },
+            order: [["end_date", "DESC"]],
+        });
+        }
+
+        if (!month) {
+        throw new Error("Aucun mois courant disponible");
+        }
+
+    return month;
+  }
+
     // Modifier un mois en se servant de son ID
-    static async updatemonthById(id, monthData){
+    static async updateMonthById(id, monthData){
         try {
             const month = await Month.findByPk(id);
             if(!month){
@@ -51,14 +73,14 @@ class monthService {
     }
 
     // Supprimer un mois en se servant de son ID
-    static async deletemonthById(id) {
+    static async deleteMonthById(id) {
         try {
             const month = await Month.findByPk(id)
         if (!month) {
                 throw new Error(`month ${id} non trouvé`);
             }
         await month.destroy();
-        return month;
+        return;
 
         }catch (err) {
             throw new Error(`Erreur lors de la suppression du mois ${err.message}`);
