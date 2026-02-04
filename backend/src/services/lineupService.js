@@ -1,71 +1,176 @@
-const Month = require("../models/Month")
+const Month = require("../models/Month");
 const Lineup = require("../models/Lineup");
+const { Op } = require("sequelize");
+const MonthlyPlayer = require("../models/MonthlyPlayer");
+const LineupPlayer = require("../models/LineupPlayer");
+const { sequelize } = require("models");
+
 
 class lineupService {
+    static async getActiveMonth() {
+        const month = await Month.findOne({
+            where: { status: "open" },
+            order: [["start_date", "DESC"]],
+        });
 
-    // Créer un nouveau joueur du mois dans un mois précis (par l'ID du mois)
-    static async createLineupByMonthId(monthId, lineupData){
-        try{
-            const month = await Month.findByPk(monthId);
-
-            if (!month) {
-                throw new Error (`Mois ${monthId} non trouvé`);   
-            }      
-            if(month.status !== 'open') {     
-                throw new Error (`Impossible de créer le Top 5 lorsque le mois n'est pas ouvert`);
-            }
-            
-            return Lineup.create({...lineupData, month_id: monthId});
-
-        } catch (err) {
-            throw new Error (`Erreur lors de la creation du Top 5 ${err.message}`);
+        if (!month) {
+        throw new Error("Aucun challenge n'est actuellement ouvert");
         }
-    }  
+        return month;
+    }
 
 
-    // Récupérer les joueurs du mois dans un mois précis (par l'ID du mois)
-    static async getLineupsByMonthId(monthId) {
-        try{
-            const month = await Month.findByPk(monthId);
-
-            if (!month) {
-                throw new Error (`Mois ${monthId} non trouvé`);   
-            }      
+    // Créer son lineup du mois
+    static async createLineup(user_id, lineupData) {
+        try {
+            const positions = ["PG", "SG", "SF", "PF", "C"];
+            const month = await this.getActiveMonth();
+            const month_id = month.id;
             
-            const lineup = Lineup.findAll({ 
-                where:{month_id: monthId}, 
+            const monthlyPlayers = await MonthlyPlayer.findAll({
+                where: {
+                    id: { [Op.in]: lineupData.map((p) => p.playerId) },
+                    month_id,
+                },
+            });
+            
+            if (monthlyPlayers.length !== 5) {
+                throw new Error(`certains joueurs du mois sont invalides`);
+            }
+
+            const positionMap = new Map();
+            monthlyPlayers.forEach((player) => {
+                positionMap.set(player.id, player.position);
+            });
+            
+            positions.forEach((pos) => {
+                const hasPos = lineupData.some(
+                (p) => positionMap.get(p.playerId) === pos,
+                );
+                if (!hasPos) {
+                throw new Error(`Le joueur pour la position ${pos} est manquant`);
+                }
             });
 
-            return lineup;
+
+            return sequelize.transaction(async (t) => {
+                // normal user creer lineup
+                const newLineup = await Lineup.create(
+                { user_id, month_id },
+                { transaction: t },
+                );
+                
+                await LineupPlayer.bulkCreate(
+                lineupData.map((p) => ({
+                    lineup_id: newLineup.id,
+                    monthly_player_id: p.playerId,
+                })),
+                { transaction: t },
+                );
+                return Lineup.findByPk(newLineup.id, {
+                include: [
+                    { model: MonthlyPlayer, include: [{ model: LineupPlayer }] },
+                ],
+                });
+            });
+        } catch (err) {
+        throw new Error(`Erreur lors de la creation du Top 5 ${err.message}`);
+        }
+    }
+
+
+    // Récupérer son lineup du mois
+    static async getMyLineup(user_id) {
+        try {
+            const month = await this.getActiveMonth();
+            const month_id = month.id;
+
+        const lineup = await Lineup.findOne({
+            where: { month_id, user_id },
+            include: [{ model: MonthlyPlayer, include: [{ model: LineupPlayer }] }],
+        });
+
+        if (!lineup) {
+        throw new Error("Aucun Top 5 trouvé pour le mois en cours");    
+        }
+
+        return lineup;
 
         } catch (err) {
-            throw new Error (`Erreur lors de la récupération des Top 5 ${err.message}`);
+        throw new Error(
+            `Erreur lors de la récupération du Top 5 ${err.message}`,
+        );
         }
-    }  
+    }
 
 
-    // Récupérer SON Top 5 du mois dans un mois précis (par l'ID du mois)
-    
+    // Supprimer son lineup du mois 
+    static async deleteMyLineup(user_id) {
+        try {
+            const month = await this.getActiveMonth();
+            const month_id = month.id;
+            
+            const lineup = await Lineup.findOne({
+                where: { month_id, user_id },
+            });
 
-
-    // Supprimer un des Top 5 (par son ID)
-    static async deleteLineupById(id){
-            try {
-                const lineup = await Lineup.findByPk(id);
-                
-                if(!lineup){
-                    throw new Error (`Top 5 ${id} non trouvé`);
-                }
-
-                await lineup.destroy();
-                return;
-
-            } catch (err) {
-                throw new Error (`Erreur lors de la suppression du Top 5 ${err.message}`);
+            if (!lineup) {
+            throw new Error("Aucun Top 5 trouvé pour le mois en cours");
             }
+            
+            await lineup.destroy();
+            return true;
+
+        } catch (err) {
+        throw new Error(`Erreur lors de la suppression de ton Top 5 ${err.message}`);
+        }
+    }
+
+
+    // Supprimer un des lineup (par son ID)
+    static async deleteLineupById(id, user_id) {
+        try {
+            const lineup = await Lineup.findByPk(id);
+
+            if (!lineup || lineup.user_id !== user_id) {
+                throw new Error(`Top 5 ${id} non trouvé ou non autorisé`);
+            }
+
+            await lineup.destroy();
+            return true;
+
+        } catch (err) {
+        throw new Error(`Erreur lors de la suppression du Top 5 : ${err.message}`);
+        }
+    }
+
+
+    // Récupérer tous les lineups d'un mois souhaité
+    static async getLineupsByMonthId (monthId) {
+        try {
+            const month = await Month.findByPk(monthId);
+
+            if (!month) {
+                throw new Error (`Mois ${monthId} non trouvé`);   
+            }      
+
+        const lineups = await Lineup.findAll({
+            where: { month_id: monthId },
+            include: [{ model: MonthlyPlayer, include: [{ model: LineupPlayer }] }],
+        });
+
+        if (lineups.length === 0) {
+        throw new Error("Aucun Top 5 trouvé pour le mois choisi");    
         }
 
+        return lineups;
 
+        } catch (err) {
+        throw new Error(
+            `Erreur lors de la récupération des Top 5 ${err.message}`,
+        );
+        }
+    }
 
 }
 

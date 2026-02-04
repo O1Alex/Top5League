@@ -1,22 +1,24 @@
 const express = require("express");
 const lineupRouter = express.Router();
-const { authenticate, requireAdmin } = require("../middlewares/authMiddleware");
-const { createLineupByMonthId, getLineupsByMonthId, deleteLineupById } = require("../services/lineupService");
+const { authenticate, requireAdmin } = require('../middlewares/authMiddleware');
+const { validate, lineupValidationRules } =require('../middlewares/validator');
+
+const {
+    createLineup,
+    getMyLineup,
+    deleteMyLineup,
+    deleteLineupById,
+    getLineupsByMonthId
+} =require('../controllers/lineupController')
 
 
-// UTILISATEUR CONNECTE
-// Créer un nouveau Top5 du mois (par l'ID du mois)
-// lineupRouter.post("/:monthId", authenticate, createLineupByMonthId); A voir
+// Utilisateur connecté
+lineupRouter.post("/", authenticate, lineupValidationRules.create, validate, createLineup);
+lineupRouter.get("/me", authenticate, getMyLineup);
+lineupRouter.delete("/me", authenticate, deleteMyLineup);
 
-
-// ADMIN
-// Récupérer les top 5 du mois de tous les utilisateurs (par l'ID du mois)
-// lineupRouter.get("/:monthId", authenticate, requireAdmin, getLineupsByMonthId);
-
-// Récupérer mon top 5 du mois (par l'ID du mois)
-// lineupRouter.post("/:monthId", authenticate, getMyLineupByMonthId ); A voir car ne sait pas comment faire en sorte de récupérérer son Lineup automatiquement
-
-// Supprimer un Top 5 par son ID
-// lineupRouter.delete("/:id", authenticate, requireAdmin, deleteLineupById);
+// Admin
+lineupRouter.delete("/:id", authenticate, requireAdmin, deleteLineupById);
+lineupRouter.get("/me", authenticate, getLineupsByMonthId);
 
 module.exports = lineupRouter;

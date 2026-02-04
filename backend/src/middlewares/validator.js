@@ -194,10 +194,32 @@ const monthlyPlayerValidationRules = {
     ],
 };
 
+// Pour Lineup
+const lineupValidationRules = {
+  create: [
+    body("picks")
+        .isArray({ min: 5, max: 5 })
+        .withMessage("Le Top 5 doit contenir exactement 5 joueurs"),
+    body("picks.*.playerId")
+      .isInt()
+      .withMessage("Chaque playerId doit être un entier valide"),
+    body("picks.*.predicted_pts")
+      .isNumeric()
+      .withMessage("Les points prédits doivent être un nombre positif"),
+    body("picks.*.predicted_ast")
+      .isNumeric()
+      .withMessage("Les passes prédites doivent être un nombre positif"),
+    body("picks.*.predicted_reb")
+      .isNumeric()
+      .withMessage("Les rebonds prédits doivent être un nombre positif"),
+  ],
+};
+
 
 module.exports = {
     validate,
     authValidationRules,
     monthValidationRules,
-    monthlyPlayerValidationRules
+    monthlyPlayerValidationRules,
+    lineupValidationRules
 }
