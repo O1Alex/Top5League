@@ -43,7 +43,7 @@ const getMyLineup = async (req, res) => {
     }
 };
 
-// Supprimer son lineup du mois ouvert
+// Supprimer son lineup du mois
 const deleteMyLineup = async (req, res) => {
      try {
         const userId = req.user.id;
@@ -100,7 +100,7 @@ const getLineupsByMonthId = async (req, res) => {
         });
 
     } catch (error) {
-        console.error("Erreur lors de la récupération des joueurs", error);
+        console.error("Erreur lors de la récupération des lineups", error);
         res.status(500).json({
             success: false,
             message: `Erreur serveur ${error.message}`,

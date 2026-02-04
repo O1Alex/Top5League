@@ -4,6 +4,7 @@ const { Op } = require("sequelize");
 const MonthlyPlayer = require("../models/MonthlyPlayer");
 const LineupPlayer = require("../models/LineupPlayer");
 const { sequelize } = require("models");
+const monthService = require("./monthService");
 
 
 class lineupService {
@@ -27,6 +28,16 @@ class lineupService {
             const month = await this.getActiveMonth();
             const month_id = month.id;
             
+            // controle 1 seul lineup dans le mois
+            const existing = await Lineup.findOne({
+                where: { user_id, month_id },
+            });
+
+            if (existing) {
+                throw new Error("Un Top 5 existe déjà pour ce mois");
+            }
+
+            // Vérification joueurs appartiennent au mois et exactement 5 joueurs
             const monthlyPlayers = await MonthlyPlayer.findAll({
                 where: {
                     id: { [Op.in]: lineupData.map((p) => p.playerId) },
@@ -38,15 +49,14 @@ class lineupService {
                 throw new Error(`certains joueurs du mois sont invalides`);
             }
 
+            // Vérification 1 joueur par poste
             const positionMap = new Map();
             monthlyPlayers.forEach((player) => {
                 positionMap.set(player.id, player.position);
             });
             
             positions.forEach((pos) => {
-                const hasPos = lineupData.some(
-                (p) => positionMap.get(p.playerId) === pos,
-                );
+                const hasPos = lineupData.some((p) => positionMap.get(p.playerId) === pos);
                 if (!hasPos) {
                 throw new Error(`Le joueur pour la position ${pos} est manquant`);
                 }
@@ -54,23 +64,22 @@ class lineupService {
 
 
             return sequelize.transaction(async (t) => {
-                // normal user creer lineup
+                
                 const newLineup = await Lineup.create(
                 { user_id, month_id },
                 { transaction: t },
                 );
                 
-                await LineupPlayer.bulkCreate(
+               await LineupPlayer.bulkCreate(
                 lineupData.map((p) => ({
                     lineup_id: newLineup.id,
                     monthly_player_id: p.playerId,
                 })),
-                { transaction: t },
+                { transaction: t }
                 );
+
                 return Lineup.findByPk(newLineup.id, {
-                include: [
-                    { model: MonthlyPlayer, include: [{ model: LineupPlayer }] },
-                ],
+                include: [{ model: MonthlyPlayer, through: { attributes: [] } }],
                 });
             });
         } catch (err) {
@@ -82,12 +91,12 @@ class lineupService {
     // Récupérer son lineup du mois
     static async getMyLineup(user_id) {
         try {
-            const month = await this.getActiveMonth();
+            const month = await monthService.getCurrentMonth();
             const month_id = month.id;
 
         const lineup = await Lineup.findOne({
             where: { month_id, user_id },
-            include: [{ model: MonthlyPlayer, include: [{ model: LineupPlayer }] }],
+            include: [{ model: MonthlyPlayer, through: { attributes: [] } }],
         });
 
         if (!lineup) {
@@ -156,7 +165,7 @@ class lineupService {
 
         const lineups = await Lineup.findAll({
             where: { month_id: monthId },
-            include: [{ model: MonthlyPlayer, include: [{ model: LineupPlayer }] }],
+            include: [{ model: MonthlyPlayer, through: { attributes: [] } }],
         });
 
         if (lineups.length === 0) {

@@ -1,6 +1,6 @@
 const Month = require("../models/Month");
 const OfficialLineup = require("../models/OfficialLineup");
-const { MonthlyPlayer, sequelize, officialLineupPlayer } = require("../models");
+const { MonthlyPlayer, sequelize, OfficialLineupPlayer } = require("../models");
 const { Op } = require("sequelize");
 
 class officialLineupService {
@@ -9,15 +9,15 @@ class officialLineupService {
         try {
             const positions = ["PG", "SG", "SF", "PF", "C"];
             const month = await Month.findOne({
-                where: { status: "open" },
-                order: [["start_date", "DESC"]],
+                where: { status: "closed" },
+                order: [["end_date", "DESC"]],
             });
 
             const month_id = month.id;
 
             const monthlyPlayers = await MonthlyPlayer.findAll({
                 where: 
-                    {id: { [Op.in]: officialLineupData.map((p) => p.playerId) },
+                    {id: { [Op.in]: officialLineupData.map((p) => p.officialPlayerId) },
                     month_id },
             });
 
@@ -54,8 +54,8 @@ class officialLineupService {
                 { transaction: t },
                 );
 
-            return officialLineup.findByPk(newofficialLineup.id, {
-            include: [officialLineupPlayer, MonthlyPlayer],
+            return OfficialLineup.findByPk(newOfficialLineup.id, {
+            include: [OfficialLineupPlayer, MonthlyPlayer],
             });
             });
         } catch (err) {
