@@ -215,11 +215,23 @@ const lineupValidationRules = {
   ],
 };
 
+// Pour OfficialLineup
+const officialLineupValidationRules ={
+    create:[
+
+
+    ],
+    update:[
+
+
+    ],
+};
 
 module.exports = {
     validate,
     authValidationRules,
     monthValidationRules,
     monthlyPlayerValidationRules,
-    lineupValidationRules
+    lineupValidationRules,
+    officialLineupValidationRules
 }

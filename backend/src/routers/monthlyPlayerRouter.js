@@ -15,7 +15,7 @@ const   {
 
 // Route PUBLIC
 //Récupérer les joueurs du mois
-monthlyPlayerRouter.get("/current", currentMonth, getCurrentMonthlyPlayers);
+monthlyPlayerRouter.get("/current", getCurrentMonthlyPlayers);
 
 
 // Routes ADMIN

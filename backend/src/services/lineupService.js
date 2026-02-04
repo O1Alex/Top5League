@@ -66,22 +66,24 @@ class lineupService {
             return sequelize.transaction(async (t) => {
                 
                 const newLineup = await Lineup.create(
-                { user_id, month_id },
-                { transaction: t },
+                    { user_id, month_id },
+                    { transaction: t }
                 );
                 
-               await LineupPlayer.bulkCreate(
-                lineupData.map((p) => ({
-                    lineup_id: newLineup.id,
-                    monthly_player_id: p.playerId,
-                })),
-                { transaction: t }
+                await LineupPlayer.bulkCreate(
+                    lineupData.map((p) => ({
+                        lineup_id: newLineup.id,
+                        monthly_player_id: p.playerId,
+                    })),
+                    { transaction: t }
                 );
 
                 return Lineup.findByPk(newLineup.id, {
-                include: [{ model: MonthlyPlayer, through: { attributes: [] } }],
+                    include: [{ model: MonthlyPlayer, through: { attributes: [] } }], 
+                    transaction: t,
                 });
             });
+            
         } catch (err) {
         throw new Error(`Erreur lors de la creation du Top 5 ${err.message}`);
         }
@@ -136,13 +138,15 @@ class lineupService {
     }
 
 
+
+
     // Supprimer un des lineup (par son ID)
-    static async deleteLineupById(id, user_id) {
+    static async deleteLineupById(id) {
         try {
             const lineup = await Lineup.findByPk(id);
 
-            if (!lineup || lineup.user_id !== user_id) {
-                throw new Error(`Top 5 ${id} non trouvé ou non autorisé`);
+            if (!lineup) {
+                throw new Error(`Top 5 ${id} non trouvé`);
             }
 
             await lineup.destroy();
