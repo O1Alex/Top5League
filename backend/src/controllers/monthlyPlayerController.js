@@ -48,11 +48,8 @@ const getMonthlyPlayersByMonthId = async(req , res)=> {
 // Récupérer tous les joueurs du mois en cours
 const getCurrentMonthlyPlayers= async(req, res)=>{
 
-    // Middleware
-    const monthId = req.currentMonth.id;
-
     try{
-        const monthlyPlayers = await monthlyPlayerService.getMonthlyPlayersByMonthId(monthId);
+        const monthlyPlayers = await monthlyPlayerService.getCurrentMonthlyPlayers();
 
         res.status(200).json({
             success: true,

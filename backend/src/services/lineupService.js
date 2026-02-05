@@ -3,8 +3,8 @@ const Lineup = require("../models/Lineup");
 const { Op } = require("sequelize");
 const MonthlyPlayer = require("../models/MonthlyPlayer");
 const LineupPlayer = require("../models/LineupPlayer");
-const { sequelize } = require("models");
-const monthService = require("./monthService");
+const { sequelize } = require("sequelize");
+const monthService = require("../services/monthService");
 
 
 class lineupService {
@@ -74,12 +74,15 @@ class lineupService {
                     lineupData.map((p) => ({
                         lineup_id: newLineup.id,
                         monthly_player_id: p.playerId,
+                        predicted_pts: p.predicted_pts,
+                        predicted_ast: p.predicted_ast,
+                        predicted_reb: p.predicted_reb,
                     })),
                     { transaction: t }
                 );
 
                 return Lineup.findByPk(newLineup.id, {
-                    include: [{ model: MonthlyPlayer, through: { attributes: [] } }], 
+                    include: [{ model: MonthlyPlayer, through: { attributes: ["predicted_pts", "predicted_ast", "predicted_reb"] } }], 
                     transaction: t,
                 });
             });

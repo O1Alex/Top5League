@@ -18,6 +18,30 @@ const LineupPlayer = sequelize.define(
             type: DataTypes.INTEGER, 
             allowNull: false 
         },
+
+         predicted_pts: {
+            type: DataTypes.DECIMAL(5, 2),
+            allowNull: false,
+            validate: {
+                min: 0,
+            },
+        },
+
+        predicted_ast: {
+            type: DataTypes.DECIMAL(5, 2),
+            allowNull: false,
+            validate: {
+                min: 0,
+            },
+        },
+
+        predicted_reb: {
+            type: DataTypes.DECIMAL(5, 2),
+            allowNull: false,
+            validate: {
+                min: 0,
+            },
+        },
     },
     {
         tableName: "lineup_players",

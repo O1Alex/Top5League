@@ -1,8 +1,7 @@
 const Month = require("../models/Month");
 const OfficialLineup = require("../models/OfficialLineup");
-const { MonthlyPlayer, sequelize, OfficialLineupPlayer } = require("../models");
-const { Op } = require("sequelize");
-const monthService = require("./monthService");
+const MonthlyPlayer = require("../models/MonthlyPlayer");
+const monthService = require("../services/monthService");
 
 class officialLineupService {
 

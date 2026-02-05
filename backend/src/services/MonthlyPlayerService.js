@@ -1,5 +1,6 @@
 const Month = require("../models/Month")
 const MonthlyPlayer = require("../models/MonthlyPlayer");
+const monthService = require("../services/monthService");
 
 class monthlyPlayerService {
 
@@ -55,18 +56,23 @@ class monthlyPlayerService {
 
     //Récupérer les joueurs du mois en cours
     static async getCurrentMonthlyPlayers() {
-        try{          
-            const monthlyPlayer = await MonthlyPlayer.findAll({ 
-                where:{month_id: monthId}, 
-                order:[["position", "ASC"]],
+        try {
+            const month = await monthService.getCurrentMonth();
+
+            if (!month) {
+            throw new Error("Aucun challenge en cours");
+            }
+
+            const monthlyPlayers = await MonthlyPlayer.findAll({
+                where: { month_id: month.id },
+                order: [["position", "ASC"]],
             });
 
-            return monthlyPlayer;
-
+            return monthlyPlayers;
         } catch (err) {
-            throw new Error (`Erreur lors de la récupération des joueurs ${err.message}`);
+            throw new Error(`Erreur lors de la récupération des joueurs : ${err.message}`);
         }
-    }  
+    }
 
     // Modifier un des joueurs du mois (par son ID)
     static async updateMonthlyPlayerById(id, monthlyPlayerData){
