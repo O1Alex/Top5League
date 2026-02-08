@@ -19,6 +19,6 @@ lineupRouter.delete("/me", authenticate, deleteMyLineup);
 
 // Admin
 lineupRouter.delete("/:id", authenticate, requireAdmin, deleteLineupById);
-lineupRouter.get("/", authenticate, requireAdmin, getLineupsByMonthId);
+lineupRouter.get("/:monthId", authenticate, requireAdmin, getLineupsByMonthId);
 
 module.exports = lineupRouter;

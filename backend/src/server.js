@@ -3,6 +3,7 @@ require ('dotenv').config();
 const sequelize = require("./config/database");
 const routes = require('./routers/index')
 const cors = require('cors')
+require("./models")
 
 const app = express();
 
@@ -26,7 +27,7 @@ async function start() {
 start();
 
 //Synchronisation des modèles avec la BDD
-sequelize.sync({ alter:true})
+sequelize.sync({ alter:false})
   .then(()=> {
     console.log("Model synchronisé avec la base de données")
   })
@@ -46,9 +47,10 @@ app.use((err, req, res, next)=>{
 
 
 //Importation des routes
+sequelize.sync();
 app.use("/api", routes);
 
-  module.exports = {app, PORT};
+module.exports = {app, PORT};
  
 
 // Middleware

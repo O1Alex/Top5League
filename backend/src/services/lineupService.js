@@ -3,7 +3,7 @@ const Lineup = require("../models/Lineup");
 const { Op } = require("sequelize");
 const MonthlyPlayer = require("../models/MonthlyPlayer");
 const LineupPlayer = require("../models/LineupPlayer");
-const { sequelize } = require("sequelize");
+const  sequelize  = require("../config/database");
 const monthService = require("../services/monthService");
 
 
@@ -56,7 +56,8 @@ class lineupService {
             });
             
             positions.forEach((pos) => {
-                const hasPos = lineupData.some((p) => positionMap.get(p.playerId) === pos);
+                const hasPos = lineupData.some(
+                    (p) => positionMap.get(p.playerId) === pos);
                 if (!hasPos) {
                 throw new Error(`Le joueur pour la position ${pos} est manquant`);
                 }
@@ -74,9 +75,9 @@ class lineupService {
                     lineupData.map((p) => ({
                         lineup_id: newLineup.id,
                         monthly_player_id: p.playerId,
-                        predicted_pts: p.predicted_pts,
-                        predicted_ast: p.predicted_ast,
-                        predicted_reb: p.predicted_reb,
+                        predicted_pts: pick.predicted_pts ?? 0,
+                        predicted_ast: pick.predicted_ast ?? 0,
+                        predicted_reb: pick.predicted_reb ?? 0,
                     })),
                     { transaction: t }
                 );
@@ -101,7 +102,7 @@ class lineupService {
 
         const lineup = await Lineup.findOne({
             where: { month_id, user_id },
-            include: [{ model: MonthlyPlayer, through: { attributes: [] } }],
+            include: [{ model: MonthlyPlayer, through: { attributes: ["predicted_pts", "predicted_ast", "predicted_reb"] } }],
         });
 
         if (!lineup) {
