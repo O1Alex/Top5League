@@ -19,7 +19,7 @@ const LineupPlayer = sequelize.define(
             allowNull: false 
         },
 
-         predicted_pts: {
+        predicted_pts: {
             type: DataTypes.DECIMAL(5, 2),
             allowNull: false,
             validate: {

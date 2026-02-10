@@ -18,6 +18,30 @@ const OfficialLineupPlayer = sequelize.define(
             type: DataTypes.INTEGER, 
             allowNull: false 
         },
+        
+        pts: {
+            type: DataTypes.DECIMAL(5, 2),
+            allowNull: false,
+            validate: {
+                min: 0,
+            },
+        },
+
+        ast: {
+            type: DataTypes.DECIMAL(5, 2),
+            allowNull: false,
+            validate: {
+                min: 0,
+            },
+        },
+
+        reb: {
+            type: DataTypes.DECIMAL(5, 2),
+            allowNull: false,
+            validate: {
+                min: 0,
+            },
+        },
     },
 
     {

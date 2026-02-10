@@ -5,9 +5,9 @@ const { validate, officialLineupValidationRules } =require('../middlewares/valid
 
 const {
     getOfficialLineup,
-    // createOfficialLineup,
+    createOfficialLineup,
     getOfficialLineupByMonthId,
-    // updateOfficialLineup,
+    updateOfficialLineup,
     deleteOfficialLineupById
 } =require('../controllers/officialLineupController')
 
@@ -17,9 +17,9 @@ officialLineupRouter.get("/current", authenticate, getOfficialLineup);
 
 
 // Admin
-// officialLineupRouter.post("/", authenticate, requireAdmin, officialLineupValidationRules.create, validate, createOfficialLineup);
-officialLineupRouter.get("/:monthid", authenticate, requireAdmin, getOfficialLineupByMonthId);
-// officialLineupRouter.put("/", authenticate, requireAdmin, officialLineupValidationRules.update, validate, updateOfficialLineup);
+officialLineupRouter.post("/", authenticate, requireAdmin, officialLineupValidationRules.create, validate, createOfficialLineup);
+officialLineupRouter.get("/:monthId", authenticate, requireAdmin, getOfficialLineupByMonthId);
+officialLineupRouter.put("/", authenticate, requireAdmin, officialLineupValidationRules.update, validate, updateOfficialLineup);
 officialLineupRouter.delete("/id",authenticate, requireAdmin, deleteOfficialLineupById);
 
 

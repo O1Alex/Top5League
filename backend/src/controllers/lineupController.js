@@ -1,28 +1,28 @@
 const lineupService = require("../services/lineupService");
 
-// Créer un nouveau joueur du mois dans un mois précis (par l'ID du mois)
+// Créer son Top 5 du mois
 const createLineup = async (req, res) => {
-  try {
-    const userId = req.user.id;
-    const picks = req.body.picks;
+    try {
+        const userId = req.user.id;
+        const picks = req.body.picks;
 
-    const newLineup = await lineupService.createLineup(userId, picks);
+        const newLineup = await lineupService.createLineup(userId, picks);
 
-    res.status(201).json({
-      success: true,
-      data: newLineup,
-    });
-  } catch (error) {
-    console.error("Erreur lors de la création du Top 5", error);
-    res.status(500).json({
-      success: false,
-      message: `Erreur serveur ${error.message}`,
-    });
-  }
+        res.status(201).json({
+            success: true,
+            data: newLineup,
+        });
+    } catch (error) {
+        console.error("Erreur lors de la création du Top 5", error);
+        res.status(500).json({
+        success: false,
+        message: `Erreur serveur ${error.message}`,
+        });
+    }
 };
 
 
-// Récupérer mon lineup du mois
+// Récupérer son Top 5 du mois
 const getMyLineup = async (req, res) => {
     try {
         const userId = req.user.id;
@@ -43,7 +43,55 @@ const getMyLineup = async (req, res) => {
     }
 };
 
-// Supprimer son lineup du mois
+
+// Récupérer tous les Top 5 d'un mois précis par l'ID du mois
+const getLineupsByMonthId = async (req, res) => {
+    
+    try {
+        const { monthId } = req.params;
+
+        const lineups = await lineupService.getLineupsByMonthId(monthId);
+        
+        res.status(200).json({
+            success: true,
+            data: lineups,
+        });
+
+    } catch (error) {
+        console.error("Erreur lors de la récupération des lineups", error);
+        res.status(500).json({
+            success: false,
+            message: `Erreur serveur ${error.message}`,
+        });  
+    }
+};
+
+
+// Modifier son Top 5 du mois
+const updateMyLineup = async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const picks = req.body.picks;
+
+        const updatedLineup = await lineupService.updateMyLineup(userId,picks);
+
+        res.status(200).json({
+            success: true,
+            message: "Top 5 du mois mis à jour avec succès",
+            data: updatedLineup,
+        });
+
+    } catch (error) {
+        console.error("Erreur lors de la modification du Top 5", error);
+        res.status(500).json({
+            success: false,
+            message: `Erreur serveur ${error.message}`,
+        });
+    }
+};
+
+
+// Supprimer son Top 5 du mois
 const deleteMyLineup = async (req, res) => {
      try {
         const userId = req.user.id;
@@ -86,32 +134,14 @@ const deleteLineupById = async (req, res) => {
     }
 };
 
-// Récupérer les lineups d'un mois précis par l'ID du mois
-const getLineupsByMonthId = async (req, res) => {
-    
-    try {
-        const { monthId } = req.params;
 
-        const lineups = await lineupService.getLineupsByMonthId(monthId);
-        
-        res.status(200).json({
-            success: true,
-            data: lineups,
-        });
-
-    } catch (error) {
-        console.error("Erreur lors de la récupération des lineups", error);
-        res.status(500).json({
-            success: false,
-            message: `Erreur serveur ${error.message}`,
-        });  
-    }
-};
 
 module.exports = {
-  createLineup,
-  getMyLineup,
-  deleteMyLineup,
-  deleteLineupById,
-  getLineupsByMonthId
+    createLineup,
+    getMyLineup,
+    getLineupsByMonthId,
+    updateMyLineup,
+    deleteMyLineup,
+    deleteLineupById
+  
 };

@@ -196,34 +196,89 @@ const monthlyPlayerValidationRules = {
 
 // Pour Lineup
 const lineupValidationRules = {
-  create: [
-    body("picks")
-        .isArray({ min: 5, max: 5 })
-        .withMessage("Le Top 5 doit contenir exactement 5 joueurs"),
-    body("picks.*.playerId")
-      .isInt()
-      .withMessage("Chaque playerId doit être un entier valide"),
-    body("picks.*.predicted_pts")
-      .isNumeric()
-      .withMessage("Les points prédits doivent être un nombre positif"),
-    body("picks.*.predicted_ast")
-      .isNumeric()
-      .withMessage("Les passes prédites doivent être un nombre positif"),
-    body("picks.*.predicted_reb")
-      .isNumeric()
-      .withMessage("Les rebonds prédits doivent être un nombre positif"),
-  ],
+    create: [
+        body("picks")
+            .isArray({ min: 5, max: 5 })
+            .withMessage("Le Top 5 doit contenir exactement 5 joueurs"),
+        body("picks.*.playerId")
+            .isInt()
+            .withMessage("Chaque playerId doit être un entier valide"),
+        body("picks.*.predicted_pts")
+            .isFloat({ min:0 })
+            .withMessage("Les points prédits doivent être un nombre positif"),
+        body("picks.*.predicted_ast")
+            .isFloat({ min:0 })
+            .withMessage("Les passes prédites doivent être un nombre positif"),
+        body("picks.*.predicted_reb")
+            .isFloat({ min:0 })
+            .withMessage("Les rebonds prédits doivent être un nombre positif"),
+    ],
+
+    update: [
+        body("picks")
+            .optional()
+            .isArray({ min: 5, max: 5 })
+            .withMessage("Le Top 5 doit contenir exactement 5 joueurs"),
+        body("picks.*.playerId")
+            .optional()
+            .isInt()
+            .withMessage("Chaque playerId doit être un entier valide"),
+        body("picks.*.predicted_pts")
+            .optional()
+            .isFloat({ min:0 })
+            .withMessage("Les points prédits doivent être un nombre positif"),
+        body("picks.*.predicted_ast")
+            .optional()
+            .isFloat({ min:0 })
+            .withMessage("Les passes prédites doivent être un nombre positif"),
+        body("picks.*.predicted_reb")
+            .optional()
+            .isFloat({ min:0 })
+            .withMessage("Les rebonds prédits doivent être un nombre positif"),
+    ]
 };
 
 // Pour OfficialLineup
 const officialLineupValidationRules ={
     create:[
-
-
+        body("picks")
+            .isArray({ min: 5, max: 5 })
+            .withMessage("Le Top 5 Officiel doit contenir exactement 5 joueurs"),
+        body("picks.*.playerId")
+            .isInt()
+            .withMessage("Chaque playerId doit être un entier valide"),
+        body("picks.*.pts")
+            .isFloat({ min:0 })
+            .withMessage("Les points doivent être un nombre positif"),
+        body("picks.*.predicted_ast")
+            .isFloat({ min:0 })
+            .withMessage("Les passes doivent être un nombre positif"),
+        body("picks.*.predicted_reb")
+            .isFloat({ min:0 })
+            .withMessage("Les rebonds doivent être un nombre positif"),
     ],
+
     update:[
-
-
+         body("picks")
+            .optional()
+            .isArray({ min: 5, max: 5 })
+            .withMessage("Le Top 5 doit contenir exactement 5 joueurs"),
+        body("picks.*.playerId")
+            .optional()
+            .isInt({ min: 1 })
+            .withMessage("playerId doit être un entier valide"),
+        body("picks.*.pts")
+            .optional()
+            .isFloat({ min: 0 })
+            .withMessage("Les points doivent être un nombre positif"),
+        body("picks.*.ast")
+            .optional()
+            .isFloat({ min: 0 })
+            .withMessage("Les passes doivent être un nombre positif"),
+        body("picks.*.reb")
+            .optional()
+            .isFloat({ min: 0 })
+            .withMessage("Les rebonds doivent être un nombre positif"),
     ],
 };
 

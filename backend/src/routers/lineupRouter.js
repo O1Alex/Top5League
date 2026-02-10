@@ -6,15 +6,19 @@ const { validate, lineupValidationRules } =require('../middlewares/validator');
 const {
     createLineup,
     getMyLineup,
+    updateMyLineup,
     deleteMyLineup,
     deleteLineupById,
     getLineupsByMonthId
-} =require('../controllers/lineupController')
+} =require('../controllers/lineupController');
+
+
 
 
 // Utilisateur connecté
-lineupRouter.post("/", authenticate, lineupValidationRules.create, validate, createLineup);
+lineupRouter.post("/me", authenticate, lineupValidationRules.create, validate, createLineup);
 lineupRouter.get("/me", authenticate, getMyLineup);
+lineupRouter.put("/me", authenticate, lineupValidationRules.update, validate, updateMyLineup);
 lineupRouter.delete("/me", authenticate, deleteMyLineup);
 
 // Admin
