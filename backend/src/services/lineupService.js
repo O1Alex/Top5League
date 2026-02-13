@@ -102,21 +102,21 @@ class lineupService {
             const month = await monthService.getCurrentMonth();
             const month_id = month.id;
 
-        const lineup = await Lineup.findOne({
-            where: { month_id, user_id },
-            include: [{ model: MonthlyPlayer, through: { attributes: ["predicted_pts", "predicted_ast", "predicted_reb"] } }],
-        });
+            const lineup = await Lineup.findOne({
+                where: { month_id, user_id },
+                include: [{ model: MonthlyPlayer, through: { attributes: ["predicted_pts", "predicted_ast", "predicted_reb"] } }],
+            });
 
         if (!lineup) {
-        throw new Error("Aucun Top 5 trouvé pour le mois en cours");    
+            throw new Error("Aucun Top 5 trouvé pour le mois en cours");    
         }
 
         return lineup;
 
         } catch (err) {
-        throw new Error(
-            `Erreur lors de la récupération du Top 5 ${err.message}`,
-        );
+            throw new Error(
+                `Erreur lors de la récupération du Top 5 ${err.message}`,
+            );
         }
     }
 

@@ -280,7 +280,28 @@ const officialLineupValidationRules ={
             .isFloat({ min: 0 })
             .withMessage("Les rebonds doivent être un nombre positif"),
     ],
+}
+  
+
+const winnerValidationRules = {
+    create: [
+        body("month_id")
+        .isInt()
+        .withMessage("Le month_id doit être un entier valide"),
+
+        body("user_id")
+        .isInt()
+        .withMessage("Le user_id doit être un entier valide"),
+
+        body("total_score")
+        .optional()
+        .isFloat({ min: 0 })
+        .withMessage("Le score total doit être un nombre positif"),
+    ],
 };
+
+// Pour winner
+
 
 module.exports = {
     validate,
@@ -288,5 +309,6 @@ module.exports = {
     monthValidationRules,
     monthlyPlayerValidationRules,
     lineupValidationRules,
-    officialLineupValidationRules
+    officialLineupValidationRules,
+    winnerValidationRules
 }

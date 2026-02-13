@@ -20,6 +20,56 @@ const computeWinner = async (req, res) => {
     }
 }
 
+
+const getWinnerByMonthId = async (req, res) => {
+    try{
+        const { monthId } = req.params;
+
+        const winner = await winnerService.getWinnerByMonthId(monthId);
+
+        res.status(200).json({
+            success: true,
+            data: winner,
+        });
+
+    } catch (error) {
+        console.error("Erreur lors de la récupération du gagnant du mois choisi", error);
+        res.status(500).json({
+            success: false,
+            message: `Erreur serveur ${error.message}`,
+        });  
+    }
+}
+
+
+const getCurrentWinner = async (req, res) => {
+    try{
+        const winner = await winnerService.getCurrentWinner();
+
+        res.status(200).json({
+            success: true,
+            data: winner,
+        });
+
+    } catch (error) {
+        console.error("Erreur lors de la récupération du gagnant du mois", error);
+        res.status(500).json({
+            success: false,
+            message: `Erreur serveur ${error.message}`,
+        });  
+    }
+}
+
+
+const getCurrentWinnerLineup = async (req, res) => {
+    const winner = await winnerService.getCurrentWinnerLineup();
+
+}
+
+
 module.exports = {
-    computeWinner
+    computeWinner,
+    getWinnerByMonthId,
+    getCurrentWinner,
+    getCurrentWinnerLineup
 };

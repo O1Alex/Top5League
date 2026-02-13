@@ -5,7 +5,8 @@ const { winnerValidationRules, validate } = require("../middlewares/validator");
 const   {
             computeWinner,
             getWinnerByMonthId,
-            getCurrentWinner
+            getCurrentWinner,
+            getCurrentWinnerLineup
             
         } = require("../controllers/winnerController")
 
@@ -18,5 +19,6 @@ winnerRouter.get("/:monthId", authenticate, getWinnerByMonthId );
 
 // Routes public
 winnerRouter.get("/current", getCurrentWinner);
+winnerRouter.get("/lineup", getCurrentWinnerLineup);
 
-module.exports = userRouter;
+module.exports = winnerRouter;
