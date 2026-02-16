@@ -29,7 +29,7 @@ const getOfficialLineup = async (req, res) =>{
 
         res.status(200).json({
             success: true,
-            message:"Top 5 Officiel du mois réceupéré avec succès",
+            message:"Top 5 Officiel du mois recupéré avec succès",
             data: officialLineup
         });
 

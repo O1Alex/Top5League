@@ -62,7 +62,23 @@ const getCurrentWinner = async (req, res) => {
 
 
 const getCurrentWinnerLineup = async (req, res) => {
-    const winner = await winnerService.getCurrentWinnerLineup();
+    try {
+        const winner = await winnerService.getCurrentWinnerLineup();
+
+        res.status(200).json({
+            success: true,
+            message:"Top 5 gagnant du mois récupéré avec succès",
+            data: winner
+        });
+
+
+    } catch (error) {
+        console.error("Erreur lors de la récupération du Top 5  du gagnant du mois", error);
+        res.status(500).json({
+            success: false,
+            message: `Erreur serveur ${error.message}`,
+        });
+    }
 
 }
 
