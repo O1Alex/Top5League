@@ -1,6 +1,6 @@
-const { request } = require("supertest");
-const { sequelize } = require("../src/config/database");
-const { app } = require("../src/server");
+const request = require("supertest");
+const sequelize = require("../src/config/database");
+const app = require("../src/server");
 
 describe("Auth Endpoints", () => {
     beforeEach(async ()=> {
@@ -9,7 +9,7 @@ describe("Auth Endpoints", () => {
 
     describe("POST /api/auth/register", () => {
         it("doit enregistrer un nouvel utilisateur avec succès", async () => {
-            const res = await request(app).post("api/auth/register").send({
+            const res = await request(app).post("/api/auth/register").send({
                 username: "testuser",
                 email: "testuser@example.com",
                 password: "TestPassword123",
