@@ -1,17 +1,17 @@
 const { Sequelize } = require("sequelize");
 require("dotenv").config();
 
-
+let sequelize;
 // Base de données pour test unitaire
 if (process.env.NODE_ENV === "test"){
-    const sequelize = new Sequelize('sqlite::memory', {
+    sequelize = new Sequelize('sqlite::memory:', {
         logging: false,
         dialect: 'sqlite',
     });
 
 // Connexion Base de données principal du site
 } else {
-    const sequelize = new Sequelize(
+    sequelize = new Sequelize(
     process.env.DB_NAME,
     process.env.DB_USER || 'root',
     process.env.DB_PASSWORD || '', {
