@@ -1,11 +1,11 @@
 const request = require("supertest");
 const sequelize = require("../src/config/database");
-const app = require("../src/server");
+const { app } = require("../src/server");
 
 describe("Auth Endpoints", () => {
     beforeEach(async ()=> {
-        await sequelize.models.User.destroy({ where: {} });
-    })
+        await sequelize.models.Users.destroy({ where: {} });
+    });
 
     describe("POST /api/auth/register", () => {
         it("doit enregistrer un nouvel utilisateur avec succès", async () => {

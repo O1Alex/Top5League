@@ -1,3 +1,5 @@
+const sequelize = require("../config/database");
+
 const User = require("./User");
 const Month = require("./Month");
 const MonthlyPlayer = require("./MonthlyPlayer");
@@ -6,8 +8,6 @@ const LineupPlayer = require("./LineupPlayer");
 const OfficialLineup = require("./OfficialLineup");
 const OfficialLineupPlayer = require("./OfficialLineupPlayer");
 const Winner = require("./Winner");
-const sequelize = require("../config/database");
-
 
 
 //Relation User/Lineup
