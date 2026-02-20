@@ -1,6 +1,6 @@
 const request = require("supertest");
 const sequelize = require("../src/config/database");
-const { app } = require("../src/server");
+const app = require("../src/app");
 
 describe("Auth Endpoints", () => {
     beforeEach(async ()=> {

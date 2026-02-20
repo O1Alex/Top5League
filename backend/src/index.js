@@ -1,4 +1,5 @@
-const {app, PORT} = require ("./server")
+const PORT = require ("./server");
+const app = require ('./app');
 
 
 app.listen(PORT, ()=>{

@@ -1,28 +1,13 @@
-const express = require("express");
-require("dotenv").config();
-const cors = require("cors");
-
 const sequelize = require("./config/database");
-const routes = require("./routers/index");
+require("dotenv").config();
+
 
 // Chargement models + association
 require("./models");
 
-const app = express();
+const app = require("./app");
+
 const PORT = process.env.SERVER_PORT || 3000;
-
-
-// Middleware
-// cors:
-var corsOptions = {
-  origin: 'http://localhost:8000',
-  optionsSuccessStatus: 200
-}
-app.use(cors(corsOptions));
-
-app.use(express.json());
-app.use(express.urlencoded ({extended : true}));
-
 
 
 // Test connexion BDD
@@ -35,7 +20,6 @@ async function start() {
     console.error("Impossible de se connecter à la base de données :", error);
   }
 }
-start();
 
 
 //Synchronisation des modèles avec la BDD
@@ -48,18 +32,7 @@ sequelize.sync({ alter:false })
   });
 
 
-//Importation des routes
-app.use("/api", routes);
 
+start();
 
-//Gestion erreurs
-app.use((err, req, res, next)=>{
-    console.error('Erreur:' , err)
-    res.status(500).json({
-      success: false,
-      message: "Erreur serveur !",
-    }) 
-});
-
-
-module.exports = {app, PORT};
+module.exports = PORT;
