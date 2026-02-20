@@ -4,9 +4,10 @@ require("dotenv").config();
 let sequelize;
 // Base de données pour test unitaire
 if (process.env.NODE_ENV === "test"){
-    sequelize = new Sequelize('sqlite::memory:', {
-        logging: false,
+    sequelize = new Sequelize({
         dialect: 'sqlite',
+        storage: ":memory:",
+        logging: false
     });
 
 // Connexion Base de données principal du site

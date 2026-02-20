@@ -52,7 +52,7 @@ const login = async (req, res) => {
 
         const user = await User.findOne({ where: { email } });
         if (!user) {
-            return res.status(400).json({
+            return res.status(401).json({
                 success: false,
                 message: "Email ou mot de passe incorrect",
             });
@@ -60,7 +60,7 @@ const login = async (req, res) => {
 
         const isValid = await bcrypt.compare(password, user.password);
         if (!isValid) {
-            return res.status(400).json({
+            return res.status(401).json({
                 success: false,
                 message: "Email ou mot de passe incorrect",
             });
@@ -99,9 +99,9 @@ const getMe = async (req, res) => {
             });
         }
 
-        res.status(201).json({
+        res.status(200).json({
             success: true,
-            data: sanitizerUser,
+             data: sanitizerUser(user),
         });
 
     } catch (error) {
