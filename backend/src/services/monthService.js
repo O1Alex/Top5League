@@ -50,9 +50,7 @@ class monthService {
         });
         }
 
-        if (!month) {
-        throw new Error("Aucun mois courant disponible");
-        }
+        return month;
 
     return month;
   }
@@ -62,7 +60,7 @@ class monthService {
         try {
             const month = await Month.findByPk(id);
             if(!month){
-                throw new Error (`month ${id} non trouvé`);
+                return null;
             }
             await month.update(monthData);
             return month;
@@ -77,10 +75,10 @@ class monthService {
         try {
             const month = await Month.findByPk(id)
         if (!month) {
-                throw new Error(`month ${id} non trouvé`);
+                return null;
             }
         await month.destroy();
-        return;
+        return true;
 
         }catch (err) {
             throw new Error(`Erreur lors de la suppression du mois ${err.message}`);

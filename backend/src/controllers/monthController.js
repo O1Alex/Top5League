@@ -46,6 +46,13 @@ const getMonthById = async(req , res)=> {
 
         const month = await monthService.getMonthById(id);
 
+        if (!month) {
+            return res.status(404).json({
+                success: false,
+                message: "Mois non trouvé",
+            });
+        }
+
         res.status(200).json({
             success: true,
             data: month,
@@ -63,6 +70,14 @@ const getMonthById = async(req , res)=> {
 const getCurrentMonth = async (req, res) => {
     try {
         const month = await monthService.getCurrentMonth();
+
+        if (!month) {
+            return res.status(404).json({
+                success: false,
+                message: "Aucun mois courant disponible",
+            });
+        }
+
         res.status(200).json({ 
             success: true, 
             data: month 
@@ -79,6 +94,13 @@ const updateMonthById = async (req, res)=> {
         const monthData = req.body;
 
         const updatedMonth = await monthService.updateMonthById(id, monthData)
+
+        if (!updatedMonth) {
+            return res.status(404).json({
+                success: false,
+                message: "Mois non trouvé",
+            });
+        }
 
         res.status(200).json({
             success: true,
@@ -100,6 +122,13 @@ const deleteMonthById = async(req, res)=> {
         const { id } = req.params;
 
         const month = await monthService.deleteMonthById(id);
+
+        if (!month) {
+            return res.status(404).json({
+                success: false,
+                message: "Mois non trouvé",
+            });
+        }
 
         res.status(200).json({
             success: true,
