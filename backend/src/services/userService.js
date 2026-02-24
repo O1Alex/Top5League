@@ -29,11 +29,11 @@ class userService {
         try {
             const user = await User.findByPk(id)
             if (!user) {
-                    throw new Error(`User ${id} non trouvé`);
+                    return null;
                 }
             await user.destroy();
             
-            return;
+            return user;
 
         }catch (err) {
             throw new Error(`Erreur lors de la suppression de l'utilisateur ${err.message}`);
