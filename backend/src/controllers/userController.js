@@ -1,14 +1,16 @@
 const userService = require("../services/userService");
-
+const sanitizeUser = require("../utils/sanitizers/user.sanitizer");
 
 // Récupérer tous les utilisateurs
 const getAllUsers = async(req , res)=> {
      try {
         const users = await userService.getAllUsers();
 
+        const sanitizedUsers = users.map(sanitizeUser);
+
         res.status(200).json({
             success: true,
-            data: users,
+            data: sanitizedUsers,
     });
     } catch (error) {
         console.error("Erreur lors de la récupération des utilisateurs", error);
@@ -27,9 +29,17 @@ const getUserById = async(req , res)=> {
 
         const user = await userService.getUserById(id);
 
+        // Si utilisateur inexistant
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "Utilisateur non trouvé",
+            });
+        }
+
         res.status(200).json({
             success: true,
-            data: user,
+            data: sanitizeUser(user),
     });
    } catch (error) {
         console.error("Erreur lors de la récupération de l'utilisateur", error);
@@ -48,16 +58,23 @@ const deleteUserById = async(req, res)=> {
 
         const user = await userService.deleteUserById(id);
 
+        // Si utilisateur inexistant
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "Utilisateur non trouvé",
+            });
+        }
+
         res.status(200).json({
             success: true,
-            data: user,
             message: "Utilisateur supprimé avec succès"
     });
     } catch (error) {
         console.error("Erreur lors de la suppression de l'utilisateur", error);
         res.status(500).json({
             success: false,
-             message: `Erreur serveur ${error.message}`,
+            message: `Erreur serveur ${error.message}`,
         });   
     }
 };

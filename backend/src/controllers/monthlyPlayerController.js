@@ -9,6 +9,13 @@ const createMonthlyPlayerByMonthId = async(req , res)=> {
         
         const newMonthlyPlayer = await monthlyPlayerService.createMonthlyPlayerByMonthId(monthId, monthlyPlayerData);
         
+        if (!newMonthlyPlayer) {
+            return res.status(404).json({
+                success: false,
+                message: "Mois non trouvé",
+            });
+        }
+
         res.status(201).json({
             success: true,
             data: newMonthlyPlayer,
@@ -30,7 +37,7 @@ const getMonthlyPlayersByMonthId = async(req , res)=> {
         const { monthId } = req.params;
 
         const monthlyPlayers = await monthlyPlayerService.getMonthlyPlayersByMonthId(monthId);
-        
+
         res.status(200).json({
             success: true,
             data: monthlyPlayers,
@@ -73,7 +80,14 @@ const updateMonthlyPlayerById = async (req, res)=> {
 
         const monthlyPlayer = await monthlyPlayerService.updateMonthlyPlayerById(id, monthlyPlayerData)
         
-         res.status(200).json({
+         if(!monthlyPlayer){
+            return res.status(404).json({
+                success: false,
+                message: "Joueur non trouvé",
+            });
+        }
+
+        res.status(200).json({
             success: true,
             data: monthlyPlayer,
         });
@@ -94,6 +108,13 @@ const deleteMonthlyPlayerById = async(req, res)=> {
         const { id } = req.params;
 
         const monthlyPlayer = await monthlyPlayerService.deleteMonthlyPlayerById(id);
+
+        if(!monthlyPlayer){
+            return res.status(404).json({
+                success: false,
+                message: "Joueur non trouvé",
+            });
+        }
 
         res.status(200).json({
             success: true,

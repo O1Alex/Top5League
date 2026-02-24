@@ -10,7 +10,7 @@ class monthlyPlayerService {
             const month = await Month.findByPk(monthId);
 
             if (!month) {
-                throw new Error (`Mois ${monthId} non trouvé`);   
+                return null;   
             }      
             if(month.status !== 'open') {     
                 throw new Error (`Impossible de créer un joueur lorsque le mois n'est pas ouvert`);
@@ -39,7 +39,7 @@ class monthlyPlayerService {
             const month = await Month.findByPk(monthId);
 
             if (!month) {
-                throw new Error (`Mois ${monthId} non trouvé`);   
+                return null;   
             }      
             
             const monthlyPlayer = MonthlyPlayer.findAll({ 
@@ -60,7 +60,7 @@ class monthlyPlayerService {
             const month = await monthService.getCurrentMonth();
 
             if (!month) {
-            throw new Error("Aucun challenge en cours");
+                return null;
             }
 
             const monthlyPlayers = await MonthlyPlayer.findAll({
@@ -78,8 +78,9 @@ class monthlyPlayerService {
     static async updateMonthlyPlayerById(id, monthlyPlayerData){
         try {
             const monthlyPlayer = await MonthlyPlayer.findByPk(id);
+
             if(!monthlyPlayer){
-                throw new Error (`Joueur ${id} non trouvé`);
+                return null;
             }
 
             await monthlyPlayer.update(monthlyPlayerData);
@@ -97,11 +98,11 @@ class monthlyPlayerService {
                 const monthlyPlayer = await MonthlyPlayer.findByPk(id);
                 
                 if(!monthlyPlayer){
-                    throw new Error (`Joueur ${id} non trouvé`);
+                    return null;
                 }
 
                 await monthlyPlayer.destroy();
-                return;
+                return monthlyPlayer;
 
             } catch (err) {
                 throw new Error (`Erreur lors de la suppression du joueur ${err.message}`);
