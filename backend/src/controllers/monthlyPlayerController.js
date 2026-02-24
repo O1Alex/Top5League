@@ -58,6 +58,13 @@ const getCurrentMonthlyPlayers= async(req, res)=>{
     try{
         const monthlyPlayers = await monthlyPlayerService.getCurrentMonthlyPlayers();
 
+        if (!monthlyPlayers){
+            return res.status(404).json({
+                success: false,
+                message: "Joueur non trouvé",
+            });
+        }
+        
         res.status(200).json({
             success: true,
             data: monthlyPlayers,

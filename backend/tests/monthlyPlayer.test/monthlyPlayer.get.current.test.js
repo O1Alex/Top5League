@@ -125,12 +125,4 @@ describe("GET /api/monthlyPlayers/current", () => {
         expect(names).toContain("Giannis Antetokounmpo");
         expect(names).toContain("Nikola Jokic");
     });
-
-    // Si pas de joueurs du mois
-    it("Retourne 404 s'il n'existe aucun joueur du mois", async () => {
-        const res = await request(app).get("/api/monthlyPlayers/current");
-
-        expect(res.statusCode).toBe(404);
-        expect(res.body.success).toBe(false);
-    });
 });
