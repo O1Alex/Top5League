@@ -130,13 +130,13 @@ describe("MonthlyPlayer Endpoints", () => {
     });
 
     // Test si utilisateur non Admin
-    describe("PUT /api/monthlyPlayers/:id", () => {
-        let token;
-        let monthId;
-        let playerId;
+    describe("PUT /api/monthlyPlayers/:id - non admin", () => {
+    let token;
+    let playerId;
 
         beforeEach(async () => {
-            await request(app)
+            // utilisateur NON admin
+            const res = await request(app)
                 .post("/api/auth/register")
                 .send({
                     username: "user",
@@ -145,18 +145,9 @@ describe("MonthlyPlayer Endpoints", () => {
                     favorite_player: "Jordan",
                 });
 
-            const user = await User.findOne({
-                where: { email: "user@example.com" }
-            });
+            token = res.body.data.token;
 
-            // role = "user" par défaut → PAS admin
-            token = jwt.sign(
-                { id: user.id, role: user.role },
-                process.env.JWT_SECRET,
-                { expiresIn: "7d" }
-            );
-
-             // Création mois pour le test
+            // mois
             const month = await Month.create({
                 label: "Janvier 2026",
                 start_date: "2026-01-01",
@@ -165,31 +156,28 @@ describe("MonthlyPlayer Endpoints", () => {
                 status: "open",
             });
 
-            monthId = month.id;
-
-            // Création du joueur du mois 
+            // joueur du mois
             const player = await MonthlyPlayer.create({
                 fullname: "Stephen Curry",
-                position: "C",
-                team_name: "Golden State Warriors",
-                pts: 30.2,
-                ast: 8.3,
-                reb: 6.7,
-                photo_url: "https://test.com/curry_30.png",
-                month_id: monthId
+                position: "PG",
+                team_name: "Warriors",
+                pts: 30,
+                ast: 8,
+                reb: 6,
+                month_id: month.id,
             });
 
-            playerId = player.id
+            playerId = player.id;
         });
+
         it("Refuse la modification du joueur si non admin", async () => {
             const res = await request(app)
                 .put(`/api/monthlyPlayers/${playerId}`)
                 .set("Authorization", `Bearer ${token}`)
                 .send({
-                    position: "PG",
-                    pts: 31,
+                    position: "C",
+                    pts: 35,
                 });
-
 
             expect(res.statusCode).toBe(403);
         });

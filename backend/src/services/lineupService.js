@@ -7,6 +7,7 @@ const  sequelize  = require("../config/database");
 const monthService = require("../services/monthService");
 
 
+
 class lineupService {
     static async getActiveMonth() {
         const month = await Month.findOne({
@@ -15,7 +16,7 @@ class lineupService {
         });
 
         if (!month) {
-        throw new Error("Aucun challenge n'est actuellement ouvert");
+            throw new Error("Aucun challenge n'est actuellement ouvert");
         }
         return month;
     }
@@ -108,7 +109,7 @@ class lineupService {
             });
 
         if (!lineup) {
-            throw new Error("Aucun Top 5 trouvé pour le mois en cours");    
+            return null;    
         }
 
         return lineup;
@@ -127,17 +128,13 @@ class lineupService {
             const month = await Month.findByPk(monthId);
 
             if (!month) {
-                throw new Error (`Mois ${monthId} non trouvé`);   
+                return null;   
             }      
 
         const lineups = await Lineup.findAll({
             where: { month_id: monthId },
-            include: [{ model: MonthlyPlayer, through: { attributes: [] } }],
+            include: [{ model: MonthlyPlayer, through: {  attributes: ["predicted_pts", "predicted_ast", "predicted_reb"] } }],
         });
-
-        if (lineups.length === 0) {
-        throw new Error("Aucun Top 5 trouvé pour le mois choisi");    
-        }
 
         return lineups;
 
@@ -164,7 +161,7 @@ class lineupService {
             });
 
             if (!lineup) {
-            throw new Error("Aucun Top 5 à modifier pour le mois en cours");
+                return null;
             }
 
             // Vérification appartenance des joueurs au mois et nombre de joueur = 5
@@ -246,7 +243,7 @@ class lineupService {
             });
 
             if (!lineup) {
-            throw new Error("Aucun Top 5 trouvé pour le mois en cours");
+                return null;
             }
             
             await lineup.destroy();
@@ -264,7 +261,7 @@ class lineupService {
             const lineup = await Lineup.findByPk(id);
 
             if (!lineup) {
-                throw new Error(`Top 5 ${id} non trouvé`);
+                return null;
             }
 
             await lineup.destroy();

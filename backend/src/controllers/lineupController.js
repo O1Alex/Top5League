@@ -29,6 +29,13 @@ const getMyLineup = async (req, res) => {
 
         const lineup = await lineupService.getMyLineup(userId);
 
+        if(!lineup){
+            return res.status(404).json({
+                success: false,
+                message: "Aucun Top 5 trouvé pour ce mois",
+            });
+        }
+
         res.status(200).json({
         success: true,
         data: lineup,
@@ -51,7 +58,21 @@ const getLineupsByMonthId = async (req, res) => {
         const { monthId } = req.params;
 
         const lineups = await lineupService.getLineupsByMonthId(monthId);
-        
+
+        if(!lineups){
+            return res.status(404).json({
+                success: false,
+                message: "Mois non troubé",
+            });
+        }
+
+        if (lineups.length === 0) {
+            return res.status(404).json({
+                success: false,
+                message: "Aucun Top 5 trouvé pour le mois choisi"
+            });
+}
+
         res.status(200).json({
             success: true,
             data: lineups,
@@ -74,6 +95,13 @@ const updateMyLineup = async (req, res) => {
         const picks = req.body.picks;
 
         const updatedLineup = await lineupService.updateMyLineup(userId,picks);
+
+        if(!updatedLineup){
+            return res.status(404).json({
+                success: false,
+                message: "Aucun Top 5 trouvé pour ce mois",
+            });
+        }
 
         res.status(200).json({
             success: true,
@@ -98,6 +126,13 @@ const deleteMyLineup = async (req, res) => {
 
         const lineup = await lineupService.deleteMyLineup(userId);
 
+         if(!lineup){
+            return res.status(404).json({
+                success: false,
+                message: "Aucun Top 5 trouvé pour ce mois",
+            });
+        }
+
         res.status(200).json({
         success: true,
         data: lineup,
@@ -119,6 +154,13 @@ const deleteLineupById = async (req, res) => {
         const { id } = req.params;
 
         const lineup = await lineupService.deleteLineupById(id);
+
+         if(!lineup){
+            return res.status(404).json({
+                success: false,
+                message: "Aucun Top 5 trouvé pour ce mois",
+            });
+        }
 
         res.status(200).json({
         success: true,
