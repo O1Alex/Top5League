@@ -62,7 +62,7 @@ const getLineupsByMonthId = async (req, res) => {
         if(!lineups){
             return res.status(404).json({
                 success: false,
-                message: "Mois non troubé",
+                message: "Auncun lineup trouvé",
             });
         }
 

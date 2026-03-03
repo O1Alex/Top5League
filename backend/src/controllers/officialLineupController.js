@@ -6,13 +6,34 @@ const createOfficialLineup = async (req, res) => {
     try {
         const picks = req.body.picks;
 
+        if (!picks || picks.length !== 5) {
+            return res.status(400).json({
+                success: false,
+                message: "Le Top 5 doit contenir exactement 5 joueurs",
+            });
+        }
+
         const newOfficialLineup = await officialLineupService.createOfficialLineup(picks);
         
         res.status(201).json({
         success: true,
         data: newOfficialLineup,
         });
+
     } catch (error) {
+
+        // Erreurs métier
+        if (
+            error.message.includes("existe déjà") ||
+            error.message.includes("invalides") ||
+            error.message.includes("manquant")
+        ) {
+            return res.status(400).json({
+                success: false,
+                message: error.message,
+            });
+        }
+
         console.error("Erreur lors de la création du Top 5 Officiel", error);
         res.status(500).json({
         success: false,
@@ -26,6 +47,13 @@ const createOfficialLineup = async (req, res) => {
 const getOfficialLineup = async (req, res) =>{
     try {
         const officialLineup = await officialLineupService.getOfficialLineup();
+
+        if(!officialLineup){
+             return res.status(404).json({
+                success: false,
+                message: "Auncun lineup officiel trouvé",
+            });
+        }
 
         res.status(200).json({
             success: true,
@@ -50,6 +78,20 @@ const getOfficialLineupByMonthId = async (req, res) => {
         const { monthId } = req.params;
 
         const officialLineup = await officialLineupService.getOfficialLineupByMonthId(monthId);
+
+        if(!monthId){
+             return res.status(404).json({
+                success: false,
+                message: "Auncun mois trouvé",
+            });
+        }
+
+        if(!officialLineup){
+             return res.status(404).json({
+                success: false,
+                message: "Auncun lineup officiel trouvé",
+            });
+        }
         
         res.status(200).json({
             success: true,
@@ -73,6 +115,13 @@ const updateOfficialLineup = async (req, res) => {
 
         const updatedOfficialLineup = await officialLineupService.updateOfficialLineup(picks);
 
+        if(!updatedOfficialLineup){
+             return res.status(404).json({
+                success: false,
+                message: "Auncun lineup officiel trouvé",
+            });
+        }
+
         res.status(200).json({
             success: true,
             data: updatedOfficialLineup,
@@ -91,11 +140,18 @@ const updateOfficialLineup = async (req, res) => {
 
 
 // Supprimer un Top 5 Officiel par son ID
-const deleteOfficialLineupById = async (req, res) => {
+const deleteOfficialLineupByMonthId = async (req, res) => {
     try {
-        const { id } = req.params;
+        const { monthId } = req.params;
 
-        await officialLineupService.deleteOfficialLineupById(id);
+        const deletedOfficialLineup = await officialLineupService.deleteOfficialLineupByMonthId(monthId);
+
+        if(!deletedOfficialLineup){
+             return res.status(404).json({
+                success: false,
+                message: "Auncun lineup officiel trouvé pour ce mois",
+            });
+        }
 
         res.status(200).json({
         success: true,
@@ -115,7 +171,7 @@ const deleteOfficialLineupById = async (req, res) => {
 module.exports = {
     createOfficialLineup,
     getOfficialLineup,
-    deleteOfficialLineupById,
+    deleteOfficialLineupByMonthId,
     updateOfficialLineup,
     getOfficialLineupByMonthId
 };

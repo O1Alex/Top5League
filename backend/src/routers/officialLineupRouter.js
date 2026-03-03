@@ -8,19 +8,19 @@ const {
     createOfficialLineup,
     getOfficialLineupByMonthId,
     updateOfficialLineup,
-    deleteOfficialLineupById
+    deleteOfficialLineupByMonthId
 } =require('../controllers/officialLineupController')
 
 
 // Utilisateur connecté
-officialLineupRouter.get("/current", authenticate, getOfficialLineup);
+officialLineupRouter.get("/current", getOfficialLineup);
 
 
 // Admin
 officialLineupRouter.post("/", authenticate, requireAdmin, officialLineupValidationRules.create, validate, createOfficialLineup);
 officialLineupRouter.get("/:monthId", authenticate, requireAdmin, getOfficialLineupByMonthId);
 officialLineupRouter.put("/", authenticate, requireAdmin, officialLineupValidationRules.update, validate, updateOfficialLineup);
-officialLineupRouter.delete("/id",authenticate, requireAdmin, deleteOfficialLineupById);
+officialLineupRouter.delete("/:monthId",authenticate, requireAdmin, deleteOfficialLineupByMonthId);
 
 
 module.exports = officialLineupRouter;

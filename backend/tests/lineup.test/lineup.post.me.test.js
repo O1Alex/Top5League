@@ -46,7 +46,7 @@ describe("Lineup Endpoints", () => {
         });
 
         it("Crée le lineup comportant 5 joueurs de 5 postes différents", async () => {
-            const players = await MonthlyPlayer.bulkCreate([
+            players = await MonthlyPlayer.bulkCreate([
                 { fullname: "P1", position: "PG", team_name: "Team", pts: 30, ast: 8, reb: 6, month_id: month.id },
                 { fullname: "P2", position: "SG", team_name: "Team", pts: 28, ast: 6, reb: 4, month_id: month.id },
                 { fullname: "P3", position: "SF", team_name: "Team", pts: 26, ast: 7, reb: 8, month_id: month.id },
@@ -76,7 +76,6 @@ describe("Lineup Endpoints", () => {
 
         // Test si + ou - de 5 joueurs
         it("Refuse la création si plus ou moins de 5 joueurs", async () => {
-
             players = await MonthlyPlayer.bulkCreate([
                 { fullname: "P1", position: "PG", team_name: "Team", pts: 30, ast: 8, reb: 6, month_id: month.id },
                 { fullname: "P2", position: "SG", team_name: "Team", pts: 28, ast: 6, reb: 4, month_id: month.id },
@@ -121,7 +120,7 @@ describe("Lineup Endpoints", () => {
 
         // Test si une des prédiction est négative
          it("Crée le lineup comportant 5 joueurs de 5 postes différents", async () => {
-            const players = await MonthlyPlayer.bulkCreate([
+            players = await MonthlyPlayer.bulkCreate([
                 { fullname: "P1", position: "PG", team_name: "Team", pts: 30, ast: 8, reb: 6, month_id: month.id },
                 { fullname: "P2", position: "SG", team_name: "Team", pts: 28, ast: 6, reb: 4, month_id: month.id },
                 { fullname: "P3", position: "SF", team_name: "Team", pts: 26, ast: 7, reb: 8, month_id: month.id },

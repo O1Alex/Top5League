@@ -89,11 +89,11 @@ class officialLineupService {
 
             const officialLineup = await OfficialLineup.findOne({
                 where: { month_id: month.id },
-                include: [{ model: MonthlyPlayer, through: { attributes: ["predicted_pts", "predicted_ast", "predicted_reb"] } }],
+                include: [{ model: MonthlyPlayer, through: { attributes: ["pts", "ast", "reb"] } }],
             });
 
             if (!officialLineup) {
-                throw new Error("Aucun Top 5 officiel publié pour le mois en cours");
+                return null;
             }
 
             return officialLineup;
@@ -111,7 +111,7 @@ class officialLineupService {
             const month = await Month.findByPk(monthId);
 
             if (!month) {
-                throw new Error (`Mois ${monthId} non trouvé`);   
+                return null;   
             }      
 
         const officialLineup = await OfficialLineup.findOne({
@@ -120,7 +120,7 @@ class officialLineupService {
         });
 
         if (!officialLineup) {
-                throw new Error("Aucun Top 5 officiel publié pour le mois en cours");
+                return null;
         }
 
         return officialLineup;
@@ -146,7 +146,7 @@ class officialLineupService {
             });
 
             if (!officialLineup) {
-            throw new Error("Aucun Top 5 Officiel trouvé pour ce mois");
+                throw new Error("Aucun Top 5 Officiel trouvé pour ce mois");
             }
 
             // Vérification joueurs du mois
@@ -212,21 +212,23 @@ class officialLineupService {
 
 
     // Supprimer un des offcialLineup (par l'ID du mois)
-    static async deleteOfficialLineupById(id) {
+    static async deleteOfficialLineupByMonthId(monthId) {
         try {
-            const officialLineup = await OfficialLineup.findByPk(id);
+            const officialLineup = await OfficialLineup.findOne({
+                where: { month_id: monthId },
+            });
 
             if (!officialLineup) {
-                throw new Error(`Top 5 officiel ${id} non trouvé`);
+                return null;
             }
 
             await officialLineup.destroy();
             return true;
 
         } catch (err) {
-        throw new Error(`Erreur lors de la suppression du Top 5 : ${err.message}`);
+            throw new Error(`Erreur lors de la suppression du Top 5 : ${err.message}`);
         }
-    }    
+    }
 }
 
 module.exports = officialLineupService;
