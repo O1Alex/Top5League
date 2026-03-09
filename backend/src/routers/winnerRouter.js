@@ -12,7 +12,7 @@ const   {
 
 
 // Routes ADMIN
-winnerRouter.post("/:monthId", authenticate, requireAdmin, winnerValidationRules.create, validate, computeWinner )
+winnerRouter.post("/:monthId", authenticate, requireAdmin, winnerValidationRules.create, validate, computeWinner );
 
 // Routes Utilisateur connecté
 winnerRouter.get("/:monthId", authenticate, getWinnerByMonthId );

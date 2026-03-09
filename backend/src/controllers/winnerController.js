@@ -25,7 +25,21 @@ const getWinnerByMonthId = async (req, res) => {
     try{
         const { monthId } = req.params;
 
+        if(!monthId){
+            return res.status(404).json({
+                success: false,
+                message: "Aucun mois trouvé pour l'Id souhaité",
+            });
+        }
+
         const winner = await winnerService.getWinnerByMonthId(monthId);
+
+        if(!winner){
+            return res.status(404).json({
+                success: false,
+                message: "Aucun gagnant pour le mois selectionné",
+            });
+        }
 
         res.status(200).json({
             success: true,
@@ -46,6 +60,13 @@ const getCurrentWinner = async (req, res) => {
     try{
         const winner = await winnerService.getCurrentWinner();
 
+        if(!winner){
+            return res.status(404).json({
+                success: false,
+                message: "Aucun gagnant pour le mois en cours",
+            });
+        }
+
         res.status(200).json({
             success: true,
             data: winner,
@@ -64,6 +85,13 @@ const getCurrentWinner = async (req, res) => {
 const getCurrentWinnerLineup = async (req, res) => {
     try {
         const winner = await winnerService.getCurrentWinnerLineup();
+
+        if(!winner){
+            return res.status(404).json({
+                success: false,
+                message: "Aucun lineup du gagnant pour le mois en cours",
+            });
+        }
 
         res.status(200).json({
             success: true,

@@ -5,7 +5,6 @@ const User = require("../../src/models/User");
 const jwt = require("jsonwebtoken");
 const Month = require("../../src/models/Month");
 const MonthlyPlayer = require("../../src/models/MonthlyPlayer");
-const LineupService = require("../../src/services/lineupService");
 
 
 describe("Lineup Endpoints", () => {
