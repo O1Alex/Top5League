@@ -77,14 +77,15 @@ const getOfficialLineupByMonthId = async (req, res) => {
     try {
         const { monthId } = req.params;
 
-        const officialLineup = await officialLineupService.getOfficialLineupByMonthId(monthId);
-
-        if(!monthId){
+         if(!monthId){
              return res.status(404).json({
                 success: false,
                 message: "Auncun mois trouvé",
             });
         }
+
+        const officialLineup = await officialLineupService.getOfficialLineupByMonthId(monthId);
+       
 
         if(!officialLineup){
              return res.status(404).json({
@@ -129,7 +130,27 @@ const updateOfficialLineup = async (req, res) => {
         });
 
     } catch (error) {
+        if (error.message.includes("Aucun Top 5 Officiel")) {
+            return res.status(404).json({
+                success: false,
+                message: error.message,
+            });
+        }
+
+        if (
+            error.message.includes("invalides") ||
+            error.message.includes("manquant") ||
+            error.message.includes("négatives") ||
+            error.message.includes("5 joueurs")
+        ) {
+            return res.status(400).json({
+                success: false,
+                message: error.message,
+            });
+        }
+
         console.error("Erreur lors de la modification du Top 5 Officiel", error);
+
         res.status(500).json({
             success: false,
             message: `Erreur serveur ${error.message}`,

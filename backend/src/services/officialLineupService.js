@@ -149,6 +149,7 @@ class officialLineupService {
                 throw new Error("Aucun Top 5 Officiel trouvé pour ce mois");
             }
 
+
             // Vérification joueurs du mois
             const monthlyPlayers = await MonthlyPlayer.findAll({
                 where: {
@@ -160,6 +161,15 @@ class officialLineupService {
             if (monthlyPlayers.length !== 5) {
                 throw new Error("Les joueurs sélectionnés sont invalides");
             }
+
+
+            // Vérification stats négatives
+            officialLineupData.forEach(p => {
+                if (p.pts < 0 || p.ast < 0 || p.reb < 0) {
+                    throw new Error("Les statistiques ne peuvent pas être négatives");
+                }
+            });
+
 
             // Vérification 1 joueur par poste
             const positionMap = new Map();
