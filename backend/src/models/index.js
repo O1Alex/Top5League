@@ -1,5 +1,4 @@
 const sequelize = require("../config/database");
-
 const User = require("./User");
 const Month = require("./Month");
 const MonthlyPlayer = require("./MonthlyPlayer");

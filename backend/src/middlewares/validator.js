@@ -250,10 +250,10 @@ const officialLineupValidationRules ={
         body("picks.*.pts")
             .isFloat({ min:0 })
             .withMessage("Les points doivent être un nombre positif"),
-        body("picks.*.predicted_ast")
+        body("picks.*.ast")
             .isFloat({ min:0 })
             .withMessage("Les passes doivent être un nombre positif"),
-        body("picks.*.predicted_reb")
+        body("picks.*.reb")
             .isFloat({ min:0 })
             .withMessage("Les rebonds doivent être un nombre positif"),
     ],
@@ -282,7 +282,7 @@ const officialLineupValidationRules ={
     ],
 }
   
-
+// Pour winner
 const winnerValidationRules = {
     create: [
         body("month_id")
@@ -300,7 +300,7 @@ const winnerValidationRules = {
     ],
 };
 
-// Pour winner
+
 
 
 module.exports = {

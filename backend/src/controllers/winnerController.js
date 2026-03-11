@@ -26,20 +26,13 @@ const getWinnerByMonthId = async (req, res) => {
         const { monthId } = req.params;
 
         if(!monthId){
-            return res.status(404).json({
+            return res.status(400).json({
                 success: false,
-                message: "Aucun mois trouvé pour l'Id souhaité",
+                message: "Id du mois recquis",
             });
         }
 
         const winner = await winnerService.getWinnerByMonthId(monthId);
-
-        if(!winner){
-            return res.status(404).json({
-                success: false,
-                message: "Aucun gagnant pour le mois selectionné",
-            });
-        }
 
         res.status(200).json({
             success: true,
@@ -48,6 +41,16 @@ const getWinnerByMonthId = async (req, res) => {
 
     } catch (error) {
         console.error("Erreur lors de la récupération du gagnant du mois choisi", error);
+
+        if (
+            error.message.includes("non trouvé") 
+        ) {
+            return res.status(404).json({
+                success: false,
+                message: error.message,
+            });
+        }
+
         res.status(500).json({
             success: false,
             message: `Erreur serveur ${error.message}`,

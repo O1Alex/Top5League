@@ -130,12 +130,13 @@ class winnerService {
             });
 
             if (!winner) {
-                throw new Error("Aucun gagnant trouvé pouer le mois sélectionné");
+                throw new Error("Aucun gagnant trouvé pour le mois sélectionné");
             }
+
             return winner;
 
         } catch (err) {
-            throw new Error (`Erreur lors de la récupération du gagnant du mois selectionné ${err.message}`);
+            throw err;
         }
     }
 
