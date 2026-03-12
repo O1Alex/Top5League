@@ -1,8 +1,7 @@
-import React from "react";
 import { useEffect, useState, createContext } from "react";
 import api from "../services/api";
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 // Mettre a disposition de tous les composants de l'application tous les données pour mettre a jour et recuperer les données de l'utilisateur connecté
 export default function AuthProvider({ children }) {
@@ -43,7 +42,7 @@ export default function AuthProvider({ children }) {
             password,
             favorite_player,
         });
-        
+
         localStorage.setItem("token", data.data.token);
         setToken(data.data.token);
         setUser(data.data.user);
