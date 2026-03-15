@@ -1,16 +1,18 @@
 import './App.css';
 import AuthProvider from './context/AuthProviders';
-import { Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
+import AppHeader from './components/app-header';
+import AppFooter from './components/app-footer/footer';
 
 function App() {
 
   return (
-    <div>
+    <div className='App'>
       <AuthProvider>
-        <Routes>
-          <Route path='/' element= {<Home/>}></Route>
-        </Routes>
+        <AppHeader />
+        <div className='page'>
+          <AppRoutes />
+        </div>
+        <AppFooter />
       </AuthProvider>
     </div>
 
