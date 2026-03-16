@@ -63,7 +63,6 @@ describe("Lineup Endpoints", () => {
             });
 
             // Création des LineupPlayers composant le Lineup
-
             await LineupPlayer.bulkCreate([
                 { lineup_id: lineup.id, monthly_player_id: players[0].id, predicted_pts: 22, predicted_ast: 6, predicted_reb: 4 },
                 { lineup_id: lineup.id,monthly_player_id: players[1].id, predicted_pts: 25, predicted_ast: 4, predicted_reb: 5 },
