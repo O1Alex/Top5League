@@ -1,7 +1,7 @@
 import './App.css';
 import AuthProvider from './context/AuthProviders';
 import AppHeader from './components/app-header';
-import AppFooter from './components/app-footer/footer';
+import AppFooter from './components/app-footer';
 
 function App() {
 
