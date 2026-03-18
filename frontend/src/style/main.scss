@@ -1,0 +1,178 @@
+@import "bootstrap/scss/bootstrap";
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+//Couleurs
+$primary-color: #F4D35B;
+$secondary-color: #FAEFC6;
+$light-color: #FDF9E8;
+$dark-color: #0D3765;
+$danger-color: #F95535;
+
+
+
+
+
+
+// Classes communes:
+.t5l-btn-blue {
+    border: 3px solid #F4D35B;
+    color: #F4D35B;
+    background-color: #0D3765;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 0.35rem 1rem;
+
+    &:hover {
+        background-color: #0D3765;
+        color: #F95535;
+        border: solid 3px #F95535;
+    }
+}
+
+.t5l-btn-orange {
+background: #F95535;
+color: #FAEFC6;
+font-weight: 700;
+border-radius: 8px;
+padding: 0.35rem 1rem;
+border: solid 3px #f4e8b2;
+
+    &:hover {
+        border: solid 3px #0D3765;
+        color: #0D3765;
+        background: #F95535;
+
+    }
+}
+
+
+
+
+
+
+
+
+
+.t5l-header {
+  background-color: #0D3765;
+  border-bottom: 3px solid #F95535;
+  padding: 30px, 0px, 30px, 0px;
+
+    .navbar {
+        padding: 0;
+
+        .t5l-logo-box {
+            border-top: 3px solid #F95535;
+            border-left: 3px solid #F95535 ;
+            border-right: 3px solid #F95535;
+        }
+
+        .navbar-collapse{
+
+            .nav-link {
+                color: #FAEFC6;
+                font-weight: 500;
+                padding: 0.75rem 0.8rem;
+                transition: 0.2s ease;
+
+
+            &:focus {
+                text-decoration: underline;
+                text-decoration-thickness: 2px;
+                text-underline-offset: 6px;
+                text-decoration-color: #F4D35B;
+                color: #F4D35B;
+                font-weight: bold;
+            }
+            }
+
+            .nav-link:hover {
+                color: #F4D35B;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Footer
+footer{
+    background-color: #0D3765;
+    border-top: solid 3px #F4D35B;
+    
+    .link-footer{
+        color: #F4D35B;
+    }
+}
+
+
+/* Modale */
+.modal-dialog{
+  border : solid 3px #0D3765;
+  border-radius: 8px;
+
+    .modal-content{
+    background-color: #FDF9E8;
+    color: #0D3765;
+
+        .modal-header{
+            background-color: #F4D35B;
+            border-bottom: solid 3px #0D3765;
+        }
+
+        .modal-body{
+            i{
+                color: #0D3765;
+            }
+
+            i:hover{
+                color: #f95535;
+            }
+        }
+
+        .modal-footer{
+            background-color: #F4D35B;
+            border-top: solid 3px #0D3765;
+
+            .btn-close-modal{
+                color:#F4D35B;
+                background-color: #0D3765;
+            }
+        }
+    }
+}
+
+
+
+
+/* Card */
+.card-player{
+  border: solid 3px #F95535;
+  background-color: #0D3765;
+  color: #FAEFC6;
+  width: 250px;
+  border-radius: 8px;
+}
+
+.card-title{
+  color: #F4D35B;
+}
+
+
+
+
+

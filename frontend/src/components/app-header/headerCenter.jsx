@@ -1,8 +1,11 @@
-import { memo } from 'react';
-import { user } from '../../context/AuthProviders';
+import { memo, useContext } from 'react';
+import { AuthContext } from '../../context/AuthProviders';
 import { Link } from 'react-router-dom';
 
 const HeaderCenter = memo(() => {
+
+    const { user} = useContext(AuthContext);
+
     return (
         <div className="collapse navbar-collapse" id="t5lNavbar">
 
@@ -16,13 +19,14 @@ const HeaderCenter = memo(() => {
                         <Link className="nav-link" to="#">Résultats</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="#">Les joueurs du mois</Link>
+                        <Link className="nav-link" to="/monthlyplayers">Les joueurs du mois</Link>
                     </li>
                 </ul>
             )}
 
+
             {/* Liens utilisateurs connecté */}
-            {user && user.role==="user"&&(
+            {user && user?.role==="user"&&(
                 <ul className="navbar-nav mx-auto gap-lg-4 text-center">
                     <li className="nav-item">
                         <Link className="nav-link" to="#">Accueil</Link>
@@ -40,7 +44,7 @@ const HeaderCenter = memo(() => {
             )}
 
             {/* Liens Admin */}
-            {user && user.role==="admin"&&(
+            {user && user?.role==="admin"&&(
                 <ul className="navbar-nav mx-auto gap-lg-4 text-center">
                     <li className="nav-item">
                         <Link className="nav-link" to="#">Utilisateur</Link>

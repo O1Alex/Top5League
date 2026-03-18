@@ -7,7 +7,7 @@ const Top20= memo(()=>  {
     useEffect(()=> {
         fetch("http://localhost:3000/api/monthlyplayers/current")
             .then(res => res.json())
-            .then(data => setPlayers(data))
+            .then(data => setPlayers(data.data))
             .catch(err => console.log(err));
     }, []);
 
@@ -42,7 +42,7 @@ const Top20= memo(()=>  {
                             </div>
                         </div>
                     </div>
-                ))};
+                ))}
             </div>
             
 

@@ -7,16 +7,16 @@ const HeaderRight = memo(() => {
     const { user } = useContext(AuthContext);
 
     return (
-        <div className='Connexion'>
+        <div className='connexion'>
             {!user ? (
-                <div class="d-flex gap-2 justify-content-center">
-                    <Link to="/Connexion" class="btn t5l-btn-blue">Connexion</Link>
-                    <Link to="/Register" class="btn t5l-btn-orange">Inscription</Link>
+                <div className="d-flex gap-2 justify-content-center">
+                    <Link to="/login" className="btn t5l-btn-blue">Connexion</Link>
+                    <Link to="/register" className="btn t5l-btn-orange">Inscription</Link>
                 </div>
             ) : (
-                <div class="d-flex gap-2 justify-content-center">
+                <div className="d-flex gap-2 justify-content-center">
                     <p>Bonjour {user.username} !</p>
-                    <Link to="/Deconnexion" class="btn t5l-btn-blue">Deconnexion</Link>
+                    <Link to="/Deconnexion" className="btn t5l-btn-blue">Deconnexion</Link>
                 </div>
             )}
         </div>

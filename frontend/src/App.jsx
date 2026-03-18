@@ -1,7 +1,10 @@
 import './App.css';
 import AuthProvider from './context/AuthProviders';
-import AppHeader from './components/app-header';
-import AppFooter from './components/app-footer';
+import AppHeader from './components/app-header/index';
+import AppFooter from './components/app-footer/index';
+import AppRoutes from './router';
+import "./style/main.scss"
+
 
 function App() {
 

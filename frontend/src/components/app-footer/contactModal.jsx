@@ -43,9 +43,9 @@ const ContactModal = memo(({ show, close }) => {
                                 <p className="mb-2"><strong>Réseaux sociaux :</strong></p>
 
                                 <div className="d-flex justify-content-center gap-4 fs-3">
-                                    <a href="#" className="text-dark"><i className="fa-brands fa-instagram"></i></a>
-                                    <a href="#" className="text-dark"><i className="fa-brands fa-facebook"></i></a>
-                                    <a href="#" className="text-dark"><i className="fa-brands fa-linkedin"></i></a>
+                                    <a href="#" className="text-dark"><i class="bi bi-instagram"></i></a>
+                                    <a href="#" className="text-dark"><i class="bi bi-facebook"></i></a>
+                                    <a href="#" className="text-dark"><i class="bi bi-linkedin"></i></a>
                                 </div>
 
                             </div>
@@ -54,7 +54,7 @@ const ContactModal = memo(({ show, close }) => {
 
                         {/* Footer */}
                         <div className="modal-footer">
-                            <button className="btn btn-secondary" onClick={close}>
+                            <button className="btn btn-secondary btn-close-modal" onClick={close}>
                             Fermer
                             </button>
                         </div>

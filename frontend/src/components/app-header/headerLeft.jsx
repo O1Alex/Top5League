@@ -5,16 +5,9 @@ const HeaderLeft = memo(() => {
   return (
 
     <div className="header-left">
-      <Link to="/">
-        <img
-          src="/images/logo-grand.png"
-          srcSet="petit-logo 768w,
-                  grand-logo 1200w"
-          sizes="(max-width: 768px) 120px, 250px"
-          alt="Top 5 League"
-          className="t5l-logo"
-        />
-      </Link>
+       <Link to="/" className="navbar-brand ">
+            <img src="grand-logo.png" alt="Top5League" width={275}/>
+        </Link>
     </div>
 
   );

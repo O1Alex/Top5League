@@ -5,11 +5,16 @@ import HeaderRight from './headerRight';
 
 const AppHeader = memo(() => {
     return (
-        <div>
-            <HeaderLeft />
+         <header class="t5l-header">
+            <nav class="navbar navbar-expand-lg pt-0 px-5">
+                <div class="container-fluid pt-0">
+
+                    <HeaderLeft />
             <HeaderCenter />
             <HeaderRight />
-        </div>
+                </div>
+            </nav>
+        </header>
     );
 });
 

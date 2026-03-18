@@ -1,12 +1,12 @@
-import React from 'react';
+import { memo } from 'react';
 import Rules from './Rules';
 import Challenge from './Challenge';
 import Top20 from './Top20';
 
-const Home= memo(() => {
+const HomeVisitorUser= memo(() => {
     return (
-        <main class="flex-grow-1 py-4">
-            <div class="container">
+        <main className="flex-grow-1 py-4">
+            <div className="container">
 
                 {/* Section règle du jeu */}
                 <Rules />
@@ -20,4 +20,4 @@ const Home= memo(() => {
     )
 });
 
-export default Home;
+export default HomeVisitorUser;

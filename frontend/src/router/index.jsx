@@ -1,3 +1,5 @@
+import { Routes, Route } from "react-router-dom";
+
 import CreatePlayer from "../pages/CreatePlayer";
 import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/Home";
@@ -6,14 +8,16 @@ import PlayersOfTheMonth from "../pages/PlayersOfTheMonth";
 import Register from "../pages/Register";
 import UpdatePlayer from "../pages/UpdatePlayer";
 
-const AppRoutes =[
-    {path: "/", element: <Home />},
-    {path: "/login", element: <Login />},
-    {path: "/register", element: <Register />},
-    {path: "/monthlyplayers", element: <PlayersOfTheMonth />},
-    {path: "/createplayer", element: <CreatePlayer />},
-    {path: "/updateplayer", element: <UpdatePlayer />},
-    {path: "*", element: <ErrorPage />}
-
-]
-export default AppRoutes;
+export default function AppRoutes() {
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
+      <Route path="/monthlyplayers" element={<PlayersOfTheMonth />} />
+      <Route path="/createplayer" element={<CreatePlayer />} />
+      <Route path="/updateplayer" element={<UpdatePlayer />} />
+      <Route path="*" element={<ErrorPage />} />
+    </Routes>
+  );
+}
