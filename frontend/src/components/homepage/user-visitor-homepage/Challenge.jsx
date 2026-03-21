@@ -1,9 +1,12 @@
 import { memo, useState, useEffect } from 'react';
+import { AuthContext } from '../../context/AuthProviders';
 
 const Challenge= memo(()=>  {
 
     const [winner, setWinner]= useState(null);
     const [month, setMonth]= useState(null);
+    const { user} = useContext(AuthContext);
+    
 
     useEffect(()=> {
         fetch("http://localhost:3000/api/winner/current")
@@ -37,7 +40,18 @@ const Challenge= memo(()=>  {
                                 devenir le <span className="highlight">gagnant du TOP5LEAGUE</span>.
                             </p>
                             <div className="button-challenge d-flex justify-content-center">
-                                <button className="btn t5l-btn-orange my-2">Participe au challenge</button>
+                                {!user && (
+                                    <Link to="/login" className="btn t5l-btn-orange my-2">
+                                        Participe au challenge 
+                                    </Link>
+                                )}
+
+                                {user && user?.role==="user"&&(
+                                    <Link to="/" className="btn t5l-btn-orange my-2">
+                                        Participe au challenge 
+                                    </Link>                                
+                                )}
+                                 
                             </div>
                         </div>
 

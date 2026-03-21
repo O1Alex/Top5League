@@ -33,6 +33,16 @@ OfficialLineup.belongsTo(Month, { foreignKey: "month_id" });
 Month.hasOne(Winner, { foreignKey: "month_id" });
 Winner.belongsTo(Month, { foreignKey: "month_id" });
 
+// Relation OfficialLineup/OfficialLineupPlayer
+OfficialLineup.hasMany(OfficialLineupPlayer, {foreignKey: "official_lineup_id"});
+OfficialLineupPlayer.belongsTo(OfficialLineup, {foreignKey: "official_lineup_id"});
+
+
+// Relation Lineup/LineupPlayer
+Lineup.hasMany(LineupPlayer, {foreignKey: "lineup_id"});
+LineupPlayer.belongsTo(Lineup, {foreignKey: "lineup_id"});
+
+
 
 //Relation OfficialLineup/MonthlyPlayer avec OfficialLineupPlayer comme table de liaison
 OfficialLineup.belongsToMany(MonthlyPlayer, {
@@ -58,6 +68,9 @@ MonthlyPlayer.belongsToMany(Lineup, {
     foreignKey: "monthly_player_id",
     otherKey: "lineup_id",
 });
+
+
+
 
 
 

@@ -11,14 +11,16 @@ const   {
         } = require("../controllers/winnerController")
 
 
-// Routes ADMIN
-winnerRouter.post("/:monthId", authenticate, requireAdmin, winnerValidationRules.create, validate, computeWinner );
+// Routes public
+winnerRouter.get("/current", getCurrentWinner);
+winnerRouter.get("/lineup", getCurrentWinnerLineup);
 
 // Routes Utilisateur connecté
 winnerRouter.get("/:monthId", authenticate, getWinnerByMonthId );
 
-// Routes public
-winnerRouter.get("/current", getCurrentWinner);
-winnerRouter.get("/lineup", getCurrentWinnerLineup);
+// Routes ADMIN
+winnerRouter.post("/:monthId", authenticate, requireAdmin, winnerValidationRules.create, validate, computeWinner );
+
+
 
 module.exports = winnerRouter;

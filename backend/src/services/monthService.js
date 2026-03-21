@@ -51,8 +51,6 @@ class monthService {
         }
 
         return month;
-
-    return month;
   }
 
     // Modifier un mois en se servant de son ID

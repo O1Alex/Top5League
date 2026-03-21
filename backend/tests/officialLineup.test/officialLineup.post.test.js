@@ -192,7 +192,7 @@ describe("OfficialLineup Endpoints", () => {
                 }))
             };
 
-            // 🔹 Première création (doit réussir)
+            // Première création (doit réussir)
             const firstRes = await request(app)
                 .post("/api/officialLineup/")
                 .set("Authorization", `Bearer ${token}`)
@@ -200,7 +200,7 @@ describe("OfficialLineup Endpoints", () => {
 
             expect(firstRes.statusCode).toBe(201);
 
-            // 🔹 Deuxième création sur le même mois (doit échouer)
+            // Deuxième création sur le même mois (doit échouer)
             const secondRes = await request(app)
                 .post("/api/officialLineup/")
                 .set("Authorization", `Bearer ${token}`)

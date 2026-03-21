@@ -6,8 +6,9 @@ const Lineup = require("../models/Lineup");
 const LineupPlayer = require("../models/LineupPlayer");
 const { sequelize } = require("../config/database");
 const { Op, where } = require("sequelize");
-const { Winner } = require("../models/Winner");
+const Winner = require("../models/Winner");
 const monthService = require("./monthService");
+const User = require("../models/User");
 
 class winnerService {
 

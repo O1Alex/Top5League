@@ -26,18 +26,10 @@ describe("GET /api/winner/current", () => {
         // Création mois pour le test 
         month = await Month.create({
             label: "Test Month",
-            start_date: "2024-01-01",
-            end_date: "2030-01-01",
-            publish_date: "2023-12-01",
-            status: "closed",
-        });
-
-        month = await Month.create({
-            label: "Test Month",
-            start_date: "2024-01-01",
-            end_date: "2030-01-01",
-            publish_date: "2023-12-01",
-            status: "closed",
+            start_date: "2026-01-01",
+            end_date: "2026-01-31",
+            publish_date: "2026-02-01",
+            status: "open",
         });
 
 
@@ -54,7 +46,7 @@ describe("GET /api/winner/current", () => {
     it("Récupère le gagnant du mois", async () => {
 
         const res = await request(app)
-            .get(`/api/winner/${month.id}`);
+            .get(`/api/winner/current`);
 
         expect(res.statusCode).toBe(200);
         expect(res.body.success).toBe(true);
@@ -73,17 +65,7 @@ describe("GET /api/winner/current", () => {
         await Winner.destroy({ where: {} });
 
         const res = await request(app)
-            .get(`/api/winner/${month.id}`);
-
-        expect(res.statusCode).toBe(404);
-    });
-
-
-    // Test mois inexistant
-    it("Retourne 404 si le mois n'existe pas", async () => {
-
-        const res = await request(app)
-            .get("/api/winner/999");
+            .get(`/api/winner/current`);
 
         expect(res.statusCode).toBe(404);
     });

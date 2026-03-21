@@ -11,8 +11,8 @@ const Winner = require("../../src/models/Winner");
 describe("GET /api/winner/:monthId", () => {
 
     let month;
-    let user;
     let token;
+    let user;
 
     beforeEach(async () => {
 
@@ -21,25 +21,35 @@ describe("GET /api/winner/:monthId", () => {
         await User.destroy({ where: {} });
 
         // Création utilisateur
-        user = await User.create({
-            username: "testUser",
-            email: "test@test.com",
-            password: "Password123",
-            favorite_player: "Jordan"
+        await request(app)
+            .post("/api/auth/register")
+            .send({
+                username: "admin",
+                email: "admin@example.com",
+                password: "AdminPassword123",
+                favorite_player: "Jordan",
+            });
+
+        // Passage Admin
+        user = await User.findOne({
+            where: { email: "admin@example.com" }
         });
 
-        // Génération token
+        user.role = "admin";
+        await user.save();
+
         token = jwt.sign(
-            { id: user.id, role: user.role },
-            process.env.JWT_SECRET
+            { userId: user.id, id: user.id, role: user.role },
+            process.env.JWT_SECRET,
+            { expiresIn: "7d" }
         );
 
-        // Création mois
+        // Création mois pour le test 
         month = await Month.create({
             label: "Test Month",
-            start_date: "2024-01-01",
-            end_date: "2030-01-01",
-            publish_date: "2023-12-01",
+            start_date: "2026-01-01",
+            end_date: "2026-01-31",
+            publish_date: "2026-02-01",
             status: "closed",
         });
 

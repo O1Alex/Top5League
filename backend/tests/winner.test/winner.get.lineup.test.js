@@ -2,8 +2,6 @@ const request = require("supertest");
 const jwt = require("jsonwebtoken");
 const app = require("../../src/app");
 
-require
-
 const User = require("../../src/models/User");
 const Month = require("../../src/models/Month");
 const MonthlyPlayer = require("../../src/models/MonthlyPlayer");
@@ -11,8 +9,8 @@ const OfficialLineup = require("../../src/models/OfficialLineup");
 const OfficialLineupPlayer = require("../../src/models/OfficialLineupPlayer");
 const Lineup = require("../../src/models/Lineup");
 const LineupPlayer = require("../../src/models/LineupPlayer");
-
 const Winner = require("../../src/models/Winner");
+const winnerService = require("../../src/services/winnerService");
 
 
 describe("GET /api/winner/lineup", () => {
@@ -27,10 +25,8 @@ describe("GET /api/winner/lineup", () => {
         await User.destroy({ where: {} });
     });
 
-    let token;
     let month;
     let players;
-    let admin;
     let user1;
     let user2;
 
@@ -52,26 +48,12 @@ describe("GET /api/winner/lineup", () => {
             favorite_player: "LeBron"
         });
 
-        // Création admin
-        admin = await User.create({
-            username: "admin",
-            email: "admin@test.com",
-            password: "Password123",
-            favorite_player: "Jordan",
-            role: "admin"
-        });
-
-        token = jwt.sign(
-            { id: admin.id, role: admin.role },
-            process.env.JWT_SECRET
-        );
-
-        // Création du mois
+        // Création mois pour le test 
         month = await Month.create({
             label: "Test Month",
-            start_date: "2024-01-01",
-            end_date: "2030-01-01",
-            publish_date: "2023-12-01",
+            start_date: "2026-01-01",
+            end_date: "2026-01-31",
+            publish_date: "2026-02-01",
             status: "closed",
         });
 
@@ -128,7 +110,6 @@ describe("GET /api/winner/lineup", () => {
             }))
         );
 
-
         // Lineup du joueur 2 (moins bon)
         const lineup2 = await Lineup.create({
             user_id: user2.id,
@@ -156,23 +137,28 @@ describe("GET /api/winner/lineup", () => {
 
     });
 
-    // Test calcul du gagnat du mois
+
+    // Test récupération lineup gagnant du mois
     it("Récupère le lineup du gagnant du mois", async () => {
+        await winnerService.computeWinner(month.id);
 
         const res = await request(app)
-            .get(`/api/winner/lineup`)
-            .set("Authorization", `Bearer ${token}`);
+            .get(`/api/winner/lineup`);
 
-        expect(res.statusCode).toBe(201);
+        expect(res.statusCode).toBe(200);
         expect(res.body.success).toBe(true);
 
-        const winner = await Winner.findOne({
-            where: { month_id: month.id }
-        });
+        expect(res.body.data).toBeDefined();
+    });
 
-        expect(winner).not.toBeNull();
-        expect(winner.user_id).toBe(user1.id);
+    // Test pas de gagnant du mois
+    it("Retourne 404 si aucun winner n'existe", async () => {
 
+        const res = await request(app)
+            .get("/api/winner/lineup");
+
+        expect(res.statusCode).toBe(404);
+        expect(res.body.success).toBe(false);
     });
 
 });

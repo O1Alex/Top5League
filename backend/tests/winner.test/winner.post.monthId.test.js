@@ -65,12 +65,12 @@ describe("POST /api/winner/:monthId", () => {
             process.env.JWT_SECRET
         );
 
-        // Création du mois
+        // Création mois pour le test 
         month = await Month.create({
             label: "Test Month",
-            start_date: "2024-01-01",
-            end_date: "2030-01-01",
-            publish_date: "2023-12-01",
+            start_date: "2026-01-01",
+            end_date: "2026-01-31",
+            publish_date: "2026-02-01",
             status: "closed",
         });
 
@@ -160,7 +160,11 @@ describe("POST /api/winner/:monthId", () => {
 
         const res = await request(app)
             .post(`/api/winner/${month.id}`)
-            .set("Authorization", `Bearer ${token}`);
+            .set("Authorization", `Bearer ${token}`)
+            .send({
+                month_id: month.id,
+                user_id: user1.id,
+            });
 
         expect(res.statusCode).toBe(201);
         expect(res.body.success).toBe(true);

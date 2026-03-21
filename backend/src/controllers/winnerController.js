@@ -43,7 +43,8 @@ const getWinnerByMonthId = async (req, res) => {
         console.error("Erreur lors de la récupération du gagnant du mois choisi", error);
 
         if (
-            error.message.includes("non trouvé") 
+            error.message.toLowerCase().includes("non trouvé") ||
+            error.message.toLowerCase().includes("aucun gagnant")
         ) {
             return res.status(404).json({
                 success: false,
@@ -105,6 +106,17 @@ const getCurrentWinnerLineup = async (req, res) => {
 
     } catch (error) {
         console.error("Erreur lors de la récupération du Top 5  du gagnant du mois", error);
+
+        if (
+            error.message.toLowerCase().includes("gagnant") ||
+            error.message.toLowerCase().includes("introuvable")
+        ) {
+            return res.status(404).json({
+                success: false,
+                message: error.message,
+            });
+        }
+
         res.status(500).json({
             success: false,
             message: `Erreur serveur ${error.message}`,
