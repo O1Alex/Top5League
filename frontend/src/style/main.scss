@@ -4,11 +4,30 @@
 //Couleurs
 $primary-color: #F4D35B;
 $secondary-color: #FAEFC6;
+$card-color: #f4e8b2;
 $light-color: #FDF9E8;
 $dark-color: #0D3765;
 $danger-color: #F95535;
 
 
+// Page elle meme
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: $light-color;
+}
 
 
 
@@ -45,9 +64,6 @@ border: solid 3px #f4e8b2;
     }
 }
 
-.page{
-    background-color: $light-color;
-}
 
 
 
@@ -105,7 +121,13 @@ footer{
     border-top: solid 3px #F4D35B;
     
     .link-footer{
+        text-decoration: none;
         color: #F4D35B;
+
+      &:hover{
+        color:$primary-color;
+        font-weight: bold;
+      }
     }
 }
 
@@ -151,17 +173,28 @@ footer{
 
 
 /* Card */
+// PLAYER CARD
 .card-player{
   border: solid 3px #F95535;
   background-color: #0D3765;
   color: #FAEFC6;
   width: 250px;
   border-radius: 8px;
+  .card-img-top{
+    border: solid 3px $danger-color;
+  }
+  .card-title{
+    color: $primary-color;
+    font-weight: bolder;
+  }
+  .card-body{
+    font-weight: bold;
+  }
+
 }
 
-.card-title{
-  color: #F4D35B;
-}
+
+
 
 
 
@@ -307,4 +340,147 @@ footer{
 }
 
 
+// Formulaire modification et creation joueur
 
+/* Titre page */
+.page-title {
+  color: $dark-color;
+  font-weight: 800;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+/* Soulignement orange du titre */
+.page-title::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -12px;
+  width: 100%;
+  height: 3px;
+  background-color: $danger-color;
+  border-radius: 4px;
+}
+
+/* Carte du formulaire */
+.player-card {
+  max-width: 400px;
+  background: $card-color; /* beige plus foncé comme la maquette */
+  border: 3px solid $dark-color;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+
+    /* Inputs et select avec style un peu plus marqué */
+    .top5-input {
+      border: 2px solid rgba(13, 55, 101, 0.4);
+      border-radius: 6px;
+      padding: 10px 12px;
+      background-color: #fbf7e6;
+    }
+
+    .top5-input:focus {
+      border-color: #0d3765;
+      box-shadow: 0 0 0 0.25rem rgba(13, 55, 101, 0.15);
+    }
+
+    .top5-select {
+      border: 2px solid rgba(13, 55, 101, 0.4);
+      border-radius: 6px;
+      padding: 10px 12px;
+      background-color: #fbf7e6;
+    }
+
+    .top5-select:focus {
+      border-color: #0d3765;
+      box-shadow: 0 0 0 0.25rem rgba(13, 55, 101, 0.15);
+    }
+}
+
+
+
+
+// Page connexion/inscription
+.access-card {
+  max-width: 400px;
+  background: $card-color;
+  border: 3px solid $dark-color;
+  border-radius: 10px;
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.25);
+
+  // Titre 
+  .access-card-title {
+    color: $dark-color;
+    font-weight: 800;
+    text-align: center;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 8px;
+  }
+
+  // Soulignement titre
+  .access-card-title::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -4px;
+    width: 100%;
+    height: 3px;
+    background-color: $danger-color;
+    border-radius: 4px;
+  }
+  .access-content{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    label{
+      text-align: left;
+      width: 100%;
+      color: $dark-color;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+
+    /* Inputs et select avec style un peu plus marqué */
+    .top5-input {
+      border: 2px solid rgba(13, 55, 101, 0.4);
+      border-radius: 6px;
+      padding: 10px 12px;
+      background-color: #fbf7e6;
+    }
+
+    .top5-input:focus {
+      border-color: #0d3765;
+      box-shadow: 0 0 0 0.25rem rgba(13, 55, 101, 0.15);
+    }
+
+    .top5-select {
+      border: 2px solid rgba(13, 55, 101, 0.4);
+      border-radius: 6px;
+      padding: 10px 12px;
+      background-color: #fbf7e6;
+    }
+
+    .top5-select:focus {
+      border-color: #0d3765;
+      box-shadow: 0 0 0 0.25rem rgba(13, 55, 101, 0.15);
+    }
+  }
+
+  .redirection{
+    font-size: smaller;
+    
+    a{
+      text-decoration: none;
+      color: $danger-color;
+      font-weight: 600;
+
+      &:hover {
+      text-decoration: underline;
+      }
+    }
+  }
+
+}

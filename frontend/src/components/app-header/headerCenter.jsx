@@ -13,7 +13,7 @@ const HeaderCenter = memo(() => {
             {!user && (
                 <ul className="navbar-nav mx-auto gap-lg-4 text-center">
                     <li className="nav-item">
-                        <Link className="nav-link" to="#">Accueil</Link>
+                        <Link className="nav-link" to="/">Accueil</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to="#">Résultats</Link>
@@ -29,7 +29,7 @@ const HeaderCenter = memo(() => {
             {user && user?.role==="user"&&(
                 <ul className="navbar-nav mx-auto gap-lg-4 text-center">
                     <li className="nav-item">
-                        <Link className="nav-link" to="#">Accueil</Link>
+                        <Link className="nav-link" to="/">Accueil</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to="#">Résultats</Link>

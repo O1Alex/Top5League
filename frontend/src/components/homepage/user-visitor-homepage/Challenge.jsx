@@ -1,5 +1,6 @@
-import { memo, useState, useEffect } from 'react';
-import { AuthContext } from '../../context/AuthProviders';
+import { memo, useState, useEffect, useContext } from 'react';
+import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../context/AuthProviders';
 
 const Challenge= memo(()=>  {
 

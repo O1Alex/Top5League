@@ -24,21 +24,19 @@ const Top20= memo(()=>  {
           
                 {/* Card */}
                 {pgPlayers.map(player => (
-                    <div key={player.id} className="col-12 col-md-3 d-flex justify-content-center">
-                        <div className="card card-player">
-                            <img src={player.image} alt={player.fullname} className="card-img-top"/>
-                            <div className="card-body">
-                                <h5 className="card-title">{player.fullname}</h5>
-                                <div>
-                                    <div className="d-flex justify-content-between">
-                                        <p>Poste : {player.position}</p>
-                                        <p>PPG :{player.pts}</p>
-                                    </div>
-                                    <div className="d-flex justify-content-between">
-                                        <p>APG : {player.ast}</p>
-                                        <p>RPG :{player.reb}</p>
-                                    </div> 
+                    <div key={player.id} className="col-12 col-md-3 d-flex justify-content-center mt-3">
+                        <div className="card card-player p-3 text-center">
+                            <img src={player.photo_url} alt={player.fullname} className="card-img-top"/>
+                            <h5 className="card-title mt-2 mb-1" >{player.fullname}</h5>
+                            <div className="card-body pb-0">
+                                <div className="d-flex justify-content-between">
+                                    <p>Poste : {player.position}</p>
+                                    <p>PPG :{player.pts}</p>
                                 </div>
+                                <div className="d-flex justify-content-between">
+                                    <p>APG : {player.ast}</p>
+                                    <p>RPG :{player.reb}</p>
+                                </div> 
                             </div>
                         </div>
                     </div>

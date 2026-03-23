@@ -43,9 +43,9 @@ const ContactModal = memo(({ show, close }) => {
                                 <p className="mb-2"><strong>Réseaux sociaux :</strong></p>
 
                                 <div className="d-flex justify-content-center gap-4 fs-3">
-                                    <a href="#" className="text-dark"><i class="bi bi-instagram"></i></a>
-                                    <a href="#" className="text-dark"><i class="bi bi-facebook"></i></a>
-                                    <a href="#" className="text-dark"><i class="bi bi-linkedin"></i></a>
+                                    <a href="#" className="text-dark"><i className="bi bi-instagram"></i></a>
+                                    <a href="#" className="text-dark"><i className="bi bi-facebook"></i></a>
+                                    <a href="#" className="text-dark"><i className="bi bi-linkedin"></i></a>
                                 </div>
 
                             </div>

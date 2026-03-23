@@ -75,7 +75,7 @@ const CreatePlayer= memo(() => {
                     </div>
 
                     {/* Bouton */}
-                    <button type="submit" className="btn btn-top5 w-100"> Créer le joueur </button>
+                    <button type="submit" className="btn t5l-btn-blue w-100"> Créer le joueur </button>
                 </form>
             </div>
         </main>

@@ -87,7 +87,7 @@ const UpdatePlayer= memo(() => {
                     </div>
 
                     {/* Bouton */}
-                    <button type="submit" className="btn btn-top5 w-100"> Modifier le joueur </button>
+                    <button type="submit" className="btn t5l-btn-blue w-100"> Modifier le joueur </button>
                 </form>
             </div>
         </main>

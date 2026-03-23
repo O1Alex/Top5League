@@ -1,9 +1,13 @@
 const express = require("express");
 const cors = require("cors");
+const path = require("path");
 
 const routes = require("./routers/index");
 
 const app = express();
+
+// Connexion image back/front
+app.use('/public', express.static(path.resolve(__dirname, '../public')));
 
 // Middlewares
 var corsOptions = {
@@ -26,5 +30,6 @@ app.use((err, req, res, next) => {
         message: "Erreur serveur",
     });
 });
+
 
 module.exports = app;
