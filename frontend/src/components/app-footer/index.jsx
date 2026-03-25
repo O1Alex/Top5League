@@ -7,11 +7,11 @@ const AppFooter = memo(() => {
     const [showModal, setShowModal]= useState(false);
 
     return (
-        <div className='footer'>
+        <div className='footer mt-4'>
             <footer className="p-3 pb-5">
                 <div className="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 px-5">
                     
-                    <Link to="/mentions-legales" className="link-footer text-decoration-none ">
+                    <Link to="/" className="link-footer text-decoration-none ">
                         Mentions légales
                     </Link>
 

@@ -1,4 +1,5 @@
 import { memo, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
 const Top20= memo(()=>  {
 
@@ -45,7 +46,7 @@ const Top20= memo(()=>  {
             
 
             <div className="d-flex justify-content-center mt-5">
-                <a href="#" className="btn t5l-btn-blue">Accéder au Top 20 complet</a>
+                <Link to="#" className="btn t5l-btn-blue">Accéder au Top 20 complet</Link>
             </div>
             
 

@@ -1,10 +1,16 @@
 import { memo, useContext } from 'react';
 import { AuthContext } from '../../context/AuthProviders';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const HeaderRight = memo(() => {
 
-    const { user } = useContext(AuthContext);
+    const { user, logout } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        logout() 
+        navigate("/login");
+    };
 
     return (
         <div className='connexion'>
@@ -14,9 +20,9 @@ const HeaderRight = memo(() => {
                     <Link to="/register" className="btn t5l-btn-orange">Inscription</Link>
                 </div>
             ) : (
-                <div className="d-flex gap-2 justify-content-center">
-                    <p>Bonjour {user.username} !</p>
-                    <Link to="/Deconnexion" className="btn t5l-btn-blue">Deconnexion</Link>
+                <div className="d-flex gap-3 justify-content-center align-items-center">
+                    <p className='header-text mb-0'>Bonjour {user.username} !</p>
+                    <button onClick={handleLogout} className="btn t5l-btn-blue">Deconnexion</button>
                 </div>
             )}
         </div>

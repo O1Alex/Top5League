@@ -7,6 +7,7 @@ import Login from "../pages/Login";
 import PlayersOfTheMonth from "../pages/PlayersOfTheMonth";
 import Register from "../pages/Register";
 import UpdatePlayer from "../pages/UpdatePlayer";
+import MyChallenge from "../pages/MyChallenge";
 
 export default function AppRoutes() {
   return (
@@ -17,6 +18,7 @@ export default function AppRoutes() {
       <Route path="/monthlyplayers" element={<PlayersOfTheMonth />} />
       <Route path="/createplayer" element={<CreatePlayer />} />
       <Route path="/updateplayer" element={<UpdatePlayer />} />
+      <Route path="/mychallenge" element={<MyChallenge />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );

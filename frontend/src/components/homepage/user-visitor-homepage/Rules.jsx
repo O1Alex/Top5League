@@ -6,7 +6,7 @@ const Rules= memo(()=>  {
         <section className="rules-section py-4 mb-5">
 
             <div className="div-title-rules d-flex justify-content-center mb-5">
-                <h2 className="title-part">Comment ça marche ?</h2>
+                <h2 className="title-part mb-4">Comment ça marche ?</h2>
             </div>
 
             <div className="rules row g-5">

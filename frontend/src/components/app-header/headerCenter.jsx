@@ -35,10 +35,10 @@ const HeaderCenter = memo(() => {
                         <Link className="nav-link" to="#">Résultats</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="#">Les joueurs du mois</Link>
+                        <Link className="nav-link" to="/monthlyplayers">Les joueurs du mois</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="#">Mon Top 5</Link>
+                        <Link className="nav-link" to="MyChallenge">Mon Top 5</Link>
                     </li>
                 </ul>
             )}

@@ -6,7 +6,7 @@ const routes = require("./routers/index");
 
 const app = express();
 
-// Connexion image back/front
+// Chemin image BDD vers front
 app.use('/public', express.static(path.resolve(__dirname, '../public')));
 
 // Middlewares
