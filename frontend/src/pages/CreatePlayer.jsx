@@ -1,21 +1,22 @@
 import { memo, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom';
+import api from '../services/api';
 
 const CreatePlayer= memo(() => {
 
     const [player, setPlayer] = useState({});
+    const navigate = useNavigate();
+    const {monthId} = useParams();
 
     // Envoi du nouveau joueur
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            await fetch("http://localhost:3000/api/monthlyPlayers/:monthId", {
-                method: "POST",
-                headers: { "Content-Type": "application/json"},
-                body: JSON.stringify(player)
-            });
-
+            await api.post(`/monthlyPlayers/${monthId}`, player);
             alert("Joueur Créer avec succès !");
+            navigate("/monthlyplayers");
+
         } catch (err) {
             console.log(err);
         }

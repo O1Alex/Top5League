@@ -520,3 +520,43 @@ footer{
     font-weight: 600;
   }
 }
+
+// Liste des utilisateurs
+.users-table {
+  border: 2px solid $dark-color;
+  overflow: hidden;
+
+  thead {
+    background-color: $dark-color;
+
+    th {
+      color: $primary-color;
+      font-weight: 700;
+      padding: 12px;
+      border: 2px solid $dark-color;
+    }
+  }
+
+  tbody {
+    tr {
+      border: 2px solid $dark-color;
+
+      td {
+        border: 2px solid $dark-color;
+        font-weight: 600;
+        padding: 10px;
+      }
+
+      // alternance des couleurs
+      &:nth-child(odd) {
+        background-color: $primary-color; 
+        color: $dark-color;
+      }
+
+      &:nth-child(even) {
+        background-color: $light-color; 
+        color: $dark-color;
+      }
+    }
+  }
+}

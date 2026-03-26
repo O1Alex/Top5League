@@ -1,18 +1,26 @@
 import { memo, useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import api from "../services/api";
 
 const UpdatePlayer= memo(() => {
 
     const { id } = useParams();
     const [player, setPlayer]= useState({});
+    const navigate = useNavigate();
 
     // Récupération joueur
-    useEffect(()=> {
-            fetch(`http://localhost:3000/api/monthlyPlayers/${id}`)
-                .then(res => res.json())
-                .then(data => setPlayer(data))
-                .catch(err => console.log(err));
-        }, [id]);
+    useEffect(() => {
+        const fetchPlayer = async () => {
+            try {
+                const { data } = await api.get(`/monthlyPlayers/${id}`);
+                setPlayer(data.data);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        fetchPlayer();
+    }, [id]);
 
 
     // Envoi modification joueur
@@ -20,18 +28,14 @@ const UpdatePlayer= memo(() => {
         e.preventDefault();
 
         try {
-            await fetch(`http://localhost:3000/api/monthlyPlayers/${id}`, {
-                method: "PUT",
-                headers: { "Content-Type": "application/json"},
-                body: JSON.stringify(player)
-            });
-
+            await api.put(`/monthlyPlayers/${id}`, player);
             alert("Joueur modifié !");
+            navigate("/monthlyplayers");
+
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     };
-
 
     return (
         <main className="container py-5">
