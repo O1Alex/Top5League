@@ -8,7 +8,7 @@ const AppFooter = memo(() => {
 
     return (
         <div className='footer mt-4'>
-            <footer className="p-3 pb-5">
+            <footer className="pt-3 pb-5">
                 <div className="container d-flex flex-column flex-md-row justify-content-between align-items-center gap-2 px-5">
                     
                     <Link to="/" className="link-footer text-decoration-none ">
