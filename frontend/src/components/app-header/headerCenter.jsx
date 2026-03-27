@@ -4,11 +4,10 @@ import { Link } from 'react-router-dom';
 
 const HeaderCenter = memo(() => {
 
-    const { user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
 
     return (
-        <div className="collapse navbar-collapse" id="t5lNavbar">
-
+        <>
             {/* Liens visiteurs */}
             {!user && (
                 <ul className="navbar-nav mx-auto gap-lg-4 text-center">
@@ -53,7 +52,7 @@ const HeaderCenter = memo(() => {
                         <Link className="nav-link" to="#">Résultats</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="#">Gérer les joueurs</Link>
+                        <Link className="nav-link" to="/monthlyplayers">Gérer les joueurs</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to="#">Challenge en cours</Link>
@@ -61,7 +60,7 @@ const HeaderCenter = memo(() => {
                 </ul>
             )}
 
-        </div>
+        </>
     );
 });
 

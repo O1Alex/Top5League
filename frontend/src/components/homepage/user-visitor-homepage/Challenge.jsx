@@ -6,7 +6,7 @@ const Challenge= memo(()=>  {
 
     const [winner, setWinner]= useState(null);
     const [month, setMonth]= useState(null);
-    const { user} = useContext(AuthContext);
+    const { user } = useContext(AuthContext);
     
 
     useEffect(()=> {

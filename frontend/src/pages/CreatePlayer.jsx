@@ -1,12 +1,18 @@
-import { memo, useState } from 'react'
+import { memo, useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../services/api';
+import { AuthContext } from '../context/AuthProviders';
 
 const CreatePlayer= memo(() => {
 
     const [player, setPlayer] = useState({});
-    const navigate = useNavigate();
     const {monthId} = useParams();
+    const { user, loading } = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!loading && user?.role !== "admin") navigate("/");
+    }, [user, loading, navigate]);
 
     // Envoi du nouveau joueur
     const handleSubmit = async (e) => {

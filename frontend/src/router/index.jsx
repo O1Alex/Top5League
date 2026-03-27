@@ -18,7 +18,7 @@ export default function AppRoutes() {
       <Route path="/register" element={<Register />} />
       <Route path="/monthlyplayers" element={<PlayersOfTheMonth />} />
       <Route path="/createplayer" element={<CreatePlayer />} />
-      <Route path="/updateplayer" element={<UpdatePlayer />} />
+      <Route path="/updateplayer/:id" element={<UpdatePlayer />} />
       <Route path="/mychallenge" element={<MyChallenge />} />
       <Route path="/userslist" element={<UsersList />} />
       <Route path="*" element={<ErrorPage />} />

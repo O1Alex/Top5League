@@ -83,11 +83,11 @@ border: solid 3px #f4e8b2;
 
     .navbar {
         padding: 0;
-
-        .t5l-logo-box {
-            border-top: 3px solid #F95535;
-            border-left: 3px solid #F95535 ;
-            border-right: 3px solid #F95535;
+      
+        .navbar-toggler-icon{
+          background-color: $light-color;
+          border: 2px solid $danger-color;
+          
         }
 
         .navbar-collapse{
@@ -121,6 +121,12 @@ border: solid 3px #f4e8b2;
         }
     }
 }
+// Header-left
+.logo {
+    max-width: 250px;
+    max-height: 100px;
+  }
+
 
 
 
@@ -198,6 +204,7 @@ footer{
   .card-title{
     color: $primary-color;
     font-weight: bolder;
+    min-height: 40px;
   }
   .card-body{
     font-weight: bold;
@@ -216,6 +223,7 @@ footer{
   color:#0D3765;
   position: relative;
   display: inline-block;
+  font-weight:600;
 }
 
 .title-part::after{
@@ -560,3 +568,39 @@ footer{
     }
   }
 }
+
+// Accueil Admin
+  // Section bienvenu
+  .welcome-section {
+    .welcome {
+
+      .welcome-text {
+        display: inline-block;
+        position: relative;
+        color: $dark-color;
+        font-size: larger;
+        font-weight: 600;
+
+        &::after {
+          content: "";
+          position: absolute;
+          bottom: -40px;
+          width: 70%;
+          height: 3px;
+          background-color: $danger-color;
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+
+  // Section Challenge
+  .challenge-admin{
+    .challenge-infos-admin{
+      background-color: $light-color;
+      border-radius: 6px;
+      font-size: 1.2rem;
+      box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.3); 
+      color: #0D3765;
+      }
+  }

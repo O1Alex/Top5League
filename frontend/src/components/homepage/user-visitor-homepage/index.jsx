@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import Rules from './Rules';
 import Challenge from './Challenge';
-import Top20 from './Top20';
+import Top20 from '../Top20';
 
 const HomeVisitorUser= memo(() => {
     return (
