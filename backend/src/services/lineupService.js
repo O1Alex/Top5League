@@ -271,6 +271,25 @@ class lineupService {
         throw new Error(`Erreur lors de la suppression du Top 5 : ${err.message}`);
         }
     }
+
+    static async getCurrentLineups() {
+        try {
+            const month = await monthService.getCurrentMonth();
+
+            if (!month) {
+                return [];
+            }
+
+            const lineups = await Lineup.findAll({
+                where: { month_id: month.id },
+            });
+
+            return lineups;
+
+        } catch (err) {
+            throw new Error(`Erreur lors de la récupération des lineups du mois ${err.message}`);
+        }
+    }
 }
 
 

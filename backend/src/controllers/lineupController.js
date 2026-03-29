@@ -177,6 +177,26 @@ const deleteLineupById = async (req, res) => {
 };
 
 
+const getCurrentLineups = async (req, res) => {
+    try {
+        const lineups = await lineupService.getCurrentLineups();
+
+        res.status(200).json({
+            success: true,
+            data: lineups,
+        });
+
+    } catch (error) {
+        console.error("Erreur lors de la récupération des lineups du mois en cours", error);
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
+
+
+
 
 module.exports = {
     createLineup,
@@ -184,6 +204,6 @@ module.exports = {
     getLineupsByMonthId,
     updateMyLineup,
     deleteMyLineup,
-    deleteLineupById
-  
+    deleteLineupById,
+    getCurrentLineups
 };

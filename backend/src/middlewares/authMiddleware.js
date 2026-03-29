@@ -19,7 +19,7 @@ function authenticate(req, res, next){
 
 function requireAdmin(req, res, next){
     if (req.user.role !== "admin") {
-        return res.status(403).json({message: "Accès refucé, administrateur uniquement"});
+        return res.status(403).json({message: "Accès refusé, administrateur uniquement"});
     }
     next();
 }

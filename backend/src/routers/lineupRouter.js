@@ -9,11 +9,17 @@ const {
     updateMyLineup,
     deleteMyLineup,
     deleteLineupById,
-    getLineupsByMonthId
+    getLineupsByMonthId,
+    getCurrentLineups
+
 } =require('../controllers/lineupController');
 
 
 
+
+
+//Public
+lineupRouter.get("/current", getCurrentLineups);
 
 // Utilisateur connecté
 lineupRouter.post("/me", authenticate, lineupValidationRules.create, validate, createLineup);

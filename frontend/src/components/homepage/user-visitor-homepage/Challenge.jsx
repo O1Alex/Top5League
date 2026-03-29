@@ -6,22 +6,33 @@ const Challenge= memo(()=>  {
 
     const [winner, setWinner]= useState(null);
     const [month, setMonth]= useState(null);
+    const [players, setPlayers]= useState(null);
+    const [lineups, setLineups]= useState(null);
     const { user } = useContext(AuthContext);
     
 
     useEffect(()=> {
         fetch("http://localhost:3000/api/winner/current")
             .then(res => res.json())
-            .then(data => setWinner(data))
+            .then(data => setWinner(data.data))
             .catch(err => console.log(err));
 
         fetch("http://localhost:3000/api/months/current")
             .then(res => res.json())
-            .then(data => setMonth(data))
+            .then(data => setMonth(data.data))
+            .catch(err => console.log(err));
+
+        fetch("http://localhost:3000/api/monthlyPlayers/current")
+            .then(res => res.json())
+            .then(data => setPlayers(data.data))
+            .catch(err => console.log(err));
+
+        fetch("http://localhost:3000/api/lineups/current")
+            .then(res => res.json())
+            .then(data => setLineups(data.data))
             .catch(err => console.log(err));
 
     }, []);
-
 
     return (
         // Section challenge
@@ -56,14 +67,21 @@ const Challenge= memo(()=>  {
                             </div>
                         </div>
 
+                               
 
                         <div className="current-challenge my-3 p-3">
                             <h3 className="title-part mb-3">Challenge du mois en cours</h3>
 
                             <div className="challenge-infos d-flex flex-column flex-md-row justify-content-between align-items-center p-3 m-3">
-                                <span><strong>Top 20 publié :</strong> <span className="status">{month?.status}</span></span>
-                                <span><strong>Participants :</strong> <span className="status"></span></span>
-                                <span><strong>Votes :</strong> <span className="status">{month?.status}</span></span>
+                                <span><strong>Top 20 publié :</strong> <span className="status">
+                                        {players?.length > 0 ? "Oui" : "Non"}
+                                    </span></span>
+                                <span><strong>Participants :</strong> <span className="status">
+                                        {lineups?.length || 0}
+                                    </span></span>
+                                <span><strong>Status des votes :</strong> <span className="status">
+                                        {month?.status === "open" ? "Ouvert" : month?.status === "closed" ? "Fermé" : "Inconnue"}
+                                    </span></span>
                             </div>
                         </div>
 

@@ -5,17 +5,29 @@ import { AuthContext } from '../../../context/AuthProviders';
 const Challenge= memo(()=>  {
 
     const [month, setMonth]= useState(null);
+    const [players, setPlayers]= useState(null);
+    const [lineups, setLineups]= useState(null);
     const { user } = useContext(AuthContext);
     
 
     useEffect(()=> {
-
         fetch("http://localhost:3000/api/months/current")
             .then(res => res.json())
-            .then(data => setMonth(data))
+            .then(data => setMonth(data.data))
+            .catch(err => console.log(err));
+
+        fetch("http://localhost:3000/api/monthlyPlayers/current")
+            .then(res => res.json())
+            .then(data => setPlayers(data.data))
+            .catch(err => console.log(err));
+
+        fetch("http://localhost:3000/api/lineups/current")
+            .then(res => res.json())
+            .then(data => setLineups(data.data))
             .catch(err => console.log(err));
 
     }, []);
+
 
 
     return (
@@ -31,9 +43,15 @@ const Challenge= memo(()=>  {
                     </div>
 
                     <div className="challenge-infos-admin d-flex flex-column flex-md-row justify-content-between align-items-center py-3 px-5 my-4 mx-4">
-                        <span><strong>Top 20 publié :</strong> <span className="status">{month?.status}</span></span>
-                        <span><strong>Participants :</strong> <span className="status"></span></span>
-                        <span><strong>Status des votes :</strong> <span className="status">{month?.status}</span></span>
+                         <span><strong>Top 20 publié :</strong> <span className="status">
+                                {players?.length > 0 ? "Oui" : "Non"}
+                            </span></span>
+                        <span><strong>Participants :</strong> <span className="status">
+                                {lineups?.length || 0}
+                            </span></span>
+                        <span><strong>Status des votes :</strong> <span className="status">
+                                {month?.status === "open" ? "Ouvert" : month?.status === "closed" ? "Fermé" : "Inconnue"}
+                            </span></span>
                     </div> 
 
                     <div className="d-flex justify-content-center">
