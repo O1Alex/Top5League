@@ -145,9 +145,7 @@ const monthlyPlayerValidationRules = {
             .withMessage("Les rebonds doivent être un nombre positif"),
 
         body("photo_url")
-            .optional()
-            .isURL()
-            .withMessage("L'URL de la photo doit être valide"),
+            .optional(),
     ],
 
   update: [
@@ -182,9 +180,7 @@ const monthlyPlayerValidationRules = {
             .withMessage("Les rebonds doivent être un nombre positif"),
 
         body("photo_url")
-            .optional()
-            .isURL()
-            .withMessage("L'URL de la photo doit être valide"),
+            .optional(),
     ],
 
     idParam: [

@@ -13,7 +13,7 @@ describe("MonthlyPlayer Endpoints", () => {
         await MonthlyPlayer.destroy({where: {} });
     });
 
-    describe("GET /api/monthlyPlayers/:monthId", () => {
+    describe("GET /api/monthlyPlayers/month/:monthId", () => {
         let token;
         let monthId;
 
@@ -70,7 +70,7 @@ describe("MonthlyPlayer Endpoints", () => {
         // Test Récupération liste joueur du mois selectionné
         it("Doit récupérer les joueurs du mois selectionné", async () => {
             const res = await request(app)
-                .get(`/api/monthlyPlayers/${monthId}`)
+                .get(`/api/monthlyPlayers/month/${monthId}`)
                 .set("Authorization", `Bearer ${token}`);
 
             expect(res.statusCode).toBe(200);
@@ -136,7 +136,7 @@ describe("MonthlyPlayer Endpoints", () => {
         });
         it("Refuse l'accès à la liste des joueurs aux utilisateurs non admin", async () => {
             const res = await request(app)
-                .get(`/api/monthlyPlayers/${monthId}`)
+                .get(`/api/monthlyPlayers/month/${monthId}`)
                 .set("Authorization", `Bearer ${token}`);
 
             expect(res.statusCode).toBe(403);

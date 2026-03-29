@@ -8,6 +8,7 @@ const   {
             createMonthlyPlayerByMonthId,
             getMonthlyPlayersByMonthId,
             getCurrentMonthlyPlayers,
+            getMonthlyPlayerById,
             updateMonthlyPlayerById,
             deleteMonthlyPlayerById
         } = require("../controllers/monthlyPlayerController");
@@ -20,7 +21,10 @@ monthlyPlayerRouter.get("/current", getCurrentMonthlyPlayers);
 
 // Routes ADMIN
 monthlyPlayerRouter.post("/:monthId", monthlyPlayerValidationRules.create, validate, authenticate, requireAdmin, createMonthlyPlayerByMonthId); 
-monthlyPlayerRouter.get("/:monthId",authenticate, requireAdmin, getMonthlyPlayersByMonthId); 
+
+monthlyPlayerRouter.get("/month/:monthId",authenticate, requireAdmin, getMonthlyPlayersByMonthId); 
+
+monthlyPlayerRouter.get("/:id",authenticate, requireAdmin, getMonthlyPlayerById); 
 monthlyPlayerRouter.put("/:id", monthlyPlayerValidationRules.update, validate, monthlyPlayerValidationRules.idParam, authenticate, requireAdmin, updateMonthlyPlayerById);
 monthlyPlayerRouter.delete("/:id", monthlyPlayerValidationRules.idParam, validate, authenticate, requireAdmin, deleteMonthlyPlayerById);
 

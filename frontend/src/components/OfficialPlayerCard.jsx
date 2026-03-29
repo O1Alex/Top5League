@@ -3,7 +3,7 @@ import { AuthContext } from "../context/AuthProviders";
 import { Link } from "react-router-dom";
 import api from "../services/api";
 
-const PlayerCard = memo(({ player }) => {
+const OfficialPlayerCard = memo(({ player }) => {
 
     const { user } = useContext(AuthContext);
 
@@ -63,4 +63,4 @@ const PlayerCard = memo(({ player }) => {
     );
 });
 
-export default PlayerCard;
+export default OfficialPlayerCard;

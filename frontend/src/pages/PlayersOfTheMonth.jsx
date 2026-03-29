@@ -1,6 +1,6 @@
 import { memo, useState, useEffect } from 'react';
 import api from '../services/api';
-import PlayerCard from '../components/PlayerCard';
+import OfficialPlayerCard from '../components/OfficialPlayerCard';
 
 const PlayersOfTheMonth = memo(() => {
 
@@ -44,7 +44,7 @@ const PlayersOfTheMonth = memo(() => {
 
                 {/* Les meneurs (PG) */}
                 {pgPlayers.map(player => (
-                    <PlayerCard key={player.id} player={player}/>
+                    <OfficialPlayerCard key={player.id} player={player}/>
                 ))}
             </div>
             
@@ -56,7 +56,7 @@ const PlayersOfTheMonth = memo(() => {
 
                 {/* Les arrières (SG) */}
                 {sgPlayers.map(player => (
-                    <PlayerCard key={player.id} player={player}/>
+                    <OfficialPlayerCard key={player.id} player={player}/>
                 ))}
             </div>
 
@@ -68,7 +68,7 @@ const PlayersOfTheMonth = memo(() => {
 
                 {/* Les ailier (SF) */}
                 {sfPlayers.map(player => (
-                    <PlayerCard key={player.id} player={player}/>
+                    <OfficialPlayerCard key={player.id} player={player}/>
                 ))}
             </div>
         
@@ -79,7 +79,7 @@ const PlayersOfTheMonth = memo(() => {
             <div className="top-card row justify-content-center mb-5">
                 {/* Les ailiers forts (PF) */}
                 {pfPlayers.map(player => (
-                    <PlayerCard key={player.id} player={player}/>
+                    <OfficialPlayerCard key={player.id} player={player}/>
                 ))}
             </div>
 
@@ -90,7 +90,7 @@ const PlayersOfTheMonth = memo(() => {
             <div className="top-card row justify-content-center mb-5">
                 {/* Les interieurs (C) */}
                 {cPlayers.map(player => (
-                    <PlayerCard key={player.id} player={player}/>
+                    <OfficialPlayerCard key={player.id} player={player}/>
                 ))}
             </div>
 

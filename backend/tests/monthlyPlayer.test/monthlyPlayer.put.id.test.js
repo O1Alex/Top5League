@@ -104,7 +104,7 @@ describe("MonthlyPlayer Endpoints", () => {
         // Test si position n'est pas comprise dans la liste des 5 proposées
         it("Refuse la modification si la position est invalide", async () => {
             const res = await request(app)
-                .put(`/api/monthlyPlayers/${monthId}`)
+                .put(`/api/monthlyPlayers/${playerId}`)
                 .set("Authorization", `Bearer ${token}`)
                 .send({ 
                     position: "XYZ", // invalide
@@ -117,7 +117,7 @@ describe("MonthlyPlayer Endpoints", () => {
         // Test si une ou plusieurs des statistiques sont négatives
         it("Refuse la modification si une ou plusieurs des statistiques sont négatives", async () => {
             const res = await request(app)
-                .put(`/api/monthlyPlayers/${monthId}`)
+                .put(`/api/monthlyPlayers/${playerId}`)
                 .set("Authorization", `Bearer ${token}`)
                 .send({
                     position: "PG", 
@@ -145,7 +145,15 @@ describe("MonthlyPlayer Endpoints", () => {
                     favorite_player: "Jordan",
                 });
 
-            token = res.body.data.token;
+            const user = await User.findOne({
+                where: { email: "user@example.com" }
+            });
+
+            token = jwt.sign(
+                { id: user.id, role: user.role },
+                process.env.JWT_SECRET,
+                { expiresIn: "7d" }
+            );
 
             // mois
             const month = await Month.create({
@@ -180,6 +188,17 @@ describe("MonthlyPlayer Endpoints", () => {
                 });
 
             expect(res.statusCode).toBe(403);
+        });
+
+        it("Refuse la modification sans token", async () => {
+            const res = await request(app)
+                .put(`/api/monthlyPlayers/${playerId}`)
+                .send({
+                    position: "PG",
+                    pts: 31,
+                });
+
+            expect(res.statusCode).toBe(401);
         });
     });
 });

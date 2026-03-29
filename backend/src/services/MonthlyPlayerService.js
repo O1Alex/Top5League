@@ -74,6 +74,22 @@ class monthlyPlayerService {
         }
     }
 
+    // Récupérer un joueur par son ID
+    static async getMonthlyPlayerById(id) {
+        try {
+            const monthlyPlayer = await MonthlyPlayer.findByPk(id);
+
+            if(!monthlyPlayer){
+                return null;
+            }
+
+            return monthlyPlayer;
+            
+        } catch (error) {
+            throw new Error (`Erreur lors de la récupération du joueur ${err.message}`);
+        }
+    }
+
     // Modifier un des joueurs du mois (par son ID)
     static async updateMonthlyPlayerById(id, monthlyPlayerData){
         try {

@@ -61,7 +61,7 @@ const getCurrentMonthlyPlayers= async(req, res)=>{
         if (!monthlyPlayers){
             return res.status(404).json({
                 success: false,
-                message: "Joueur non trouvé",
+                message: "Joueurs non trouvés",
             });
         }
         
@@ -77,6 +77,34 @@ const getCurrentMonthlyPlayers= async(req, res)=>{
         });
     }
 }
+
+// Récupérer un joueur par son Id
+const getMonthlyPlayerById = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const monthlyPlayer = await monthlyPlayerService.getMonthlyPlayerById(id);
+
+        if (!monthlyPlayer) {
+            return res.status(404).json({
+                success: false,
+                message: "Joueur non trouvé",
+            });
+        }
+
+        res.status(200).json({
+            success: true,
+            data: monthlyPlayer,
+        });
+
+    } catch (error) {
+        console.error("Erreur lors de la récupération du joueur", error);
+        res.status(500).json({
+            success: false,
+            message: error.message,
+        });
+    }
+};
 
 
 // Modifier un joueur du mois par son ID
@@ -145,6 +173,7 @@ module.exports= {
     createMonthlyPlayerByMonthId,
     getMonthlyPlayersByMonthId,
     getCurrentMonthlyPlayers,
+    getMonthlyPlayerById,
     deleteMonthlyPlayerById,
     updateMonthlyPlayerById
 }

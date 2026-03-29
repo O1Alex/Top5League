@@ -1,7 +1,7 @@
 import { memo, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
-import PlayerCard from '../PlayerCard';
+import PlayerCard from '../OfficialPlayerCard';
 
 const Top20= memo(()=>  {
 
