@@ -10,7 +10,7 @@ body{
 
 //Couleurs
 $primary-color: #F4D35B;
-$secondary-color: #FAEFC6;
+$secondary-color: #F6E6AB;
 $card-color: #f4e8b2;
 $light-color: #FDF9E8;
 $dark-color: #0D3765;
@@ -534,40 +534,44 @@ footer{
   border: 2px solid $dark-color;
   overflow: hidden;
 
+  // Titre des colonnes
   thead {
-    background-color: $dark-color;
-
     th {
       color: $primary-color;
       font-weight: 700;
+      font-size: 1.2rem;
       padding: 12px;
       border: 2px solid $dark-color;
+      background-color: $dark-color
     }
   }
 
+  // Contenu du tableau
   tbody {
+
     tr {
       border: 2px solid $dark-color;
+    }
 
-      td {
-        border: 2px solid $dark-color;
-        font-weight: 600;
-        padding: 10px;
-      }
-
-      // alternance des couleurs
-      &:nth-child(odd) {
-        background-color: $primary-color; 
-        color: $dark-color;
-      }
-
-      &:nth-child(even) {
-        background-color: $light-color; 
-        color: $dark-color;
-      }
+    td {
+      border: 2px solid $dark-color;
+      font-weight: 600;
+      padding: 10px;
+      font-size: 1rem;
+      color: $dark-color;
     }
   }
 }
+
+// Forcage stripped bootstrap
+.users-table.table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: $primary-color !important;
+}
+
+.users-table.table-striped > tbody > tr:nth-of-type(even) > * {
+  background-color: $light-color !important;
+}
+
 
 // Accueil Admin
   // Section bienvenu
@@ -604,3 +608,48 @@ footer{
       color: #0D3765;
       }
   }
+
+  // Pages création et modification Lineup
+.form-lineup-card{
+  color: $dark-color;
+  background-color: $secondary-color;
+  border: solid 3px $dark-color;
+  border-radius: 8px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  font-size: 1.1rem;
+  
+  .lineup-form{
+    // Titre 
+    .form-title-part {
+      color: $dark-color;
+      font-weight: 800;
+      text-align: center;
+      display: block; 
+      position: relative;
+      padding-bottom: 10px;
+    }
+
+    .form-title-part::after {
+      content: "";
+      position: absolute;
+      left: 50%;                 
+      transform: translateX(-50%); 
+      bottom: 0;
+      width: 130px;            
+      height: 3px;
+      background-color: $danger-color;
+      border-radius: 4px;
+    }
+
+
+    .form-control {
+      border: 3px solid $dark-color;
+      border-radius: 0px;
+      background-color: #fbf7e6;
+    }
+    .form-control:focus {
+      border-color: #0d3765;
+      box-shadow: 0 0 0 0.25rem rgba(13, 55, 101, 0.14);
+    }
+  }
+}

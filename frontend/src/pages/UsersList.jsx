@@ -22,12 +22,12 @@ const UsersList = memo(() => {
     return (
         <main className="container py-5">
             <div className=" title d-flex justify-content-center mb-5">
-                <h2 className="page-title">Liste des utilisateurs</h2>
+                <h2 className="page-title mb-4">Liste des utilisateurs</h2>
             </div>
 
-            <table className="table users-table text-center align-middle">
+            <table className="table table-striped users-table text-center align-middle">
                 <thead>
-                    <tr>
+                    <tr className='title-users-table'>
                         <th>Pseudo</th>
                         <th>Email</th>
                         <th>Joueur favoris</th>
@@ -37,7 +37,7 @@ const UsersList = memo(() => {
 
                 <tbody>
                    {users.map((user) => (
-                        <tr key={user.id}>
+                        <tr key={user.id} className='data-users-table'>
                             <td>{user.username}</td>
                             <td>{user.email}</td>
                             <td>{user.favorite_player}</td>

@@ -9,7 +9,7 @@ import Register from "../pages/Register";
 import UpdatePlayer from "../pages/UpdatePlayer";
 import MyChallenge from "../pages/MyChallenge";
 import UsersList from "../pages/UsersList";
-import CreateTop5 from "../pages/CreateTop5";
+import CreateLineup from "../pages/CreateLineup";
 
 export default function AppRoutes() {
   return (
@@ -22,7 +22,7 @@ export default function AppRoutes() {
       <Route path="/updateplayer/:id" element={<UpdatePlayer />} />
       <Route path="/mychallenge" element={<MyChallenge />} />
       <Route path="/userslist" element={<UsersList />} />
-      <Route path="/createtop5" element={<CreateTop5 />} />
+      <Route path="/createlineup" element={<CreateLineup />} />
       <Route path="/mychallenge" element={<MyChallenge />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>

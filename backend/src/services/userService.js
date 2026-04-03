@@ -3,13 +3,16 @@ const User = require("../models/User")
 class userService {
 
     // Récupérer tous les utilisateurs
-    static async getAllUsers(){
+    static async getAllUsers() {
         try {
-            const users = User.findAll();
+            const users = await User.findAll({
+                order: [["username", "ASC"]],
+            });
+            
             return users;
 
         } catch (err) {
-            throw new Error (`Erreur lors de la récupération des utilisateurs ${err.message}`);
+            throw new Error(`Erreur lors de la récupération des utilisateurs ${err.message}`);
         }
     }
 

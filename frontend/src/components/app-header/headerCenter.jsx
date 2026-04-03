@@ -46,7 +46,7 @@ const HeaderCenter = memo(() => {
             {user && user?.role==="admin"&&(
                 <ul className="navbar-nav mx-auto gap-lg-4 text-center">
                     <li className="nav-item">
-                        <Link className="nav-link" to="#">Utilisateur</Link>
+                        <Link className="nav-link" to="/userslist">Utilisateurs</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to="#">Résultats</Link>
