@@ -1,7 +1,7 @@
 import { memo, useContext } from "react";
-import { AuthContext } from "../context/AuthProviders";
+import { AuthContext } from "../../context/AuthProviders";
 import { Link } from "react-router-dom";
-import api from "../services/api";
+import api from "../../services/api";
 
 const OfficialPlayerCard = memo(({ player }) => {
 

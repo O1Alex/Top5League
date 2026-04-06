@@ -8,7 +8,7 @@ const HomeAdmin= memo(() => {
         <main className="flex-grow-1 py-4">
             <div className="container">
 
-                {/* Section Bienvenu */}
+                {/* Section Bienvenue */}
                 <Welcome />
                 <Challenge />
                 <Top20 />

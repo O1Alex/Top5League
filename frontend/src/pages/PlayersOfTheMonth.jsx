@@ -1,6 +1,7 @@
 import { memo, useState, useEffect } from 'react';
 import api from '../services/api';
-import OfficialPlayerCard from '../components/OfficialPlayerCard';
+import OfficialPlayerCard from '../components/player-cards/OfficialPlayerCard';
+
 
 const PlayersOfTheMonth = memo(() => {
 

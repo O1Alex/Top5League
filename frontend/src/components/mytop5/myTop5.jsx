@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from 'react';
-import PredictedPlayerCard from '../PredictedPlayerCard';
+import PredictedPlayerCard from '../player-cards/PredictedPlayerCard';
 import { Link } from 'react-router-dom';
 
 const MyTop5 = memo(({lineup}) => {

@@ -1,7 +1,8 @@
 import { memo, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../../services/api';
-import PlayerCard from '../OfficialPlayerCard';
+import OfficialPlayerCard from '../player-cards/OfficialPlayerCard';
+
 
 const Top20= memo(()=>  {
 
@@ -33,7 +34,7 @@ const Top20= memo(()=>  {
             {/* Card */}
             <div  className="top-card row justify-content-center g-2 mt-4">
                 {pgPlayers.map(player => (
-                    <PlayerCard key={player.id} player={player}/>
+                    <OfficialPlayerCard key={player.id} player={player}/>
                 ))}
             </div>
 

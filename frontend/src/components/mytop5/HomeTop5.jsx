@@ -11,7 +11,7 @@ const HomeTop5= memo(() => {
                 Une fois cela fait, ton top 5 sera disponible sur cette page. 
             </p>
             <div className="d-flex justify-content-center mt-4">
-                <Link to="/createtop5" className="btn t5l-btn-blue"> Créer mon Top 5 </Link>
+                <Link to="/createlineup" className="btn t5l-btn-blue"> Créer mon Top 5 </Link>
             </div>
             
         </div>

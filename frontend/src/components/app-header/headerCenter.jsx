@@ -15,7 +15,7 @@ const HeaderCenter = memo(() => {
                         <Link className="nav-link" to="/">Accueil</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="#">Résultats</Link>
+                        <Link className="nav-link" to="/result">Résultats</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to="/monthlyplayers">Les joueurs du mois</Link>
@@ -31,13 +31,13 @@ const HeaderCenter = memo(() => {
                         <Link className="nav-link" to="/">Accueil</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="#">Résultats</Link>
+                        <Link className="nav-link" to="/result">Résultats</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to="/monthlyplayers">Les joueurs du mois</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="MyChallenge">Mon Top 5</Link>
+                        <Link className="nav-link" to="/mychallenge">Mon Top 5</Link>
                     </li>
                 </ul>
             )}
@@ -49,7 +49,7 @@ const HeaderCenter = memo(() => {
                         <Link className="nav-link" to="/userslist">Utilisateurs</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="#">Résultats</Link>
+                        <Link className="nav-link" to="/result">Résultats</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to="/monthlyplayers">Gérer les joueurs</Link>

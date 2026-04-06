@@ -10,6 +10,7 @@ import UpdatePlayer from "../pages/UpdatePlayer";
 import MyChallenge from "../pages/MyChallenge";
 import UsersList from "../pages/UsersList";
 import CreateLineup from "../pages/CreateLineup";
+import Result from "../pages/Result";
 
 export default function AppRoutes() {
   return (
@@ -24,6 +25,7 @@ export default function AppRoutes() {
       <Route path="/userslist" element={<UsersList />} />
       <Route path="/createlineup" element={<CreateLineup />} />
       <Route path="/mychallenge" element={<MyChallenge />} />
+      <Route path="/result" element={<Result />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );

@@ -27,7 +27,7 @@ const MyChallenge = memo(() => {
     if (loading) {
         return (
             <main className="container py-5 text-center">
-                <p>Chargement...</p>
+                <p>Chargement du Top 5...</p>
             </main>
         );
     }
