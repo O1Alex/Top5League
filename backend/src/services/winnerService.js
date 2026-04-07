@@ -155,7 +155,7 @@ class winnerService {
                 where: { month_id: month.id },
                 include: [
                     { model: User,
-                    attributes: ["id", "username", "email"]},
+                    attributes: ["id", "username", "email", "favorite_player"]},
                 ],
             });
 

@@ -24,7 +24,7 @@ const CreateLineup = memo(() => {
         predicted_reb: "",
         }))
     );
-    const [ playersName, setPlayersName ] = useState([]);
+    const [playersName, setPlayersName] = useState([]);
 
   // Protection accès au formulaire de création du Top 5
   useEffect(() => {
@@ -103,7 +103,7 @@ const CreateLineup = memo(() => {
                         />
 
                         {/* RPG */}
-                        <label htmlFor="predicted_rbd" className="form-label fw-semibold mt-2">Rebonds par match (PPG) :</label>
+                        <label htmlFor="predicted_rbd" className="form-label fw-semibold mt-2">Rebonds par match (RPG) :</label>
                         <input type="number" step="0.1" placeholder="10.3" className="form-control" value={player.predicted_reb}
                             onChange={(e) =>
                                 handleChange(index, "predicted_reb", e.target.value)

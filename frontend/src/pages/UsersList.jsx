@@ -27,7 +27,7 @@ const UsersList = memo(() => {
 
             <table className="table table-striped users-table text-center align-middle">
                 <thead>
-                    <tr className='title-users-table'>
+                    <tr className='title-table'>
                         <th>Pseudo</th>
                         <th>Email</th>
                         <th>Joueur favoris</th>
@@ -37,7 +37,7 @@ const UsersList = memo(() => {
 
                 <tbody>
                    {users.map((user) => (
-                        <tr key={user.id} className='data-users-table'>
+                        <tr key={user.id} className='data-table'>
                             <td>{user.username}</td>
                             <td>{user.email}</td>
                             <td>{user.favorite_player}</td>
