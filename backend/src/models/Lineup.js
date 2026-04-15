@@ -20,7 +20,7 @@ const Lineup = sequelize.define(
 
     {
         tableName: "lineups",
-        timestamps: true,
+        timestamps: false,
         updatedAt: false,
         indexes: [
             {

@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node src/index.js",
+    "dev": "nodemon src/index.js",
     "init-db": "mysql -u root -p < src/init-db.sql",
+    "seed-db": "mysql -u root -p < src/seed-db.sql",
     "test": "cross-env NODE_ENV=test jest"
   },
   "repository": {

@@ -11,6 +11,7 @@ import MyChallenge from "../pages/MyChallenge";
 import UsersList from "../pages/UsersList";
 import CreateLineup from "../pages/CreateLineup";
 import Result from "../pages/Result";
+import UpdateLineup from "../pages/UpdateLineup";
 
 export default function AppRoutes() {
   return (
@@ -19,11 +20,12 @@ export default function AppRoutes() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/monthlyplayers" element={<PlayersOfTheMonth />} />
-      <Route path="/createplayer" element={<CreatePlayer />} />
+      <Route path="/createplayer/:monthId" element={<CreatePlayer />} />
       <Route path="/updateplayer/:id" element={<UpdatePlayer />} />
       <Route path="/mychallenge" element={<MyChallenge />} />
       <Route path="/userslist" element={<UsersList />} />
       <Route path="/createlineup" element={<CreateLineup />} />
+      <Route path="/updatelineup" element={<UpdateLineup />} />
       <Route path="/mychallenge" element={<MyChallenge />} />
       <Route path="/result" element={<Result />} />
       <Route path="*" element={<ErrorPage />} />

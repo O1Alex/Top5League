@@ -1,7 +1,8 @@
 import { memo, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import api from '../services/api';
-import { AuthContext } from '../context/AuthProviders';
+import api from '../../../services/api';
+import { AuthContext } from '../../../context/AuthProviders';
+
 
 
 const positions = [
@@ -129,7 +130,7 @@ const CreateOfficialLlineup = memo(() => {
                     {/* Bouton */}
                     <div className="text-center m-5">
                         <button type="submit" className="btn t5l-btn-blue px-5">
-                            Créer mon Top 5
+                            Créer Le top 5 Officiel
                         </button>
                     </div>
 

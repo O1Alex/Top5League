@@ -1,4 +1,5 @@
 const monthlyPlayerService = require('../services/MonthlyPlayerService');
+const monthService = require('../services/monthService');
 
 
 // Créer un nouveau joueur du mois dans un mois précis (par l'ID du mois)
@@ -53,22 +54,25 @@ const getMonthlyPlayersByMonthId = async(req , res)=> {
 };
 
 // Récupérer tous les joueurs du mois en cours
-const getCurrentMonthlyPlayers= async(req, res)=>{
-
-    try{
+const getCurrentMonthlyPlayers = async (req, res) => {
+    try {
         const monthlyPlayers = await monthlyPlayerService.getCurrentMonthlyPlayers();
 
-        if (!monthlyPlayers){
+        const currentMonth = await monthService.getCurrentMonth(); 
+
+        if (!monthlyPlayers || !currentMonth) {
             return res.status(404).json({
                 success: false,
-                message: "Joueurs non trouvés",
+                message: "Joueurs ou mois non trouvés",
             });
         }
-        
+
         res.status(200).json({
             success: true,
             data: monthlyPlayers,
+            monthId: currentMonth.id
         });
+
     } catch (error) {
         console.error("Erreur lors de la récupération des joueurs du mois en cours", error);
         res.status(500).json({
@@ -76,7 +80,7 @@ const getCurrentMonthlyPlayers= async(req, res)=>{
             message: error.message,
         });
     }
-}
+};
 
 // Récupérer un joueur par son Id
 const getMonthlyPlayerById = async (req, res) => {

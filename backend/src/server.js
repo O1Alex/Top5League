@@ -23,7 +23,7 @@ async function start() {
 
 
 //Synchronisation des modèles avec la BDD
-sequelize.sync({ alter:false })
+sequelize.sync({ alter:true })
   .then(()=> {
     console.log("Model synchronisé avec la base de données")
   })

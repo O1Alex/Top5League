@@ -49,11 +49,14 @@ OfficialLineup.belongsToMany(MonthlyPlayer, {
     through: OfficialLineupPlayer,
     foreignKey: "official_lineup_id",
     otherKey: "monthly_player_id",
+    uniqueKey: "unique_official_player"
 });
 MonthlyPlayer.belongsToMany(OfficialLineup, {
     through: OfficialLineupPlayer,
     foreignKey: "monthly_player_id",
     otherKey: "official_lineup_id",
+    uniqueKey: "unique_official_player"
+
 });
 
 

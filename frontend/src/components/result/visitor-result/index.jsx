@@ -1,4 +1,4 @@
-import React from 'react'
+import { memo } from 'react'
 import ReferenceLineup from '../ReferenceLineup';
 import MonthWinner from '../MonthWinner';
 import IntroResultVisitor from './IntroResultVisitor';

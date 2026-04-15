@@ -18,13 +18,30 @@ const CreateLineup = memo(() => {
     const [players, setPlayers] = useState(
         positions.map((p) => ({
         position: p.key,
-        fullname: "",
+        playerId: "",
         predicted_pts: "",
         predicted_ast: "",
         predicted_reb: "",
         }))
     );
     const [playersName, setPlayersName] = useState([]);
+    const [isFetching, setIsFetching] = useState(true);
+
+    // Récupération de la liste des joueurs
+    useEffect(()=> {
+        const fetchPlayers = async () => {
+            try{
+                const {data} = await api.get("/monthlyplayers/current");
+                setPlayersName(data.data || []);
+            }catch (err){
+                console.error(err);
+            }
+            finally{
+                setIsFetching(false);
+            }
+        };
+        fetchPlayers();
+    }, []);
 
   // Protection accès au formulaire de création du Top 5
   useEffect(() => {
@@ -41,9 +58,15 @@ const CreateLineup = memo(() => {
   // Envoi du top 5
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const picks = players.map(p => ({
+            playerId: Number(p.playerId),
+            predicted_pts: Number(p.predicted_pts),
+            predicted_ast: Number(p.predicted_ast),
+            predicted_reb: Number(p.predicted_reb),
+        }));
 
         try {
-        await api.post("/lineups/current", { players });
+        await api.post("/lineups/me", { picks });
         alert("Top 5 créé !");
         navigate("/mychallenge");
         } catch (err) {
@@ -53,6 +76,7 @@ const CreateLineup = memo(() => {
 
   return (
     <main className="container py-5">
+        {isFetching?(<p>Chargment des joueurs..</p>) : null}
       <form onSubmit={handleSubmit}>
         
         {/* Titre */}
@@ -71,18 +95,20 @@ const CreateLineup = memo(() => {
                         <br />
 
                         {/* Joueur */}
-                        <label htmlFor="fullname" className="form-label fw-semibold mt-0">Nom du joueur :</label>
-                        <select className="form-control" value={player.fullname}
+                        <label htmlFor="playerId" className="form-label fw-semibold mt-0">Nom du joueur :</label>
+                        <select className="form-control" value={player.playerId}
                             onChange={(e) =>
-                                handleChange(index, "fullname", e.target.value)
-                            }
+                                handleChange(index, "playerId", e.target.value)
+                            } required
                         >
-                        {playersName
-                            .filter(p => p.position === player.position)
-                            .map(p => (
-                                <option value="#">Sélectionner un joueur</option>,
-                            <option key={p.id} value={p.fullname}> {p.fullname} </option>
-                            ))}
+                            <option value="">Sélectionner un joueur</option>
+                            {playersName
+                                .filter(p => p.position === player.position)
+                                .sort((a,b) => a.fullname.localeCompare(b.fullname, 'fr', { sensitivity: 'base' }))
+                                .map(
+                                    (p) => (
+                                        <option key={p.id} value={p.id}> {p.fullname} </option>))
+                            }
                         </select>
 
 

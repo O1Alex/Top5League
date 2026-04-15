@@ -4,35 +4,48 @@ import { AuthContext } from '../../../context/AuthProviders';
 
 const Challenge= memo(()=>  {
 
-    const [winner, setWinner]= useState(null);
-    const [month, setMonth]= useState(null);
-    const [players, setPlayers]= useState(null);
-    const [lineups, setLineups]= useState(null);
-    const { user } = useContext(AuthContext);
-    
+    const [winner, setWinner] = useState(null);
+    const [winnerPlayers, setWinnerPlayers] = useState([]);
+    const [month, setMonth] = useState(null);
+    const [players, setPlayers] = useState([]);
+    const [lineups, setLineups] = useState([]);
+
+    const { user } = useContext(AuthContext);   
 
     useEffect(()=> {
+
+        //Pour le nom du gagant
         fetch("http://localhost:3000/api/winner/current")
             .then(res => res.json())
             .then(data => setWinner(data.data))
             .catch(err => console.log(err));
 
+        // Pour le lineup du gagnant
+        fetch("http://localhost:3000/api/winner/lineup")
+            .then(res => res.json())
+            .then(data => setWinnerPlayers(data.data?.MonthlyPlayers || []))
+            .catch(err => console.log(err));
+
+        // Pour récupérer le mois en cours
         fetch("http://localhost:3000/api/months/current")
             .then(res => res.json())
             .then(data => setMonth(data.data))
             .catch(err => console.log(err));
 
+        // Pour récupérer les joueurs du mois
         fetch("http://localhost:3000/api/monthlyPlayers/current")
             .then(res => res.json())
-            .then(data => setPlayers(data.data))
+            .then(data => setPlayers(data.data || []))
             .catch(err => console.log(err));
 
+        // Pour récupérer les informations du challenge en cours
         fetch("http://localhost:3000/api/lineups/current")
             .then(res => res.json())
-            .then(data => setLineups(data.data))
+            .then(data => setLineups(data.data || []))
             .catch(err => console.log(err));
 
     }, []);
+
 
     return (
         // Section challenge
@@ -101,20 +114,24 @@ const Challenge= memo(()=>  {
                         </div>
 
                         <p className="winner-text">
-                        Ce mois-ci, <strong>{winner?.username}</strong> est le grand gagnant !
+                        Ce mois-ci, <strong>{winner?.User?.username}</strong> est le grand gagnant !
                         </p>
 
                         <p className="winner-text">
                         Voici les 5 joueurs qui lui ont permis de remporter le maillot :
                         </p>
 
-                        {/* <div className="winner-players mt-3">
-                        <span>{winner.lineupPlayer.fullname}</span>
-                        <span>{winner.lineupPlayer.fullname}</span>
-                        <span>{winner.lineupPlayer.fullname}</span>
-                        <span>{winner.lineupPlayer.fullname}</span>
-                        <span>{winner.lineupPlayer.fullname}</span>
-                        </div> */}
+                       <div className="winner-players mt-3">
+                            {winnerPlayers.length === 0 ? (
+                                <p>Aucun joueur</p>
+                            ) : (
+                                winnerPlayers.map(player => (
+                                    <span key={player.id}>
+                                        {player.fullname}
+                                    </span>
+                                ))
+                            )}
+                        </div>
                     </div>
                 </div>
 

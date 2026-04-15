@@ -112,4 +112,4 @@ const UpdatePlayer= memo(() => {
     )
 });
 
-export default UpdatePlayer
+export default UpdatePlayer;
