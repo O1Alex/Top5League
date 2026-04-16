@@ -1,22 +1,22 @@
-USE top5league
+USE top5league;
 
-INSERT INTO users (username, email, password, role, favorite_player)
-VALUES
-('admin', 'admin@top5league.test', '$2y$10$EXAMPLEHASHCHANGEINAPP', 'admin', NULL),
-('lukaFan', 'lukafan@top5league.test', 'luka123', 'user', 'Luka Doncic'),
-('giannisFan', 'giannisfan@top5league.test', 'giannis123', 'user', 'Giannis Antetokounmpo'),
-('curryNation', 'currynation@top5league.test', 'curry123', 'user', 'Stephen Curry'),
-('jokicMVP', 'jokicmvp@top5league.test', 'jokic123', 'user', 'Nikola Jokic'),
-('kdSniper', 'kdsniper@top5league.test', 'kd123', 'user', 'Kevin Durant'),
-('tatumTime', 'tatumtime@top5league.test', 'tatum123', 'user', NULL),
-('bronLegacy', 'bronlegacy@top5league.test', 'bron123', 'user', 'LeBron James'),
-('anonymousHooper', 'anonymoushooper@top5league.test', 'anonymous123', 'user', NULL);
+-- INSERT INTO users (username, email, password, role, favorite_player)
+-- VALUES
+-- ('admin', 'admin@top5league.test', 'admin123', 'admin', NULL),
+-- ('lukaFan', 'lukafan@top5league.test', 'luka123', 'user', 'Luka Doncic'),
+-- ('giannisFan', 'giannisfan@top5league.test', 'giannis123', 'user', 'Giannis Antetokounmpo'),
+-- ('curryNation', 'currynation@top5league.test', 'curry123', 'user', 'Stephen Curry'),
+-- ('jokicMVP', 'jokicmvp@top5league.test', 'jokic123', 'user', 'Nikola Jokic'),
+-- ('kdSniper', 'kdsniper@top5league.test', 'kd123', 'user', 'Kevin Durant'),
+-- ('dameTime', 'dametime@top5league.test', 'tatum123', 'user', NULL),
+-- ('bronLegacy', 'bronlegacy@top5league.test', 'bron123', 'user', 'LeBron James'),
+-- ('anonymousHooper', 'anonymoushooper@top5league.test', 'anonymous123', 'user', NULL);
 
 
 INSERT INTO months (label, start_date, end_date, publish_date, status)
-VALUES ('2026-04', '2026-04-01', '2026-04-05', 'open');
+VALUES ('2026-04', '2026-04-01', '2026-04-05', '2026-05-01', 'open');
 
-INSERT INTO monthly_players (month_id, fullname, position, team_name, pts, ast, reb)
+INSERT INTO monthly_players (month_id, fullname, position, team_name, pts, ast, reb, photo_url)
 VALUES
 (1, 'Luka Doncic', 'PG', 'Dallas Mavericks', 33.1, 9.2, 8.4),
 (1, 'Stephen Curry', 'PG', 'Golden State Warriors', 28.4, 6.1, 4.5),
@@ -39,21 +39,18 @@ VALUES
 (1, 'Kristaps Porzingis', 'PF', 'Boston Celtics', 20.4, 2.1, 7.1),
 (1, 'Domantas Sabonis', 'PF', 'Sacramento Kings', 19.8, 7.9, 13.0);
 
-INSERT INTO lineups (user_id, month_id) VALUES (2, 1), (3, 1);
+INSERT INTO lineups (user_id, month_id) VALUES (2, 1), (4, 1);
 
 INSERT INTO lineup_players (lineup_id, monthly_player_id, predicted_pts, predicted_ast, predicted_reb)
 VALUES
-(1, 1),(1, 2),(1, 3),(1, 4),(1, 5);
-
-INSERT INTO lineup_players (lineup_id, monthly_player_id)
-VALUES
-(2, 17),(2, 6),(2, 7),(2, 4),(2, 9);
+(1, 1, 33.0, 9.0, 8.0),(1, 3, 28.0, 6.0, 4.0),(1, 4, 30.0, 5.0, 8.0),(1, 5, 31.0, 6.0, 12.0),(1, 7, 27.0, 10.0, 12.0),
+(2, 2, 26.0, 7.0, 4.0),(2, 14, 27.0, 4.0, 5.0),(2, 7, 28.0, 5.0, 6.0),(2, 13, 31.0, 6.0, 12.0),(2, 4, 30.0, 5.0, 10.0);
 
 INSERT INTO official_lineups (month_id, method) VALUES (1, 'manual');
 
-INSERT INTO official_lineup_players (official_lineup_id, monthly_player_id)
+INSERT INTO official_lineup_players (official_lineup_id, monthly_player_id, pts, ast, reb)
 VALUES
-(1, 1),(1, 2),(1, 3),(1, 4),(1, 5);
+(1, 2, 33.1, 9.2, 8.4),(1, 14, 28.4, 6.1, 4.5),(1, 7, 30.0, 4.8, 8.2),(1, 13, 31.2, 6.0, 12.1),(1, 4, 26.7, 9.8, 12.3);
 
 INSERT INTO winners (month_id, user_id, score, reward_status)
 VALUES (1, 2, 5, 'pending');

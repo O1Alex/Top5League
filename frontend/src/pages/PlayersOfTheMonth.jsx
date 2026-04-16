@@ -16,7 +16,7 @@ const PlayersOfTheMonth = memo(() => {
                     const { data } = await api.get(`/monthlyPlayers/current`);
 
                     console.log("API response:", data);
-                    
+
                     setPlayers(data.data);
                     setMonthId(data.monthId);
                 } catch (err) {
@@ -26,12 +26,14 @@ const PlayersOfTheMonth = memo(() => {
 
             fetchPlayer();
         }, []);
+
+        const sortedPlayers = [...players].sort((a, b) => a.fullname.localeCompare(b.fullname));
             
-        const pgPlayers = players.filter(player => player.position === "PG");
-        const sgPlayers = players.filter(player => player.position === "SG");
-        const sfPlayers = players.filter(player => player.position === "SF");
-        const pfPlayers = players.filter(player => player.position === "PF");
-        const cPlayers = players.filter(player => player.position === "C");
+        const pgPlayers = sortedPlayers.filter(player => player.position === "PG");
+        const sgPlayers = sortedPlayers.filter(player => player.position === "SG");
+        const sfPlayers = sortedPlayers.filter(player => player.position === "SF");
+        const pfPlayers = sortedPlayers.filter(player => player.position === "PF");
+        const cPlayers = sortedPlayers.filter(player => player.position === "C");
 
         const { user, loading } = useContext(AuthContext);
 

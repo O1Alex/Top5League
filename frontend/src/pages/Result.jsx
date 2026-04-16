@@ -9,6 +9,9 @@ import api from '../services/api';
 const Result = memo(() =>  {
     const { user } = useContext(AuthContext);
     const [officialLineup, setOfficialLineup] = useState([]);
+    const [winner, setWinner] = useState(null);
+    
+
 
     useEffect(() => {
         const fetchOfficialLineup = async () => {
@@ -22,6 +25,20 @@ const Result = memo(() =>  {
 
         fetchOfficialLineup();
     }, []);
+
+    useEffect(() => {
+        const fetchWinner = async () => {
+            try {
+                const { data } = await api.get("/winner/current");
+                setWinner(data.data);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+
+        fetchWinner();
+    }, []);
+
 
     return (
         <main className="container py-5">

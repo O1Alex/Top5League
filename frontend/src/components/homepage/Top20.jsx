@@ -21,7 +21,9 @@ const Top20= memo(()=>  {
         fetchPlayer();
     }, []);
 
-    const pgPlayers = players.filter(player => player.position === "PG");
+    const sortedPlayers = [...players].sort((a, b) => a.fullname.localeCompare(b.fullname));
+    
+    const pgPlayers = sortedPlayers.filter(player => player.position === "PG");
     
     return (
         // Section apercu Top 20 mois
