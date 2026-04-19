@@ -22,7 +22,7 @@ const Top20= memo(()=>  {
     }, []);
 
     const sortedPlayers = [...players].sort((a, b) => a.fullname.localeCompare(b.fullname));
-    
+
     const pgPlayers = sortedPlayers.filter(player => player.position === "PG");
     
     return (
@@ -36,7 +36,9 @@ const Top20= memo(()=>  {
             {/* Card */}
             <div  className="top-card row justify-content-center g-2 mt-4">
                 {pgPlayers.map(player => (
-                    <OfficialPlayerCard key={player.id} player={player}/>
+                    <div key={player.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <OfficialPlayerCard player={player} />
+                    </div>             
                 ))}
             </div>
 

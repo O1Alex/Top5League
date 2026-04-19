@@ -1,6 +1,6 @@
 import{ memo, useEffect, useState } from 'react';
-import api from '../../services/api';
-import OfficialPlayerCard from '../player-cards/OfficialPlayerCard';
+import api from '../../../services/api';
+import OfficialPlayerCard from '../../player-cards/OfficialPlayerCard';
 
 const ReferenceLineup = memo(() => {
 
@@ -28,12 +28,12 @@ const ReferenceLineup = memo(() => {
     }
     
     return (
-        <div className="column month-winner g-4 mt-3">
+        <div className="row justify-content-center g-4 mt-3">
             {players.length === 0 ? (
                 <p>Aucun joueur trouvé</p>
             ) : (
                 players.map((player) => (
-                    <OfficialPlayerCard key={player.id} player={player} />
+                    <OfficialPlayerCard key={player.id} player={player} showAdminActions={false}/>
                 ))
             )}
         </div>

@@ -548,12 +548,10 @@ footer{
   // Contenu du tableau
   tbody {
 
-    tr {
-      border: 2px solid $dark-color;
-    }
-
     td {
-      border: 2px solid $dark-color;
+      border-left: 2px solid $dark-color;
+      border-right: 2px solid $dark-color;
+      border-bottom: 2px solid $dark-color;
       font-weight: 600;
       padding: 10px;
       font-size: 1rem;
@@ -674,5 +672,31 @@ footer{
 .top-position{
   .players-position{
     background-color: $secondary-color;
+  }
+}
+
+// Partie Résultat
+// Intro utilisateur et visiteur
+.intro-result-user{
+  .winner-case{
+    background-color: $dark-color;
+    border-radius: 8px;
+  }
+  .winner-text{
+    font-size: 1.1rem;
+    color: $secondary-color;
+    font-weight: 600;
+  }
+}
+
+// Intro admin
+.intro-result-admin{
+  .intro-text-admin{
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: $dark-color;
+  }
+  .table{
+    border-radius: 8px;
   }
 }

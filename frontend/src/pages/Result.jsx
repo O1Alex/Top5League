@@ -1,12 +1,12 @@
 import { memo, useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthProviders';
-import VisitorResult from '../components/result/visitor-result';
-import UserResult from '../components/result/user-result/ResultUser';
 import AdminResult from '../components/result/admin-result/AdminResult';
 import CreateOfficialLlineup from '../components/result/admin-result/CreateOfficialLlineup';
 import api from '../services/api';
+import UserVisitorResult from '../components/result/user-visitor-result/UserVisitorResult';
 
 const Result = memo(() =>  {
+    console.log("🔁 Result render");
     const { user } = useContext(AuthContext);
     const [officialLineup, setOfficialLineup] = useState([]);
     const [winner, setWinner] = useState(null);
@@ -43,13 +43,11 @@ const Result = memo(() =>  {
     return (
         <main className="container py-5">
            
-            {!user && <VisitorResult />}
-
-            {user?.role === "users" && <UserResult />}
+            {(!user || user?.role === "user") && <UserVisitorResult winner={winner}/>}
 
             {user?.role === "admin" && (
                 officialLineup.length > 0 ? (
-                    <AdminResult />
+                    <AdminResult winner={winner}/>
                 ) : (
                     <CreateOfficialLlineup />
                 )

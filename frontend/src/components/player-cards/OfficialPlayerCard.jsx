@@ -3,7 +3,7 @@ import { AuthContext } from "../../context/AuthProviders";
 import { Link } from "react-router-dom";
 import api from "../../services/api";
 
-const OfficialPlayerCard = memo(({ player }) => {
+const OfficialPlayerCard = memo(({ player, showAdminActions = true }) => {
 
     const { user } = useContext(AuthContext);
 
@@ -21,7 +21,7 @@ const OfficialPlayerCard = memo(({ player }) => {
     };
 
     return (
-        <div className="col-12 col-sm-6 col-md-3 d-flex justify-content-center mt-3">
+        <div className="d-flex justify-content-center mb-4">
             <div className="card card-player p-3 text-center">
 
                 <img src={player.photo_url || "/default-player.png"} alt={player.fullname} className="card-img-top"/>
@@ -42,7 +42,7 @@ const OfficialPlayerCard = memo(({ player }) => {
                     </div>
                 </div>
 
-                 {user?.role === "admin" && (
+                 {user?.role === "admin" && showAdminActions && (
                     <div className="d-flex flex-column">
                         <div className="d-flex justify-content-center mt-0">
                              <Link to={`/updateplayer/${player.id}`}  className="btn t5l-btn-blue btn-sm w-75">

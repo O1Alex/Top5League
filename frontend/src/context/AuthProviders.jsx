@@ -3,7 +3,7 @@ import api from "../services/api";
 
 export const AuthContext = createContext();
 
-// Mettre a disposition de tous les composants de l'application tous les données pour mettre a jour et recuperer les données de l'utilisateur connecté
+// Pour la récupération des données des utilisateurs
 export default function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(localStorage.getItem("token") || null);
@@ -52,6 +52,7 @@ export default function AuthProvider({ children }) {
         setToken(null);
         setUser(null);
     };
+    
     return (
         <AuthContext.Provider value={{ user, token, loading, login, register, logout }}>
         {children}

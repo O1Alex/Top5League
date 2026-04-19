@@ -14,7 +14,9 @@ const MyTop5 = memo(({lineup}) => {
 
             <div className="top-card row d-flex justify-content-center mt-5 players-position px-4 py-4">
                {lineup.map((player) => (
-                    <PredictedPlayerCard key={player.id} player={player} />
+                    <div key={player.id} className="col-12 col-md-6 col-lg-4 pt-4">
+                        <PredictedPlayerCard player={player} />
+                    </div>
                 ))}
             </div>
 

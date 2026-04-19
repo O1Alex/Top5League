@@ -58,7 +58,9 @@ const PlayersOfTheMonth = memo(() => {
 
                     {/* Les meneurs (PG) */}
                     {pgPlayers.map(player => (
-                        <OfficialPlayerCard key={player.id} player={player}/>
+                        <div key={player.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <OfficialPlayerCard player={player} />
+                        </div>
                     ))}
                 </div>
             </div>
@@ -72,7 +74,9 @@ const PlayersOfTheMonth = memo(() => {
 
                     {/* Les arrières (SG) */}
                     {sgPlayers.map(player => (
-                        <OfficialPlayerCard key={player.id} player={player}/>
+                        <div key={player.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <OfficialPlayerCard player={player} />
+                        </div>
                     ))}
                 </div>
             </div>
@@ -86,7 +90,9 @@ const PlayersOfTheMonth = memo(() => {
 
                     {/* Les ailier (SF) */}
                     {sfPlayers.map(player => (
-                        <OfficialPlayerCard key={player.id} player={player}/>
+                        <div key={player.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <OfficialPlayerCard player={player} />
+                        </div>
                     ))}
                 </div>
             </div>
@@ -99,7 +105,9 @@ const PlayersOfTheMonth = memo(() => {
                 <div className="top-card row justify-content-center mb-5">
                     {/* Les ailiers forts (PF) */}
                     {pfPlayers.map(player => (
-                        <OfficialPlayerCard key={player.id} player={player}/>
+                        <div key={player.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <OfficialPlayerCard player={player} />
+                        </div>
                     ))}
                 </div>
             </div>
@@ -112,7 +120,9 @@ const PlayersOfTheMonth = memo(() => {
                 <div className="top-card row justify-content-center mb-5">
                     {/* Les interieurs (C) */}
                     {cPlayers.map(player => (
-                        <OfficialPlayerCard key={player.id} player={player}/>
+                        <div key={player.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                            <OfficialPlayerCard player={player} />
+                        </div>
                     ))}
                 </div>
             </div>

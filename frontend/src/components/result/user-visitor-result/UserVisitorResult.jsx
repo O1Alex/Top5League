@@ -1,16 +1,18 @@
-import { memo } from 'react'
-import IntroResultAdmin from './IntroResultAdmin';
+import { memo } from 'react';
+import IntroResult from './IntroResult';
 import ResultLineups from '../result-lineups/ResultLineups';
 
-const AdminResult= memo(({winner}) =>{
+const UserVisitorResult= memo(({winner}) => {
+
     return (
         <div>
-            <IntroResultAdmin winner = {winner}/>
+            <IntroResult winner = {winner}/>
             <section className='lineup-result d-flex row'>          
                 <ResultLineups />   
             </section>
         </div>
+        
     )
 });
 
-export default AdminResult;
+export default UserVisitorResult;

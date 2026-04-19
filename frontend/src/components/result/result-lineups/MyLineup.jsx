@@ -1,6 +1,6 @@
 import{ memo, useEffect, useState } from 'react';
-import api from '../../services/api';
-import PredictedPlayerCard from '../player-cards/PredictedPlayerCard';
+import api from '../../../services/api';
+import PredictedPlayerCard from '../../player-cards/PredictedPlayerCard';
 
 const MyLineup = memo(() => {
 
@@ -10,7 +10,7 @@ const MyLineup = memo(() => {
     useEffect(() => {
         const fetchMyLineup = async () => {
             try {
-                const { data } = await api.get("/lineup/me");
+                const { data } = await api.get("/lineups/me");
                 console.log("Winner lineup:", data.data);
                 setPlayers(data.data.MonthlyPlayers);
             } catch (err) {
@@ -28,7 +28,7 @@ const MyLineup = memo(() => {
     }
     
     return (
-        <div className="column month-winner g-4 mt-3">
+        <div className="row justify-content-center g-4 mt-3">
             {players.length === 0 ? (
                 <p>Aucun joueur trouvé</p>
             ) : (

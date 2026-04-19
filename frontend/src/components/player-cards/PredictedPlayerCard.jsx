@@ -3,8 +3,8 @@ import { memo } from "react";
 const PredictedPlayerCard = memo(({ player }) => {
 
     return (
-        <div className="col-12 col-md-4 d-flex justify-content-center g-4 mb-5">
-            <div className="card card-player p-3 text-center">
+        <div className="d-flex justify-content-center mb-4">
+            <div className="card card-player p-3 text-center h-100">
 
                 <img src={player.photo_url} alt={player.fullname} className="card-img-top"/>
 

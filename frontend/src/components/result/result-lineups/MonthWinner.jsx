@@ -1,6 +1,6 @@
 import{ memo, useEffect, useState } from 'react';
-import api from '../../services/api';
-import PredictedPlayerCard from '../player-cards/PredictedPlayerCard';
+import api from '../../../services/api';
+import PredictedPlayerCard from '../../player-cards/PredictedPlayerCard';
 
 const MonthWinner = memo(() => {
 
@@ -28,7 +28,7 @@ const MonthWinner = memo(() => {
     }
     
     return (
-        <div className="column month-winner g-4 mt-3">
+        <div className="row justify-content-center g-4 mt-3">
             {players.length === 0 ? (
                 <p>Aucun joueur trouvé</p>
             ) : (
