@@ -1,4 +1,4 @@
-import { memo, useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { AuthContext } from "../context/AuthProviders";
@@ -11,7 +11,7 @@ const positions = [
     { key: "C", label: "Pivot (C)" },
 ];
 
-const CreateLineup = memo(() => {
+const CreateLineup = () => {
 
     const navigate = useNavigate();
     const { user, loading } = useContext(AuthContext);
@@ -154,6 +154,6 @@ const CreateLineup = memo(() => {
       </form>
     </main>
   );
-});
+};
 
 export default CreateLineup;

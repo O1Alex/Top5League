@@ -1,12 +1,12 @@
-import { memo, useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthProviders';
 import AdminResult from '../components/result/admin-result/AdminResult';
 import CreateOfficialLlineup from '../components/result/admin-result/CreateOfficialLlineup';
 import api from '../services/api';
 import UserVisitorResult from '../components/result/user-visitor-result/UserVisitorResult';
 
-const Result = memo(() =>  {
-    console.log("🔁 Result render");
+const Result = () =>  {
+    
     const { user } = useContext(AuthContext);
     const [officialLineup, setOfficialLineup] = useState([]);
     const [winner, setWinner] = useState(null);
@@ -54,6 +54,6 @@ const Result = memo(() =>  {
             )}
         </main>
     );
-});
+};
 
 export default Result;

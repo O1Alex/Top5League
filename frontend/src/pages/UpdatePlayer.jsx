@@ -1,8 +1,8 @@
-import { memo, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from "../services/api";
 
-const UpdatePlayer= memo(() => {
+const UpdatePlayer= () => {
 
     const { id } = useParams();
     const [player, setPlayer]= useState({});
@@ -110,6 +110,6 @@ const UpdatePlayer= memo(() => {
             </div>
         </main>
     )
-});
+};
 
 export default UpdatePlayer;

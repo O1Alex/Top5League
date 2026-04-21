@@ -1,7 +1,7 @@
-import { memo, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import api from '../services/api';
 
-const UsersList = memo(() => {
+const UsersList = () => {
 
     const [users, setUsers] = useState([]);
 
@@ -48,6 +48,6 @@ const UsersList = memo(() => {
             </table>
         </main>
     )
-});
+};
 
 export default UsersList;

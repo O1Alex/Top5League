@@ -1,7 +1,6 @@
-import { memo } from 'react'
 import { Link } from 'react-router-dom';
 
-const ErrorPage = memo(() => {
+const ErrorPage = () => {
     return (
         <div className='error d-flex flex-column justify-content-center align-items-center text-center '>
             <img src="Erreur-404.png" alt="Erreur 404" width={800}/> 
@@ -11,6 +10,6 @@ const ErrorPage = memo(() => {
             </div>
         </div>
     )
-});
+};
 
 export default ErrorPage;

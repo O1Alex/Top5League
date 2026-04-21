@@ -1,6 +1,8 @@
 import { memo } from 'react'
+import { Link } from 'react-router-dom';
+import HeaderRight from '../app-header/headerRight';
 
-const CurrentChallenge = memo(({challenge, onEdit, onClose}) => {
+const CurrentChallenge = memo(({challenge}) => {
 
     if (!challenge) return <p>Chargement...</p>;
 
@@ -18,59 +20,75 @@ const CurrentChallenge = memo(({challenge, onEdit, onClose}) => {
     };
 
     return (
-         <section className='current-challenge container my-5'>
-            <div className="challenge-card border rounded">
 
-                {/* HEADER */}
-                <div className="d-flex">
-                    <div className="flex-fill p-3 border-bottom fw-bold">
-                        Challenge en cours
+        <section className='current-challenge mt-5 mb-5'>
+            <div className='row g-4'>
+
+            
+            {/* Card Info */}
+            <div className='col-12 col-lg-9'>
+
+                <div className='card challenge-card'>
+
+                    <div className='card-header'>
+                        <h5 className='card-title'>Challenge en cours</h5>
                     </div>
-                    <div className="p-3 border-bottom fw-bold text-center" style={{ width: "250px" }}>
-                        Actions
+
+                    <div className='card-body text-center'>
+
+                        {/* Label du challenge*/}
+                        <div className='content-card d-flex flex-column flex-md-row justify-content-md-between px-2 mb-2'>
+                            <span>Label :</span>
+                            <span className='flash'><strong>{challenge.label}</strong></span>
+                        </div>
+
+                        {/* Début du challenge */}
+                        <div className='content-card d-flex flex-column flex-md-row justify-content-md-between px-2 mb-2'>
+                            <span>Date début participation :</span>
+                            <span className='flash'><strong>{" "}{new Date(challenge.start_date).toLocaleString()}</strong></span>
+                        </div>
+
+                        {/* Fin du challenge */}
+                        <div className='content-card d-flex flex-column flex-md-row justify-content-md-between px-2 mb-2'>
+                            <span>Date fin participation :</span>
+                            <span className='flash'><strong>{" "}{new Date(challenge.end_date).toLocaleString()}</strong></span>
+                        </div>
+
+                        {/* Status du challenge */}
+                        <div className='content-card d-flex flex-column flex-md-row justify-content-md-between px-2 mb-2'>
+                            <span>Statut:</span>
+                            <span className='flash'><strong>{getStatusLabel(challenge.status)}</strong></span>
+                        </div>
                     </div>
                 </div>
+            </div>
 
-                {/* BODY */}
-                <div className="d-flex">
-
-                    {/* INFOS */}
-                    <div className="flex-fill p-4">
-
-                        <p><strong>Label :</strong> {challenge.label}</p>
-
-                        <p>
-                            <strong>Date début participation :</strong>{" "}
-                            {new Date(challenge.start_date).toLocaleString()}
-                        </p>
-
-                        <p>
-                            <strong>Date fin participation :</strong>{" "}
-                            {new Date(challenge.end_date).toLocaleString()}
-                        </p>
-
-                        <p>
-                            <strong>Status :</strong> {getStatusLabel(challenge.status)}
-                        </p>
-
+            {/* Card Actions */}
+            <div className='col-12 col-lg-3'>
+                <div className='card challenge-card '>
+                    <div className='card-header text-center'>
+                        <h5 className='card-title'>Actions</h5>
                     </div>
 
-                    {/* ACTIONS */}
-                    <div className="d-flex flex-column justify-content-center align-items-center gap-3 p-4 border-start" style={{ width: "250px" }}>
-                        <button className="btn t5l-btn-blue w-100" onClick={onEdit}>
-                            Modifier les dates
-                        </button>
-
-                        <button className="btn t5l-btn-orange w-100" onClick={onClose}>
-                            Clôturer le challenge
-                        </button>
+                    <div className='card-body text-center'>
+                        <div className="d-flex justify-content-center mt-3">
+                            <Link to={"/"}  className="btn t5l-btn-blue ">
+                                Modifier les dates
+                            </Link>
+                        </div>
+                        <div className="d-flex justify-content-center mt-3 mb-3" >
+                            <Link to={"/"}  className="btn t5l-btn-orange ">
+                                Cloturer le challenge
+                            </Link>
+                        </div>              
                     </div>
-
                 </div>
-
+            </div>
+            
             </div>
 
         </section>
+
     )
 });
 

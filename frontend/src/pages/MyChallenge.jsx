@@ -1,9 +1,9 @@
-import { memo, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import MyTop5 from '../components/mytop5/MyTop5';
 import HomeTop5 from '../components/mytop5/HomeTop5';
 import api from '../services/api';
 
-const MyChallenge = memo(() => {
+const MyChallenge = () => {
 
     const [lineup, setLineup] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -41,6 +41,6 @@ const MyChallenge = memo(() => {
             )}
         </main>
     );
-});
+};
 
 export default MyChallenge;

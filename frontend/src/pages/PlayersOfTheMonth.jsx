@@ -1,11 +1,11 @@
-import { memo, useState, useEffect, useContext } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import api from '../services/api';
 import OfficialPlayerCard from '../components/player-cards/OfficialPlayerCard';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProviders';
 
 
-const PlayersOfTheMonth = memo(() => {
+const PlayersOfTheMonth = () => {
 
     const [players, setPlayers]= useState([]);
     const [monthId, setMonthId] = useState(null);
@@ -66,7 +66,7 @@ const PlayersOfTheMonth = memo(() => {
             </div>
             
             <div className='players-position px-5 py-4 mb-5'>
-                <div className="div-title-top d-flex mb-4">
+                <div className="div-title-top d-flex mb-5">
                     <h4 className="title-part">Les arrières (SG):</h4>
                 </div>
 
@@ -82,7 +82,7 @@ const PlayersOfTheMonth = memo(() => {
             </div>
 
             <div className='players-position px-5 py-4 mb-5'>
-                <div className="div-title-top d-flex mb-4">
+                <div className="div-title-top d-flex mb-5">
                     <h4 className="title-part">Les ailliers (SF):</h4>
                 </div>
 
@@ -98,7 +98,7 @@ const PlayersOfTheMonth = memo(() => {
             </div>
         
             <div className='players-position px-5 py-4 mb-5'>
-                <div className="div-title-top d-flex mb-4">
+                <div className="div-title-top d-flex mb-5">
                     <h4 className="title-part">Les ailliers forts (PF):</h4>
                 </div>
 
@@ -113,7 +113,7 @@ const PlayersOfTheMonth = memo(() => {
             </div>
 
             <div className='players-position px-5 py-4 mb-5'>
-                <div className="div-title-top d-flex mb-4">
+                <div className="div-title-top d-flex mb-5">
                     <h4 className="title-part">Les interieurs (C):</h4>
                 </div>
 
@@ -142,6 +142,6 @@ const PlayersOfTheMonth = memo(() => {
 
 
     )
-});
+};
 
 export default PlayersOfTheMonth;

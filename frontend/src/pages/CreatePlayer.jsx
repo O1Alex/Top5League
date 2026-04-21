@@ -1,9 +1,9 @@
-import { memo, useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../services/api';
 import { AuthContext } from '../context/AuthProviders';
 
-const CreatePlayer= memo(() => {
+const CreatePlayer= () => {
 
     const [player, setPlayer] = useState({});
     const {monthId} = useParams();
@@ -87,6 +87,6 @@ const CreatePlayer= memo(() => {
             </div>
         </main>
     )
-});
+};
 
 export default CreatePlayer;

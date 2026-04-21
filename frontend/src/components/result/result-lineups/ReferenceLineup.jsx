@@ -1,11 +1,14 @@
-import{ memo, useEffect, useState } from 'react';
+import{ useEffect, useState } from 'react';
 import api from '../../../services/api';
 import OfficialPlayerCard from '../../player-cards/OfficialPlayerCard';
+import sortPlayersByPosition from '../../../utils/sortPlayers';
 
-const ReferenceLineup = memo(() => {
+const ReferenceLineup = () => {
 
     const [players, setPlayers] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const sortedPlayers = sortPlayersByPosition(players);
 
     useEffect(() => {
         const fetchReferenceLineup = async () => {
@@ -32,12 +35,12 @@ const ReferenceLineup = memo(() => {
             {players.length === 0 ? (
                 <p>Aucun joueur trouvé</p>
             ) : (
-                players.map((player) => (
+                sortedPlayers.map((player) => (
                     <OfficialPlayerCard key={player.id} player={player} showAdminActions={false}/>
                 ))
             )}
         </div>
     );
-});
+};
 
 export default ReferenceLineup;

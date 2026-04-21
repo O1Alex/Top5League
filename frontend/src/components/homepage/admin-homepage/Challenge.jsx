@@ -1,13 +1,11 @@
 import { memo, useState, useEffect, useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { AuthContext } from '../../../context/AuthProviders';
 
 const Challenge= memo(()=>  {
 
     const [month, setMonth]= useState(null);
     const [players, setPlayers]= useState(null);
     const [lineups, setLineups]= useState(null);
-    const { user } = useContext(AuthContext);
     
 
     useEffect(()=> {

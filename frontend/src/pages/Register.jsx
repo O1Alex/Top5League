@@ -1,8 +1,8 @@
-import { memo, useContext, useState } from 'react';
+import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProviders';
 
-const Register= memo(() => {
+const Register= () => {
 
     const [username, setUsername] = useState ('');
     const [favorite_player, setFavoritePlayer] = useState ('');
@@ -70,6 +70,6 @@ const Register= memo(() => {
             </main>
         </div>
     )
-});
+};
 
 export default Register;

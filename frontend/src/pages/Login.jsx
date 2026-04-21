@@ -1,9 +1,9 @@
-import { memo, useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProviders';
 
 
-const Login= memo(() => {
+const Login= () => {
 
     const [email, setEmail] = useState ('');
     const [password, setPassword] = useState ('');
@@ -59,6 +59,6 @@ const Login= memo(() => {
         </main>
 
     )
-});
+};
 
 export default Login;

@@ -24,14 +24,14 @@ const IntroResultAdmin= memo(({winner}) => {
 
                 <tbody>
                    <tr className="data-table">
-                        <td className="d-flex justify-content-between px-3">
+                        <td className="d-flex flex-column flex-md-row justify-content-md-between px-3">
                             <span className="fw-semibold">Email :</span>
                             <span>{winner?.User?.email}</span>
                         </td>
                     </tr>
 
                     <tr className="data-table">
-                        <td className="d-flex justify-content-between px-3">
+                        <td className="d-flex flex-column flex-md-row justify-content-md-between px-3">
                             <span className="fw-semibold">Joueur préféré :</span>
                             <span>{winner?.User?.favorite_player}</span>
                         </td>

@@ -1,11 +1,14 @@
-import{ memo, useEffect, useState } from 'react';
+import{ useEffect, useState } from 'react';
 import api from '../../../services/api';
 import PredictedPlayerCard from '../../player-cards/PredictedPlayerCard';
+import sortPlayersByPosition from '../../../utils/sortPlayers';
 
-const MyLineup = memo(() => {
+const MyLineup = () => {
 
     const [players, setPlayers] = useState([]);
     const [loading, setLoading] = useState(true);
+    
+    const sortedPlayers = sortPlayersByPosition(players);
 
     useEffect(() => {
         const fetchMyLineup = async () => {
@@ -32,13 +35,13 @@ const MyLineup = memo(() => {
             {players.length === 0 ? (
                 <p>Aucun joueur trouvé</p>
             ) : (
-                players.map((player) => (
+                sortedPlayers.map((player) => (
                     <PredictedPlayerCard key={player.id} player={player} />
                 ))
             )}
         </div>
     );
-});
+};
 
 
 export default MyLineup;
