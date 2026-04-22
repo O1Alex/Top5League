@@ -13,7 +13,7 @@ const MyLineup = () => {
     useEffect(() => {
         const fetchMyLineup = async () => {
             try {
-                const { data } = await api.get("/lineups/me");
+                const { data } = await api.get("/lineups/me/last-month-lineup");
                 console.log("Winner lineup:", data.data);
                 setPlayers(data.data.MonthlyPlayers);
             } catch (err) {

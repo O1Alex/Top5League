@@ -53,7 +53,7 @@ const Challenge= memo(()=>  {
                     </div> 
 
                     <div className="d-flex justify-content-center">
-                        <Link to="/" className="btn t5l-btn-orange my-2 mb-3 mt-3">
+                        <Link to="/challengemanagement" className="btn t5l-btn-orange my-2 mb-3 mt-3">
                             Accéder au challenge
                         </Link>
                     </div>           
