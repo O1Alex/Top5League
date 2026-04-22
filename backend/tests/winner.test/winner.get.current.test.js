@@ -23,17 +23,16 @@ describe("GET /api/winner/current", () => {
             favorite_player: "Jordan"
         });
 
-        // Création mois pour le test 
+        // Céation mois fermé
         month = await Month.create({
-            label: "Test Month",
-            start_date: "2026-01-01",
-            end_date: "2026-01-31",
-            publish_date: "2026-02-01",
-            status: "open",
+            label: "Janvier 2026",
+            start_date: new Date("2026-01-01"),
+            end_date: new Date("2026-01-31"),
+            publish_date: new Date("2026-02-01"),
+            status: "closed", // ✅ DOIT être closed
         });
 
-
-        // Création winner
+        // Création winner 
         await Winner.create({
             month_id: month.id,
             user_id: user.id,
@@ -41,9 +40,8 @@ describe("GET /api/winner/current", () => {
         });
     });
 
-
-    // Test récupération du gagnant
-    it("Récupère le gagnant du mois", async () => {
+    // Si tout est bon
+    it("Récupère le gagnant du dernier mois terminé", async () => {
 
         const res = await request(app)
             .get(`/api/winner/current`);
@@ -58,9 +56,8 @@ describe("GET /api/winner/current", () => {
         expect(res.body.data.score).toBe(5);
     });
 
-
-    // Test si aucun gagnant
-    it("Retourne 404 si aucun gagnant n'existe", async () => {
+    // Si pas de gagnant
+    it("Retourne 404 si aucun gagnant n'existe pour le dernier mois", async () => {
 
         await Winner.destroy({ where: {} });
 
@@ -68,6 +65,28 @@ describe("GET /api/winner/current", () => {
             .get(`/api/winner/current`);
 
         expect(res.statusCode).toBe(404);
+        expect(res.body.success).toBe(false);
+    });
+
+    // Ignore mois ouvert
+    it("Ignore le mois en cours (open) et récupère le dernier mois closed", async () => {
+
+        // Mois fermé le plus récent utilisé
+        await Month.create({
+            label: "Février 2026",
+            start_date: new Date("2026-02-01"),
+            end_date: new Date("2026-02-28"),
+            publish_date: new Date("2026-03-01"),
+            status: "open",
+        });
+
+        const res = await request(app)
+            .get(`/api/winner/current`);
+
+        expect(res.statusCode).toBe(200);
+
+        // Vérification utilisattion mois fermé
+        expect(res.body.data.user_id).toBe(user.id);
     });
 
 });

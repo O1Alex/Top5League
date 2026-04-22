@@ -272,6 +272,7 @@ class lineupService {
         }
     }
 
+    // Récupérer les lineups du mois
     static async getCurrentLineups() {
         try {
             const month = await monthService.getCurrentMonth();
@@ -290,7 +291,37 @@ class lineupService {
             throw new Error(`Erreur lors de la récupération des lineups du mois ${err.message}`);
         }
     }
-}
+
+    // Récupérer son lineup du mois précédent
+    static async getMyLastMonthLineup(userId) {
+        const month = await monthService.getLastClosedMonth();
+
+        if (!month) {
+            throw new Error("Aucun mois terminé trouvé");
+        }
+
+        const lineup = await Lineup.findOne({
+            where: {
+                user_id: userId,
+                month_id: month.id,
+            },
+            include: [
+                {
+                    model: MonthlyPlayer,
+                    through: {
+                        attributes: ["predicted_pts", "predicted_ast", "predicted_reb"],
+                    },
+                },
+            ],
+        });
+
+        if (!lineup) {
+            throw new Error("Tu n'as pas participé au challenge du mois dernier");
+        }
+
+        return lineup;
+    }
+};
 
 
 module.exports = lineupService;

@@ -145,7 +145,7 @@ class winnerService {
     // Récupérer le dernier gagnant
     static async getCurrentWinner() {
         try {
-            const month = await monthService.getCurrentMonth();
+            const month = await monthService.getLastClosedMonth();
 
             if (!month) {
             throw new Error("Aucun challenge en cours");
@@ -170,7 +170,7 @@ class winnerService {
     // Récupérer le Top 5 gagnant du mois
     static async getCurrentWinnerLineup() {
         try {
-            const month = await monthService.getCurrentMonth();
+            const month = await monthService.getLastClosedMonth();
 
             if (!month) {
                 throw new Error("Aucun challenge en cours");

@@ -19,7 +19,7 @@ const IntroResult = memo(({winner}) => {
                 </div>
 
                 <p className="winner-text">
-                    Il s'agit ce mois ci de {winner?.User.username} qui est le seul a avoir trouvé le 5 ou qui est celui qui a  été le plus près des statistiques de chaque joueur ! <br />
+                    Il s'agit ce mois ci de <strong>{winner?.User.username}</strong> qui est le seul a avoir trouvé le 5 ou qui est celui qui a  été le plus près des statistiques de chaque joueur ! <br />
                     Voici donc ci-dessous {isUser && "ton Top 5,"} le Top 5 de référence ainsi que le Top 5 gagnant mis côte à côte afin de pouvoir mieux les comparer.
                 </p>
 

@@ -10,7 +10,8 @@ const {
     deleteMyLineup,
     deleteLineupById,
     getLineupsByMonthId,
-    getCurrentLineups
+    getCurrentLineups,
+    getMyLastMonthLineup
 
 } =require('../controllers/lineupController');
 
@@ -24,6 +25,7 @@ lineupRouter.get("/current", getCurrentLineups);
 // Utilisateur connecté
 lineupRouter.post("/me", authenticate, lineupValidationRules.create, validate, createLineup);
 lineupRouter.get("/me", authenticate, getMyLineup);
+lineupRouter.get("/me/last-month-lineup", authenticate, getMyLastMonthLineup);
 lineupRouter.put("/me", authenticate, lineupValidationRules.update, validate, updateMyLineup);
 lineupRouter.delete("/me", authenticate, deleteMyLineup);
 

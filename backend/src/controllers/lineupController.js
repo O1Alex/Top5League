@@ -176,7 +176,7 @@ const deleteLineupById = async (req, res) => {
     }
 };
 
-
+// Récupéré les Top 5 du mois
 const getCurrentLineups = async (req, res) => {
     try {
         const lineups = await lineupService.getCurrentLineups();
@@ -195,6 +195,46 @@ const getCurrentLineups = async (req, res) => {
     }
 };
 
+// Récupérer son lineup du mois passé
+const getMyLastMonthLineup = async (req, res) => {
+   try {
+        const userId = req.user.id;
+
+        const lineup = await lineupService.getMyLastMonthLineup(userId);
+
+        if(!lineup){
+            return res.status(404).json({
+                success: false,
+                message: "Aucun Top 5 trouvé pour ce mois",
+            });
+        }
+
+        res.status(200).json({
+        success: true,
+        data: lineup,
+        });
+        
+    } catch (error) {
+
+         if (
+            error.message.includes("pas participé") ||
+            error.message.includes("Aucun mois")
+        ) {
+            return res.status(404).json({
+                success: false,
+                message: error.message,
+            });
+        }
+        
+        console.error("Erreur lors de la récupération de votre Top 5", error);
+        res.status(500).json({
+        success: false,
+        message: `Erreur serveur ${error.message}`,
+        });
+    }
+};
+
+
 
 
 
@@ -205,5 +245,6 @@ module.exports = {
     updateMyLineup,
     deleteMyLineup,
     deleteLineupById,
-    getCurrentLineups
+    getCurrentLineups,
+    getMyLastMonthLineup
 };
