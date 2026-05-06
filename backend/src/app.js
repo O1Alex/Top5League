@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+const helmet = require("helmet");
 
 const routes = require("./routers/index");
 
@@ -15,7 +16,7 @@ var corsOptions = {
   optionsSuccessStatus: 200
 }
 app.use(cors(corsOptions));
-
+app.use(helmet);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

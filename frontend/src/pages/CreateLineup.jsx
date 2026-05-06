@@ -28,7 +28,7 @@ const CreateLineup = () => {
     const [isFetching, setIsFetching] = useState(true);
 
 
-     // Protection accès au formulaire de création du Top 5
+     // Protection accès utilisateur
     useEffect(() => {
         if (!loading && user?.role !== "user") navigate("/");
     }, [user, loading, navigate]);
