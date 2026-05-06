@@ -59,10 +59,10 @@ const Challenge= memo(()=>  {
                         <div className="participation my-3 p-3">
                             <h3 className="title-part">Compose ton 5 du mois</h3>
                             <p className="challenge-text py-3">
-                                Ça y est c'est le moment ! Lance-toi et crée ton 5 majeur du mois,
-                                tu as jusqu'au 5 pour le faire et nous donner les
-                                3 statistiques principales de tes joueurs afin de
-                                devenir le <span className="highlight">gagnant du TOP5LEAGUE</span>.
+                                Ça y est, c'est le moment ! Lance-toi et crée ton 5 majeur du mois. 
+                                Tu as jusqu'au 5 pour le faire et nous donner 
+                                les 3 statistiques principales de tes joueurs afin 
+                                de devenir <span className="highlight">gagnant du TOP5LEAGUE</span>.
                             </p>
                             <div className="button-challenge d-flex justify-content-center">
                                 {!user && (
@@ -72,7 +72,7 @@ const Challenge= memo(()=>  {
                                 )}
 
                                 {user && user?.role==="user"&&(
-                                    <Link to="/" className="btn t5l-btn-orange my-2">
+                                    <Link to="/mychallenge" className="btn t5l-btn-orange my-2">
                                         Participe au challenge 
                                     </Link>                                
                                 )}
@@ -87,7 +87,7 @@ const Challenge= memo(()=>  {
 
                             <div className="challenge-infos d-flex flex-column flex-md-row justify-content-between align-items-center p-3 m-3">
                                 <span><strong>Top 20 publié :</strong> <span className="status">
-                                        {players?.length > 0 ? "Oui" : "Non"}
+                                        {players?.length === 20 ? "Oui" : "Non"}
                                     </span></span>
                                 <span><strong>Participants :</strong> <span className="status">
                                         {lineups?.length || 0}

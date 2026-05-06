@@ -16,15 +16,11 @@ class officialLineupService {
             const positions = ["PG", "SG", "SF", "PF", "C"];
             const month = await lineupService.getActiveMonth();
             const month_id = month.id;
-            
-            // controle 1 seul lineup dans le mois
-            const existing = await OfficialLineup.findOne({
-                where: { month_id },
-            });
 
-            if (existing) {
-                throw new Error("Un Top 5 existe déjà pour ce mois");
+            if (month.status !== "closed") {
+                throw new Error("Le challenge doit être fermé avant publication");
             }
+            
 
             // Vérification joueurs appartiennent au mois et exactement 5 joueurs
             const monthlyPlayers = await MonthlyPlayer.findAll({
@@ -54,6 +50,17 @@ class officialLineupService {
 
 
             return sequelize.transaction(async (t) => {
+
+                // controle 1 seul lineup dans le mois
+                const existing = await OfficialLineup.findOne({
+                    where: { month_id },
+                    transaction: t,
+                    lock: t.LOCK.UPDATE
+                });
+
+                if (existing) {
+                    throw new Error("Un Top 5 existe déjà pour ce mois");
+                }
                 
                 const newOfficialLineup = await OfficialLineup.create(
                     { month_id },
@@ -71,6 +78,11 @@ class officialLineupService {
                     { transaction: t }
                 );
 
+                await Month.update(
+                    { status: "published" },
+                    { where: { id: month_id }, transaction: t }
+                );
+
                 return OfficialLineup.findByPk(newOfficialLineup.id, {
                     include: [{ model: MonthlyPlayer, through: { attributes: ["pts", "ast", "reb"] } }], 
                     transaction: t,
@@ -82,10 +94,10 @@ class officialLineupService {
     }
 
 
-    // Récupérerle Top 5 gagnant Officiel du mois
+    // Récupérerle Top 5 gagnant Officiel du mois précédent
     static async getOfficialLineup() {
         try {
-            const month = await monthService.getCurrentMonth();
+            const month = await monthService.getLastPublishedMonth();
 
             const officialLineup = await OfficialLineup.findOne({
                 where: { month_id: month.id },

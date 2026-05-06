@@ -13,6 +13,8 @@ import CreateLineup from "../pages/CreateLineup";
 import Result from "../pages/Result";
 import UpdateLineup from "../pages/UpdateLineup";
 import ChallengeManagement from "../pages/ChallengeManagement";
+import UpdateMonth from "../pages/UpdateMonth";
+import CreateMonth from "../pages/CreateMonth";
 
 export default function AppRoutes() {
   return (
@@ -29,6 +31,8 @@ export default function AppRoutes() {
       <Route path="/updatelineup" element={<UpdateLineup />} />
       <Route path="/mychallenge" element={<MyChallenge />} />
       <Route path="/challengemanagement" element={<ChallengeManagement />} />
+      <Route path="/createmonth" element={<CreateMonth />} />
+      <Route path="/updatemonth" element={<UpdateMonth />} />
       <Route path="/result" element={<Result />} />
       <Route path="*" element={<ErrorPage />} />
     </Routes>

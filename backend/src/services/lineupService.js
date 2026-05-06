@@ -294,10 +294,10 @@ class lineupService {
 
     // Récupérer son lineup du mois précédent
     static async getMyLastMonthLineup(userId) {
-        const month = await monthService.getLastClosedMonth();
+        const month = await monthService.getLastPublishedMonth();
 
         if (!month) {
-            throw new Error("Aucun mois terminé trouvé");
+            throw new Error("Aucun mois publié trouvé");
         }
 
         const lineup = await Lineup.findOne({

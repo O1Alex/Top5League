@@ -7,9 +7,11 @@ const CreatePlayer= () => {
 
     const [player, setPlayer] = useState({});
     const {monthId} = useParams();
+
     const { user, loading } = useContext(AuthContext);
     const navigate = useNavigate();
 
+    // // Protection accès admin
     useEffect(() => {
         if (!loading && user?.role !== "admin") navigate("/");
     }, [user, loading, navigate]);

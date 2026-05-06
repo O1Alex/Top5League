@@ -1,10 +1,21 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import api from '../services/api';
+import { AuthContext } from '../context/AuthProviders';
+import { useNavigate } from 'react-router-dom';
 
 const UsersList = () => {
 
     const [users, setUsers] = useState([]);
+    const {user, loading} = useContext(AuthContext);
+    const navigate = useNavigate();
 
+
+    // // Protection accès admin
+    useEffect(() => {
+        if (!loading && user?.role !== "admin") navigate("/");
+    }, [user, loading, navigate]);
+
+    // Récupération des utilisateurs
     useEffect(() => {
         const fetchUsers = async () => {
             try {

@@ -5,6 +5,11 @@ class monthService {
     // Créer un mois
     static async createMonth(monthData){
         try{
+            const currentDate  = new Date().toLocaleDateString();
+            if (new Date(monthData.end_date) < new Date(currentDate)) {
+                monthData.status = "closed";
+            }
+
             const newMonth = Month.create(monthData);
             return newMonth;
 
@@ -54,14 +59,14 @@ class monthService {
   }
 
     // Récupéré le mois passé (pour définir le gagnant)
-    static async getLastClosedMonth() {
+    static async getLastPublishedMonth() {
         const month = await Month.findOne({
-            where: { status: "closed" },
-            order: [["end_date", "DESC"]],
+            where: { status: "published" },
+            order: [["publish_date", "DESC"]],
         });
 
         if (!month) {
-            throw new Error("Aucun mois terminé trouvé");
+            throw new Error("Aucun mois publié trouvé");
         }
 
         return month;

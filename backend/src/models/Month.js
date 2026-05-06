@@ -26,7 +26,7 @@ const Month = sequelize.define(
 
         publish_date: {
              type: DataTypes.DATEONLY, 
-             allowNull: false 
+             allowNull: true
         },
 
         status: {

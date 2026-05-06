@@ -1,12 +1,20 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import api from "../services/api";
+import { AuthContext } from "../context/AuthProviders";
 
 const UpdatePlayer= () => {
 
     const { id } = useParams();
     const [player, setPlayer]= useState({});
+
+    const {user, loading} = useContext(AuthContext);
     const navigate = useNavigate();
+
+    // // Protection accès admin
+    useEffect(() => {
+        if (!loading && user?.role !== "admin") navigate("/");
+    }, [user, loading, navigate]);
 
     // Récupération joueur
     useEffect(() => {
@@ -23,7 +31,7 @@ const UpdatePlayer= () => {
         fetchPlayer();
     }, [id]);
 
-
+    
     // Envoi modification joueur
     const handleSubmit = async (e) => {
         e.preventDefault();

@@ -42,7 +42,7 @@ const Challenge= memo(()=>  {
 
                     <div className="challenge-infos-admin d-flex flex-column flex-md-row justify-content-between align-items-center py-3 px-5 my-4 mx-4">
                          <span><strong>Top 20 publié :</strong> <span className="status">
-                                {players?.length > 0 ? "Oui" : "Non"}
+                                {players?.length === 20 ? "Oui" : "Non"}
                             </span></span>
                         <span><strong>Participants :</strong> <span className="status">
                                 {lineups?.length || 0}

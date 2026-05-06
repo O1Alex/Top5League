@@ -1,11 +1,26 @@
-import { memo, useState } from 'react'
+import { memo, useEffect, useState } from 'react'
 import AttendeesModal from './AttendeesModal';
+import api from '../../services/api';
 
-const Participation = memo(({challenge, lineups, user}) => {
+const Participation = memo(({challenge, user}) => {
 
+    const [lineups, setLineups] = useState([]);
+    const [showModal, setShowModal]= useState(false);
+
+    useEffect(() => {
+        const fetchCurrentLineup = async () => {
+            try{
+                const {data} = await api.get("/lineups/current");
+                setLineups(data.data || []);
+            }catch (err){
+                console.error(err);
+            }
+        };
+        fetchCurrentLineup();
+    }, []);
+    
     if (!challenge) return <p>Chargement...</p>;
 
-    const [showModal, setShowModal]= useState(false);
 
     return (
         <section className='participation'>
@@ -43,4 +58,4 @@ const Participation = memo(({challenge, lineups, user}) => {
     )
 });
 
-export default Participation
+export default Participation;

@@ -27,6 +27,12 @@ const CreateLineup = () => {
     const [playersName, setPlayersName] = useState([]);
     const [isFetching, setIsFetching] = useState(true);
 
+
+     // Protection accès au formulaire de création du Top 5
+    useEffect(() => {
+        if (!loading && user?.role !== "user") navigate("/");
+    }, [user, loading, navigate]);
+
     // Récupération de la liste des joueurs
     useEffect(()=> {
         const fetchPlayers = async () => {
@@ -43,11 +49,7 @@ const CreateLineup = () => {
         fetchPlayers();
     }, []);
 
-  // Protection accès au formulaire de création du Top 5
-  useEffect(() => {
-    if (!loading && user?.role !== "user") navigate("/");
-  }, [user, loading, navigate]);
-
+ 
   // Update d’un champ
   const handleChange = (index, field, value) => {
     const updated = [...players];

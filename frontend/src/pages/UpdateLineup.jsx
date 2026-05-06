@@ -29,7 +29,7 @@ const UpdateLineup = () => {
     const [playersName, setPlayersName] = useState([]);
     const [isFetching, setIsFetching] = useState(true);
 
-    // Acces au utilisateur connecté
+    // // Protection accès utilisateur
     useEffect(() => {
         if (!loading && user?.role !== "user") navigate("/");
     }, [user, loading, navigate]);

@@ -1,4 +1,4 @@
-
+import { Link } from "react-router-dom";
 
 const NewChallenge = () => {
 
@@ -12,13 +12,13 @@ const NewChallenge = () => {
 
                 <div className='card-body'>
                     <div className='content-card px-2'>
-                       <p>Cliquez ici pour générer automatiquement un nouveau challenge lorsque le mois débute :</p>
+                       <p>Cliquez ici pour créér un nouveau challenge lorsque le résultat du challenge en cours est publié :</p>
                     </div>
                     
                     <div className="d-flex justify-content-center mt-4">
-                        <div to={"/challengemanagement"}  className="btn t5l-btn-orange ">
-                            Débuter le challenge
-                        </div>
+                        <Link to={"/createmonth"}  className="btn t5l-btn-orange ">
+                                Débuter un nouveau challenge
+                        </Link>
                     </div>
 
                 </div>

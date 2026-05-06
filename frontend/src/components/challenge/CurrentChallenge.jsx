@@ -1,6 +1,5 @@
 import { memo } from 'react'
 import { Link } from 'react-router-dom';
-import HeaderRight from '../app-header/headerRight';
 
 const CurrentChallenge = memo(({challenge}) => {
 
@@ -67,20 +66,15 @@ const CurrentChallenge = memo(({challenge}) => {
             <div className='col-12 col-lg-3'>
                 <div className='card challenge-card '>
                     <div className='card-header text-center'>
-                        <h5 className='card-title'>Actions</h5>
+                        <h5 className='card-title'>Action</h5>
                     </div>
 
                     <div className='card-body text-center'>
                         <div className="d-flex justify-content-center mt-3">
-                            <Link to={"/"}  className="btn t5l-btn-blue ">
-                                Modifier les dates
+                            <Link to={"/updatemonth"}  className="btn t5l-btn-blue mb-5 mt-4 ">
+                                Modifier le challenge
                             </Link>
-                        </div>
-                        <div className="d-flex justify-content-center mt-3 mb-3" >
-                            <Link to={"/"}  className="btn t5l-btn-orange ">
-                                Cloturer le challenge
-                            </Link>
-                        </div>              
+                        </div>       
                     </div>
                 </div>
             </div>

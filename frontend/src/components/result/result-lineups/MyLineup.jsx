@@ -33,7 +33,7 @@ const MyLineup = () => {
     return (
         <div className="row justify-content-center g-4 mt-3">
             {players.length === 0 ? (
-                <p>Aucun joueur trouvé</p>
+                <p className='text-center'>Il semblerait que vous n'ayez pas participé au challenge du mois dernier</p>
             ) : (
                 sortedPlayers.map((player) => (
                     <PredictedPlayerCard key={player.id} player={player} />

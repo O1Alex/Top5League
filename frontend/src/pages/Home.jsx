@@ -6,17 +6,13 @@ import { AuthContext } from '../context/AuthProviders';
 
 const Home = () => {
 
-    const { user } = useContext(AuthContext);
+    const { user, loading} = useContext(AuthContext);
+
+    if(loading) return null;
 
     return(
         <>
-            {(!user || user?.role==="user") &&(
-                <HomeVisitorUser />
-            )}
-
-            {user?.role==="admin"&&(
-                <HomeAdmin />
-            )}
+            {user?.role === "admin" ? <HomeAdmin /> : <HomeVisitorUser />}
         </>
     )
 };
