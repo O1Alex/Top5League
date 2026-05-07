@@ -10,7 +10,7 @@ class monthService {
                 monthData.status = "closed";
             }
 
-            const newMonth = Month.create(monthData);
+            const newMonth = await Month.create(monthData);
             return newMonth;
 
         } catch (err) {
@@ -21,7 +21,7 @@ class monthService {
     // Récupérer tous les mois
     static async getAllMonths(){
         try {
-            const months = Month.findAll();
+            const months = await Month.findAll();
             return months;
 
         } catch (err) {
@@ -32,7 +32,7 @@ class monthService {
     // Récupérer un mois par son ID
     static async getMonthById(id){
         try {
-            const month = Month.findByPk(id);
+            const month = await Month.findByPk(id);
             return month;
 
         } catch (err) {

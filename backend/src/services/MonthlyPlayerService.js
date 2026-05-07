@@ -85,7 +85,7 @@ class monthlyPlayerService {
 
             return monthlyPlayer;
             
-        } catch (error) {
+        } catch (err) {
             throw new Error (`Erreur lors de la récupération du joueur ${err.message}`);
         }
     }

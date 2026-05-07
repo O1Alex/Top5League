@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../context/AuthProviders';
 import AdminResult from '../components/result/admin-result/AdminResult';
-import CreateOfficialLlineup from '../components/result/admin-result/CreateOfficialLlineup';
+import CreateOfficialLineup from '../components/result/admin-result/CreateOfficialLineup';
 import api from '../services/api';
 import UserVisitorResult from '../components/result/user-visitor-result/UserVisitorResult';
 
@@ -49,7 +49,7 @@ const Result = () =>  {
                 officialLineup.length > 0 ? (
                     <AdminResult winner={winner}/>
                 ) : (
-                    <CreateOfficialLlineup />
+                    <CreateOfficialLineup />
                 )
             )}
         </main>

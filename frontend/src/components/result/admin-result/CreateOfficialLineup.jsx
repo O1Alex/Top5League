@@ -111,7 +111,7 @@ const CreateOfficialLlineup = memo(() => {
                                 <label htmlFor="ast" className="form-label fw-semibold mt-2">Passe décisive par match (APG) :</label>
                                 <input type="number" step="0.1" placeholder="5.2" className="form-control mb-2" value={player.predicted_ast}
                                     onChange={(e) =>
-                                        handleChange(index, "_ast", e.target.value)
+                                        handleChange(index, "ast", e.target.value)
                                     } required
                                 />
 

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import MyTop5 from '../components/mytop5/MyTop5';
 import HomeTop5 from '../components/mytop5/HomeTop5';
 import api from '../services/api';
@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 const MyChallenge = () => {
 
     const [lineup, setLineup] = useState([]);
-    const [loading, setLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
 
     const { user, loading } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -29,7 +29,7 @@ const MyChallenge = () => {
             } catch (err) {
                 console.error(err);
             } finally {
-                setLoading(false);
+                setIsLoading(false);
             }
         };
 
