@@ -142,6 +142,11 @@ describe("GET /api/winner/lineup", () => {
     it("Récupère le lineup du gagnant du mois", async () => {
         await winnerService.computeWinner(month.id);
 
+        // Passage du mois en published
+        await month.update({
+            status: "published"
+        });
+
         const res = await request(app)
             .get(`/api/winner/lineup`);
 
@@ -153,6 +158,11 @@ describe("GET /api/winner/lineup", () => {
 
     // Test pas de gagnant du mois
     it("Retourne 404 si aucun winner n'existe", async () => {
+
+        // Passage du mois en published
+        await month.update({
+            status: "published"
+        });
 
         const res = await request(app)
             .get("/api/winner/lineup");

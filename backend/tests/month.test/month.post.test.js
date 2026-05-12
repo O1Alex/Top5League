@@ -47,8 +47,8 @@ describe("Month Endpoints", () => {
                 .send({
                     label: "testMonth",
                     start_date: "2026-01-01",
-                    end_date: "2026-01-31",
-                    publish_date: "2025-12-31",
+                    end_date: "2026-01-05",
+                    publish_date: "2026-01-31",
                     status: "open",
                 });
         

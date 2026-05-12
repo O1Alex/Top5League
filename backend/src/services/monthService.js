@@ -5,7 +5,7 @@ class monthService {
     // Créer un mois
     static async createMonth(monthData){
         try{
-            const currentDate  = new Date().toLocaleDateString();
+            const currentDate  = new Date();
             if (new Date(monthData.end_date) < new Date(currentDate)) {
                 monthData.status = "closed";
             }
@@ -58,7 +58,7 @@ class monthService {
         return month;
   }
 
-    // Récupéré le mois passé (pour définir le gagnant)
+    // Récupérer le mois passé (pour définir le gagnant)
     static async getLastPublishedMonth() {
         const month = await Month.findOne({
             where: { status: "published" },
@@ -71,6 +71,20 @@ class monthService {
 
         return month;
     }
+
+    // Récupérer le dernier mois fermé
+    static async getLastClosedMonth() {
+    const month = await Month.findOne({
+        where: { status: "closed" },
+        order: [["end_date", "DESC"]],
+    });
+
+    if (!month) {
+        throw new Error("Aucun mois fermé trouvé");
+    }
+
+    return month;
+}
 
     // Modifier un mois en se servant de son ID
     static async updateMonthById(id, monthData){

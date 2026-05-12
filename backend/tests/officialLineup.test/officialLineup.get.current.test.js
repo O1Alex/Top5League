@@ -30,9 +30,9 @@ describe("OfficialLineup Endpoints", () => {
             month = await Month.create({
                 label: "Janvier 2026",
                 start_date: "2026-01-01",
-                end_date: "2026-01-31",
-                publish_date: "2025-12-31",
-                status: "open",
+                end_date: "2026-01-05",
+                publish_date: "2026-01-31",
+                status: "closed",
             });
 
             // Création des joueurs
@@ -60,10 +60,15 @@ describe("OfficialLineup Endpoints", () => {
         });
 
 
-        // Test récupération du Top 5 officiel du mois
-        it("Retourne le OfficielLineup du mois", async () => {
+       it("Retourne le OfficielLineup du mois", async () => {
+
+            // Passage du mois en published
+            await month.update({
+                status: "published"
+            });
+
             const res = await request(app)
-                .get(`/api/officialLineup/current`)
+                .get(`/api/officialLineup/current`);
 
             expect(res.statusCode).toBe(200);
             expect(res.body.success).toBe(true);
@@ -81,6 +86,11 @@ describe("OfficialLineup Endpoints", () => {
 
         // Test si pas encore d'officialLineup
         it("Retourne 404 si aucun OfficialLineup n'existe pour le mois courant", async () => {
+
+            // Passage du mois en published
+            await month.update({
+                status: "published"
+            });
             await OfficialLineup.destroy({ where: {} });
 
             const res = await request(app)

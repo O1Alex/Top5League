@@ -29,8 +29,9 @@ describe("GET /api/winner/current", () => {
             start_date: new Date("2026-01-01"),
             end_date: new Date("2026-01-31"),
             publish_date: new Date("2026-02-01"),
-            status: "closed", // ✅ DOIT être closed
+            status: "closed", 
         });
+
 
         // Création winner 
         await Winner.create({
@@ -41,7 +42,12 @@ describe("GET /api/winner/current", () => {
     });
 
     // Si tout est bon
-    it("Récupère le gagnant du dernier mois terminé", async () => {
+    it("Récupère le gagnant du dernier mois publié", async () => {
+
+        // Passage du mois en published
+        await month.update({
+            status: "published"
+        });
 
         const res = await request(app)
             .get(`/api/winner/current`);
@@ -59,6 +65,11 @@ describe("GET /api/winner/current", () => {
     // Si pas de gagnant
     it("Retourne 404 si aucun gagnant n'existe pour le dernier mois", async () => {
 
+        // Passage du mois en published
+        await month.update({
+            status: "published"
+        });
+
         await Winner.destroy({ where: {} });
 
         const res = await request(app)
@@ -69,7 +80,12 @@ describe("GET /api/winner/current", () => {
     });
 
     // Ignore mois ouvert
-    it("Ignore le mois en cours (open) et récupère le dernier mois closed", async () => {
+    it("Ignore le mois en cours (open) et récupère le dernier mois published", async () => {
+
+        // Passage du mois en published
+        await month.update({
+            status: "published"
+        });
 
         // Mois fermé le plus récent utilisé
         await Month.create({

@@ -56,7 +56,7 @@ describe("OfficialLineup Endpoints", () => {
                 start_date: "2026-01-01",
                 end_date: "2026-01-31",
                 publish_date: "2025-12-31",
-                status: "open",
+                status: "closed",
             });
 
             // Création joueurs du mois

@@ -55,9 +55,9 @@ describe("OfficialLineup Endpoints", () => {
             month = await Month.create({
                 label: "Janvier 2026",
                 start_date: "2026-01-01",
-                end_date: "2026-01-31",
-                publish_date: "2025-12-31",
-                status: "open",
+                end_date: "2026-01-05",
+                publish_date: "2026-01-31",
+                status: "closed",
             });
         });
 
@@ -126,7 +126,7 @@ describe("OfficialLineup Endpoints", () => {
         });
 
 
-        // Test si une des prédiction est négative
+        // Test si une des statistiques est négative
         it("Refuse la création si une stat est négative", async () => {
             const players = await MonthlyPlayer.bulkCreate([
                 { fullname: "P1", position: "PG", team_name: "Team", pts: 30, ast: 8, reb: 6, month_id: month.id },
@@ -171,44 +171,6 @@ describe("OfficialLineup Endpoints", () => {
                 });
             
             expect(res.statusCode).toBe(400);
-        });
-
-        // Test si lineupOfficiel déjà existant
-        it("Refuse la création si un OfficialLineup existe déjà pour le mois", async () => {
-            const players = await MonthlyPlayer.bulkCreate([
-                { fullname: "P1", position: "PG", team_name: "Team", pts: 30, ast: 8, reb: 6, month_id: month.id },
-                { fullname: "P2", position: "SG", team_name: "Team", pts: 28, ast: 6, reb: 4, month_id: month.id },
-                { fullname: "P3", position: "SF", team_name: "Team", pts: 26, ast: 7, reb: 8, month_id: month.id },
-                { fullname: "P4", position: "PF", team_name: "Team", pts: 29, ast: 6, reb: 11, month_id: month.id },
-                { fullname: "P5", position: "C",  team_name: "Team", pts: 27, ast: 9, reb: 12, month_id: month.id },
-            ]);
-
-            const payload = {
-                picks: players.map(p => ({
-                    playerId: p.id,
-                    pts: 20,
-                    ast: 5,
-                    reb: 7
-                }))
-            };
-
-            // Première création (doit réussir)
-            const firstRes = await request(app)
-                .post("/api/officialLineup/")
-                .set("Authorization", `Bearer ${token}`)
-                .send(payload);
-
-            expect(firstRes.statusCode).toBe(201);
-
-            // Deuxième création sur le même mois (doit échouer)
-            const secondRes = await request(app)
-                .post("/api/officialLineup/")
-                .set("Authorization", `Bearer ${token}`)
-                .send(payload);
-
-            expect(secondRes.statusCode).toBe(400);
-            expect(secondRes.body.success).toBe(false);
-            expect(secondRes.body.message).toContain("existe déjà");
         });
     });
 

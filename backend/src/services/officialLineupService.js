@@ -2,7 +2,6 @@ const Month = require("../models/Month");
 const OfficialLineup = require("../models/OfficialLineup");
 const MonthlyPlayer = require("../models/MonthlyPlayer");
 const monthService = require("../services/monthService");
-const lineupService = require("./lineupService");
 const { Op } = require("sequelize");
 const  sequelize  = require("../config/database");
 const  OfficialLineupPlayer = require("../models/OfficialLineupPlayer");
@@ -14,7 +13,7 @@ class officialLineupService {
     static async createOfficialLineup(officialLineupData) {
         try {
             const positions = ["PG", "SG", "SF", "PF", "C"];
-            const month = await lineupService.getActiveMonth();
+            const month = await monthService.getLastClosedMonth();
             const month_id = month.id;
 
             if (month.status !== "closed") {
@@ -149,7 +148,7 @@ class officialLineupService {
     static async updateOfficialLineup(officialLineupData) {
         try {
             const positions = ["PG", "SG", "SF", "PF", "C"];
-            const month = await lineupService.getActiveMonth();
+            const month = await monthService.getLastClosedMonth();
             const month_id = month.id;
 
             // Récupérer le Top 5 Officiel existant

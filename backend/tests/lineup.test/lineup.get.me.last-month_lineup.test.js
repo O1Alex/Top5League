@@ -21,7 +21,7 @@ describe("Lineup Endpoints", () => {
 
         let token;
         let user;
-        let closedMonth;
+        let publishedMonth;
         let players;
         let lineup;
 
@@ -40,28 +40,28 @@ describe("Lineup Endpoints", () => {
             token = res.body.data.token;
             user = res.body.data.user;
 
-            // Création du mois terminé
-            closedMonth = await Month.create({
+            // Création du mois publié
+            publishedMonth = await Month.create({
                 label: "Janvier 2026",
                 start_date: "2026-01-01",
                 end_date: "2026-01-31",
                 publish_date: "2025-12-31",
-                status: "closed",
+                status: "published",
             });
 
             //Joueurs du mois
             players = await MonthlyPlayer.bulkCreate([
-                { fullname: "P1", position: "PG", team_name: "Team", pts: 30, ast: 8, reb: 6, month_id: closedMonth.id },
-                { fullname: "P2", position: "SG", team_name: "Team", pts: 28, ast: 6, reb: 4, month_id: closedMonth.id },
-                { fullname: "P3", position: "SF", team_name: "Team", pts: 26, ast: 7, reb: 8, month_id: closedMonth.id },
-                { fullname: "P4", position: "PF", team_name: "Team", pts: 29, ast: 6, reb: 11, month_id: closedMonth.id },
-                { fullname: "P5", position: "C",  team_name: "Team", pts: 27, ast: 9, reb: 12, month_id: closedMonth.id },
+                { fullname: "P1", position: "PG", team_name: "Team", pts: 30, ast: 8, reb: 6, month_id: publishedMonth.id },
+                { fullname: "P2", position: "SG", team_name: "Team", pts: 28, ast: 6, reb: 4, month_id: publishedMonth.id },
+                { fullname: "P3", position: "SF", team_name: "Team", pts: 26, ast: 7, reb: 8, month_id: publishedMonth.id },
+                { fullname: "P4", position: "PF", team_name: "Team", pts: 29, ast: 6, reb: 11, month_id: publishedMonth.id },
+                { fullname: "P5", position: "C",  team_name: "Team", pts: 27, ast: 9, reb: 12, month_id: publishedMonth.id },
             ]);
 
             //Lineup utilisateur
             lineup = await Lineup.create({
                 user_id: user.id,
-                month_id: closedMonth.id,
+                month_id: publishedMonth.id,
             });
 
             // Association lineup et joueur
@@ -74,7 +74,7 @@ describe("Lineup Endpoints", () => {
             ]);
         });
 
-        // Récupération du lineup du mois passé avec succès
+        // Récupération du lineup du dernier mois publié avec succès
         it("Récupère le Top 5 de l'utilisateur pour le dernier mois terminé", async () => {
             const res = await request(app)
                 .get("/api/lineups/me/last-month-lineup")
@@ -106,7 +106,7 @@ describe("Lineup Endpoints", () => {
             expect(res.body.success).toBe(false);
         });
 
-        // Test si choisi bien le mois précédent
+        // Test si choisi bien le mois publié
         it("Ignore le mois en cours (open) et utilise le dernier mois fermé", async () => {
 
             // Mois ouvert
@@ -125,7 +125,7 @@ describe("Lineup Endpoints", () => {
             expect(res.statusCode).toBe(200);
 
             // Utilisateur utilise mois fermé
-            expect(res.body.data.month_id).toBe(closedMonth.id);
+            expect(res.body.data.month_id).toBe(publishedMonth.id);
         });
 
     });
