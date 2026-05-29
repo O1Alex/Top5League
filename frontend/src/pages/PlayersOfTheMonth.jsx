@@ -58,7 +58,7 @@ const PlayersOfTheMonth = () => {
 
                     {/* Les meneurs (PG) */}
                     {pgPlayers.map(player => (
-                        <div key={player.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div key={player.id} className="col-12 col-sm-6 col-lg-3">
                             <OfficialPlayerCard player={player} />
                         </div>
                     ))}
@@ -74,7 +74,7 @@ const PlayersOfTheMonth = () => {
 
                     {/* Les arrières (SG) */}
                     {sgPlayers.map(player => (
-                        <div key={player.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div key={player.id} className="col-12 col-sm-6 col-lg-3">
                             <OfficialPlayerCard player={player} />
                         </div>
                     ))}
@@ -90,7 +90,7 @@ const PlayersOfTheMonth = () => {
 
                     {/* Les ailier (SF) */}
                     {sfPlayers.map(player => (
-                        <div key={player.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div key={player.id} className="col-12 col-sm-6 col-lg-3">
                             <OfficialPlayerCard player={player} />
                         </div>
                     ))}
@@ -105,7 +105,7 @@ const PlayersOfTheMonth = () => {
                 <div className="top-card row justify-content-center mb-5">
                     {/* Les ailiers forts (PF) */}
                     {pfPlayers.map(player => (
-                        <div key={player.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div key={player.id} className="col-12 col-sm-6 col-lg-3">
                             <OfficialPlayerCard player={player} />
                         </div>
                     ))}
@@ -120,7 +120,7 @@ const PlayersOfTheMonth = () => {
                 <div className="top-card row justify-content-center mb-5">
                     {/* Les interieurs (C) */}
                     {cPlayers.map(player => (
-                        <div key={player.id} className="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div key={player.id} className="col-12 col-sm-6 col-lg-3">
                             <OfficialPlayerCard player={player} />
                         </div>
                     ))}

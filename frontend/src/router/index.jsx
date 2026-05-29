@@ -20,20 +20,29 @@ export default function AppRoutes() {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
+
       <Route path="/monthlyplayers" element={<PlayersOfTheMonth />} />
+
       <Route path="/createplayer/:monthId" element={<CreatePlayer />} />
       <Route path="/updateplayer/:id" element={<UpdatePlayer />} />
+
       <Route path="/mychallenge" element={<MyChallenge />} />
-      <Route path="/userslist" element={<UsersList />} />
+
       <Route path="/createlineup" element={<CreateLineup />} />
       <Route path="/updatelineup" element={<UpdateLineup />} />
-      <Route path="/mychallenge" element={<MyChallenge />} />
+
+      <Route path="/userslist" element={<UsersList />} />
+    
       <Route path="/challengemanagement" element={<ChallengeManagement />} />
+
       <Route path="/createmonth" element={<CreateMonth />} />
       <Route path="/updatemonth" element={<UpdateMonth />} />
+
       <Route path="/result" element={<Result />} />
+
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   );

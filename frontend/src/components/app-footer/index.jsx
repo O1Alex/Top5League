@@ -1,8 +1,8 @@
-import { memo, useState } from 'react';
+import { useState } from 'react';
 import { Link } from "react-router-dom";
 import ContactModal from "./contactModal"
 
-const AppFooter = memo(() => {
+const AppFooter = () => {
 
     const [showModal, setShowModal]= useState(false);
 
@@ -32,6 +32,6 @@ const AppFooter = memo(() => {
             />
         </div>
     );
-});
+};
 
 export default AppFooter;

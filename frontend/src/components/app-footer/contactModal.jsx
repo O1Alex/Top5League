@@ -1,6 +1,4 @@
-import { memo } from 'react';
-
-const ContactModal = memo(({ show, close }) => {
+const ContactModal = ({ show, close }) => {
 
     if (!show) return null;
 
@@ -65,6 +63,6 @@ const ContactModal = memo(({ show, close }) => {
             <div className="modal-backdrop fade show"></div>
         </>
     );
-});
+};
 
 export default ContactModal;

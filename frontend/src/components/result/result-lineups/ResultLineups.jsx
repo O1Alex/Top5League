@@ -9,13 +9,15 @@ const ResultLineups= memo(() => {
     const isUser = user?.role === "user";
 
     return (
-        <section className="row g-4 mb-4">
+        <section  className="row result g-4 mb-4">
 
         {isUser && (
             <div className="col-12 col-md-6 col-lg-4">
                 <div className="result-part d-flex flex-column align-items-center">
                     <h3 className="text-center page-title mb-4">Mon top 5</h3>
-                    <MyLineup />
+                    <div className='players-result'>
+                        <MyLineup /> 
+                    </div>
                 </div>
             </div>
         )}
@@ -23,14 +25,19 @@ const ResultLineups= memo(() => {
         <div className={isUser ? "col-12 col-md-6 col-lg-4" : "col-12 col-md-6"}>
             <div className="result-part d-flex flex-column align-items-center">
                 <h3 className="text-center page-title mb-4">Top 5 officiel</h3>
-                <ReferenceLineup />
+                <div className='players-result'>
+                      <ReferenceLineup />
+                </div>
+              
             </div>
         </div>
 
         <div className={isUser ? "col-12 col-md-6 col-lg-4" : "col-12 col-md-6"}>
             <div className="result-part d-flex flex-column align-items-center">
                 <h3 className="text-center page-title mb-4">Top 5 gagnant</h3>
-                <MonthWinner />
+                <div className='players-result'>
+                    <MonthWinner />
+                </div>
             </div>
         </div>
 

@@ -21,7 +21,7 @@ const MyTop5 = memo(({lineup}) => {
             </div>
 
             <div className="d-flex justify-content-center mt-4">
-                <Link to={"/updatelineup"}  className="btn t5l-btn-blue btn-sm ">
+                <Link to={"/updatelineup"}  className="btn t5l-btn-blue btn-sm px-4">
                     Modifier mon Top 5
                 </Link>
             </div>
