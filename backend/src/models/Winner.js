@@ -18,7 +18,6 @@ const Winner = sequelize.define(
     tableName: "winners",
     timestamps: false,
     updatedAt: false,
-    createdAt: "created_at",
   }
 );
 

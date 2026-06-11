@@ -177,9 +177,7 @@ const UpdateLineup = () => {
                             Modifier mon Top 5
                         </button>
                     </div>
-
                 </div>
-
             </form>
         </main>
     );

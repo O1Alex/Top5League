@@ -79,81 +79,77 @@ const CreateLineup = () => {
   return (
     <main className="container py-5">
         {isFetching?(<p>Chargment des joueurs..</p>) : null}
-      <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit}>
         
-        {/* Titre */}
-        <div className="d-flex justify-content-center mb-5">
-          <h1 className="page-title mb-5">Création Top 5</h1>
-        </div>
-
-        {/* Formulaire de création */}
-        <div className="form-lineup-card row g-5 d-flex justify-content-center mt-5 px-5">
-
-            {players.map((player, index) => (
-                <div key={player.position} className="col-md-6 col-lg-4">
-                    <div className="lineup-form p-3 h-100">
-
-                        <h4 className="form-title-part text-center mb-1"> {positions[index].label} </h4>
-                        <br />
-
-                        {/* Joueur */}
-                        <label htmlFor="playerId" className="form-label fw-semibold mt-0">Nom du joueur :</label>
-                        <select className="form-control" value={player.playerId}
-                            onChange={(e) =>
-                                handleChange(index, "playerId", e.target.value)
-                            } required
-                        >
-                            <option value="">Sélectionner un joueur</option>
-                            {playersName
-                                .filter(p => p.position === player.position)
-                                .sort((a,b) => a.fullname.localeCompare(b.fullname, 'fr', { sensitivity: 'base' }))
-                                .map(
-                                    (p) => (
-                                        <option key={p.id} value={p.id}> {p.fullname} </option>))
-                            }
-                        </select>
-
-
-                        {/* PPG */}
-                        <label htmlFor="predicted_pts" className="form-label fw-semibold mt-2">Points par match (PPG) :</label>
-                        <input className="form-control mb-2" type="number" step="0.1" placeholder="20.0" value={player.predicted_pts}
-                            onChange={(e) =>
-                                handleChange(index, "predicted_pts", e.target.value)
-                            } required
-                        />
-
-                        {/* APG */}
-                        <label htmlFor="predicted_ast" className="form-label fw-semibold mt-2">Passe décisive par match (APG) :</label>
-                        <input type="number" step="0.1" placeholder="5.2" className="form-control mb-2" value={player.predicted_ast}
-                            onChange={(e) =>
-                                handleChange(index, "predicted_ast", e.target.value)
-                            } required
-                        />
-
-                        {/* RPG */}
-                        <label htmlFor="predicted_rbd" className="form-label fw-semibold mt-2">Rebonds par match (RPG) :</label>
-                        <input type="number" step="0.1" placeholder="10.3" className="form-control" value={player.predicted_reb}
-                            onChange={(e) =>
-                                handleChange(index, "predicted_reb", e.target.value)
-                            } required
-                        />
-
-                    </div>
-                </div>
-            ))}
-
-            {/* Bouton */}
-            <div className="text-center m-5">
-                <button type="submit" className="btn t5l-btn-blue px-5">
-                    Créer mon Top 5
-                </button>
+            {/* Titre */}
+            <div className="d-flex justify-content-center mb-5">
+            <h1 className="page-title mb-5">Création Top 5</h1>
             </div>
 
-        </div>
+            {/* Formulaire de création */}
+            <div className="form-lineup-card row g-5 d-flex justify-content-center mt-5 px-5">
 
-        
+                {players.map((player, index) => (
+                    <div key={player.position} className="col-md-6 col-lg-4">
+                        <div className="lineup-form p-3 h-100">
 
-      </form>
+                            <h4 className="form-title-part text-center mb-1"> {positions[index].label} </h4>
+                            <br />
+
+                            {/* Joueur */}
+                            <label htmlFor="playerId" className="form-label fw-semibold mt-0">Nom du joueur :</label>
+                            <select className="form-control" value={player.playerId}
+                                onChange={(e) =>
+                                    handleChange(index, "playerId", e.target.value)
+                                } required
+                            >
+                                <option value="">Sélectionner un joueur</option>
+                                {playersName
+                                    .filter(p => p.position === player.position)
+                                    .sort((a,b) => a.fullname.localeCompare(b.fullname, 'fr', { sensitivity: 'base' }))
+                                    .map(
+                                        (p) => (
+                                            <option key={p.id} value={p.id}> {p.fullname} </option>))
+                                }
+                            </select>
+
+
+                            {/* PPG */}
+                            <label htmlFor="predicted_pts" className="form-label fw-semibold mt-2">Points par match (PPG) :</label>
+                            <input className="form-control mb-2" type="number" step="0.1" placeholder="20.0" value={player.predicted_pts}
+                                onChange={(e) =>
+                                    handleChange(index, "predicted_pts", e.target.value)
+                                } required
+                            />
+
+                            {/* APG */}
+                            <label htmlFor="predicted_ast" className="form-label fw-semibold mt-2">Passe décisive par match (APG) :</label>
+                            <input type="number" step="0.1" placeholder="5.2" className="form-control mb-2" value={player.predicted_ast}
+                                onChange={(e) =>
+                                    handleChange(index, "predicted_ast", e.target.value)
+                                } required
+                            />
+
+                            {/* RPG */}
+                            <label htmlFor="predicted_rbd" className="form-label fw-semibold mt-2">Rebonds par match (RPG) :</label>
+                            <input type="number" step="0.1" placeholder="10.3" className="form-control" value={player.predicted_reb}
+                                onChange={(e) =>
+                                    handleChange(index, "predicted_reb", e.target.value)
+                                } required
+                            />
+
+                        </div>
+                    </div>
+                ))}
+
+                {/* Bouton */}
+                <div className="text-center m-5">
+                    <button type="submit" className="btn t5l-btn-blue px-5">
+                        Créer mon Top 5
+                    </button>
+                </div>
+            </div>
+        </form>
     </main>
   );
 };
