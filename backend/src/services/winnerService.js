@@ -77,9 +77,9 @@ class winnerService {
             const targetStats = statsMap.get(lp.monthly_player_id);
             if (targetStats) {
             statDelta +=
-                Math.abs(lp.pts - targetStats.pts) +
-                Math.abs(lp.reb - targetStats.reb) +
-                Math.abs(lp.ast - targetStats.ast);
+                Math.abs(lp.predicted_pts - targetStats.pts) +
+                Math.abs(lp.predicted_reb - targetStats.reb) +
+                Math.abs(lp.predicted_ast - targetStats.ast);
             }
         });
         return { lineup, score, statDelta };

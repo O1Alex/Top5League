@@ -20,9 +20,9 @@ const authValidationRules = {
             .isEmail()
             .withMessage("L'Email doit être valide'"),
 
-        // body("password")
-        //     .isLenght({min : 6})
-        //     .withMessage("L'Email doit contenir au moins 6 caractères'"),
+        body("password")
+            .isLength({min : 5})
+            .withMessage("Le mot de passe doit contenir au moins 5 caractères"),
     ],
     login:[
         body("email")
